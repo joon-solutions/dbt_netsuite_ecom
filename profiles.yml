@@ -1,0 +1,20 @@
+
+netsuite_joon:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: "{{ env_var('DBT_ACCOUNT') }}"
+      # Replace by your user/password or set the environment env_variables
+      # DBT_USER & DBT_PASSWORD
+      user: "{{ env_var('DBT_USER') }}"
+      password: "{{ env_var('DBT_PASSWORD') }}"
+
+      role: "{{ env_var('DBT_ROLE') }}"
+      database: "{{ env_var('DBT_DB') }}"
+      warehouse: "{{ env_var('DBT_WH') }}"
+      # replace with dbt_yourname or set environment env_variable dbt_schema
+      schema: "{{ env_var('DBT_SCHEMA') }}"
+      threads: 10
+      client_session_keep_alive: false
+      query_tag: dbt_cicd_runner
