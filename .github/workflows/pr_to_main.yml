@@ -7,6 +7,7 @@ env:
   DBT_PROFILES_DIR: ./
   DBT_USER: ${{ secrets.DBT_USER }}
   DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
+  NESTUITE_SOURCE_SCHEMA: ${{ secrets.NESTUITE_SOURCE_SCHEMA }}
 
 jobs:
   pr_to_main:
@@ -28,6 +29,14 @@ jobs:
           pip install -r requirements.txt
           dbt deps
 
+      - name: Run all models
+        id: run_all_models
+        run: dbt run
+
+      - name: Test all models
+        id: test_all_models
+        run: dbt test
+          
       - name: Lint dbt models
         id: sqlfluff_json
         run: |
