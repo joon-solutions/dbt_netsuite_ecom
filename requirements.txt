@@ -1,0 +1,4 @@
+# Add Python dependencies for development here
+dbt-snowflake~=1.7
+sqlfluff-templater-dbt~=2.3
+pre-commit~=3.6
