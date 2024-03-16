@@ -1,0 +1,230 @@
+version: 2
+
+models:
+  - name: stg_netsuite__weight_units
+    config:
+      tags: "netsuite"  
+    columns:
+      - name: weight_unit_id
+        tests:
+          - unique
+          - not_null        
+
+  - name: stg_netsuite__accounts
+    config:
+      tags: "netsuite"    
+    columns:
+      - name: account_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_netsuite__account_types
+    config:
+      tags: "netsuite"    
+    columns:
+      - name: account_type_id
+        tests:
+          - unique
+          - not_null
+          
+  - name: stg_netsuite__accounting_periods
+    config:
+      tags: "netsuite"    
+    columns:
+      - name: accounting_period_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_netsuite__budget
+    config:
+      tags: "netsuite"  
+    columns:
+      - name: budget_id
+        tests:
+          - unique
+          - not_null
+      - name: category_id
+        tests:
+          # This column is always 3 ('Locked Budget'), put test here for alert purpose
+          # Refer to `budgetcategory` table for full list of values
+          - accepted_values:
+              values: [3]
+              quote: false
+ 
+  - name: stg_netsuite__budgets_machines
+    config:
+      tags: "netsuite"    
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - budget_id
+            - accounting_period_id      
+
+  - name: stg_netsuite__budget_histories
+    config:
+      tags: "netsuite"  
+    columns:
+      - name: unique_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_netsuite__classifications
+    config:
+      tags: "netsuite"    
+    columns:
+      - name: class_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_netsuite__customers
+    config:
+      tags: "netsuite"    
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_netsuite__deleted_records
+    description: this table is append-only and thus does not have a unique key
+    config:
+      tags: "netsuite"
+    columns:
+      - name: contexgt
+        description: >
+            see https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_4032860783.html for a comprehensive list of values
+            SLT: Script (RESTlet)
+            UIF: User Interface
+            WST: Web Store
+    # tests:
+    #   - dbt_utils.unique_combination_of_columns:
+    #       combination_of_columns:
+    #         - record_id
+    #         - type
+    #         - name
+    #         - deleted_date
+    #         - deleted_by
+
+  - name: stg_netsuite__customer_subsidiary_relationship
+    config:
+      tags: "netsuite"    
+    columns:
+      - name: customer_subsidiary_relationship_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_netsuite__departments
+    config:
+      tags: "netsuite"    
+    columns:
+      - name: department_id
+        tests:
+          - unique
+          - not_null          
+
+  - name: stg_netsuite__entities
+    config:
+      tags: "netsuite"    
+    columns:
+      - name: entity_id
+        tests:
+          - unique
+          - not_null      
+
+  - name: stg_netsuite__entity_address
+    config:
+      tags: "netsuite"    
+    columns:
+      - name: address_id
+        tests:
+          - unique
+          - not_null      
+      - name: record_owner_id
+          - unique
+             
+  - name: stg_netsuite__entity_status
+    config:
+      tags: "netsuite"    
+    columns:
+      - name: entity_status_id
+        tests:
+          - unique
+          - not_null      
+
+  - name: stg_netsuite__items
+    config:
+      tags: "netsuite"    
+    columns:
+      - name: item_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_netsuite__item_units
+    config:
+      tags: "netsuite"    
+    columns:
+      - name: item_unit_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_netsuite__subsidiaries
+    config:
+      tags: "netsuite"    
+    columns:
+      - name: subsidiary_id
+        tests:
+          - unique
+          - not_null     
+
+  - name: stg_netsuite__transaction_accounting_lines
+    config:
+      tags: "netsuite"    
+    columns:
+      - name: unique_id
+        tests:
+          - unique
+          - not_null          
+
+  - name: stg_netsuite__transaction_lines
+    config:
+      tags: "netsuite"    
+    columns:
+      - name: unique_key
+        tests:
+          - unique
+          - not_null          
+
+  - name: stg_netsuite__transactions
+    config:
+      tags: "netsuite"    
+    columns:
+      - name: transaction_id
+        tests:
+          - unique
+          - not_null         
+
+  - name: stg_netsuite__consolidated_exchange_rates
+    config:
+      tags: "netsuite"    
+    columns:
+      - name: exchange_rate_id
+        tests:
+          - unique
+          - not_null         
+ 
+  - name: stg_netsuite__currencies
+    config:
+      tags: "netsuite"    
+    columns:
+      - name: currency_id
+        tests:
+          - unique
+          - not_null         
+ 
