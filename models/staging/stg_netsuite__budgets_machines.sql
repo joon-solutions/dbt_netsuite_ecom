@@ -16,7 +16,7 @@ renamed as (
         --_sdc_table_version,
 
     from source
-    qualify row_number() over(partition by budget_id, accounting_period_id order by amount asc) = 1
+    qualify row_number() over (partition by budget_id, accounting_period_id order by amount asc) = 1
 )
 
 select * from renamed

@@ -94,8 +94,8 @@ renamed as (
         --rate
         rateamount__fl as rate_amount__fl,
         ratepercent as rate_percent,
-        rate__fl as rate__fl,
-        rate__de as rate__de,
+        rate__fl,
+        rate__de,
         rateamount__de as rate_amount__de,
 
         --est

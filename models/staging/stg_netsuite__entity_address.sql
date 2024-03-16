@@ -11,7 +11,7 @@ renamed as (
 
         addr1,
         addr2,
-        addressee as addressee,
+        addressee,
         addrphone as addr_phone,
         addrtext as addr_text,
 

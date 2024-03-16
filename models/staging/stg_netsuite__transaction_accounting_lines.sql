@@ -18,8 +18,8 @@ renamed as (
         amountpaid as amount_paid,
         amountunpaid as amount_unpaid,
         netamount as net_amount,
-        coalesce(credit,0) as amount_credit,
-        coalesce(debit,0) as amount_debit,
+        coalesce(credit, 0) as amount_credit,
+        coalesce(debit, 0) as amount_debit,
 
         exchangerate__de as exchange_rate__de,
         exchangerate as exchange_rate,

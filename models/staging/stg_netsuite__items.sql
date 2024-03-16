@@ -19,7 +19,7 @@ renamed as (
         class as class_id,
         stockdescription as stock_description,
         "DESCRIPTION" as item_description,
-        displayname as display_name,
+        displayname as item_display_name,
         manufacturer,
         "LOCATION" as item_location,
 
@@ -37,8 +37,8 @@ renamed as (
         costestimatetype as cost_estimate_type,
         costingmethod as costing_method,
         costingmethoddisplay as costing_method_display,
-        averagecost__de as averagecost__de,
-        averagecost__fl as averagecost__fl,
+        averagecost__de,
+        averagecost__fl,
         fxcost as fx_cost,
         tracklandedcost as track_landed_cost,
 
@@ -55,8 +55,8 @@ renamed as (
         --price
         custitem_price_change_approve as price_change_approve,
         custitem_pricing_formulation as pricing_formulation,
-        lastpurchaseprice__de as lastpurchaseprice__de,
-        lastpurchaseprice__fl as lastpurchaseprice__fl,
+        lastpurchaseprice__de,
+        lastpurchaseprice__fl,
 
         --numeric
         custitemeighty_thousand as eighty_thousand,

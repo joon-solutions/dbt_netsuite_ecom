@@ -30,14 +30,14 @@ renamed as (
         firstsaledate as first_sale_date,
 
         --email
-        email as email,
+        email,
         emailpreference as email_preference,
         emailtransactions as email_transactions,
 
         --shipping
         shipcomplete = 'T' as is_shipcomplete,
-        shippingcarrier as shippingcarrier,
-        shippingitem as shippingitem,
+        shippingcarrier,
+        shippingitem,
         custentity_shipping_terms as shipping_terms,
 
         --default
@@ -80,26 +80,26 @@ renamed as (
         contactlist as contact_list,
         creditholdoverride as credit_hold_override,
         creditlimit as credit_limit,
-        cseg_channel as cseg_channel,
-        currency as currency,
-        cseg_geography as cseg_geography,
+        cseg_channel,
+        currency,
+        cseg_geography,
 
         {# overduebalancesearch as overdue_balance_search, #}
         pricelevel as price_level,
-        probability as probability,
+        probability,
         receivablesaccount as receivables_account,
         representingsubsidiary as representing_subsidiary,
         resalenumber as resale_number,
         searchstage as search_stage,
         terms
-        {# unbilledorderssearch as unbilled_orders_search #}
+    {# unbilledorderssearch as unbilled_orders_search #}
 
-        --system
-        --_sdc_batched_at,
-        --_sdc_extracted_at,
-        --_sdc_received_at,
-        --_sdc_sequence,
-        --_sdc_table_version,
+    --system
+    --_sdc_batched_at,
+    --_sdc_extracted_at,
+    --_sdc_received_at,
+    --_sdc_sequence,
+    --_sdc_table_version,
 
     from source
 )
