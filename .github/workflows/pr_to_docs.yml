@@ -2,10 +2,6 @@ name: "pr_to_docs"
 
 # Triggers
 on:
-  # Triggers the workflow on push to main branch
-  push:
-    branches:
-      - main
   # Triggers the workflow manually from GUI
   workflow_dispatch:
 
