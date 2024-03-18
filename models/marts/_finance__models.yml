@@ -1,0 +1,56 @@
+version: 2
+
+models:
+  - name: dim_erp__customers
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_erp__items
+    columns:
+      - name: item_id
+        tests:
+          - unique
+          - not_null
+
+  - name: fct_erp__budget
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - budget_id
+            - accounting_period_id
+
+    columns:
+      - name: subsidiary_id
+        tests:
+          - not_null
+      - name: account_id
+        tests:
+          - not_null
+      - name: accounting_period_id
+        tests:
+          - not_null
+
+  - name: fct_erp__transaction_lines
+    columns:
+      - name: unique_key
+        tests:
+          - unique
+          - not_null
+    tests:
+      - dbt_utils.expression_is_true:
+          expression: "amount_debit >= 0"          
+      - dbt_utils.expression_is_true:
+          expression: "amount_credit >= 0"      
+
+  - name: fct_erp__consolidated_exchange_rate
+    description: This table holds the CER for each account at each accounting(posting) period
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - account_id
+            - posting_period_id
+            - from_subsidiary_id
+            - to_subsidiary_id
