@@ -1,8 +1,6 @@
 name: "pr_to_docs"
 
-# Triggers
 on:
-  # Triggers the workflow manually from GUI
   workflow_dispatch:
 
 jobs:
