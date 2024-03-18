@@ -1,4 +1,4 @@
-name: "dbt prd pipeline"
+name: "pr_to_docs"
 
 # Triggers
 on:
@@ -10,10 +10,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  # Build job
-  build:
+  pr_to_docs:
+    name: pr_to_docs
     runs-on: ubuntu-latest
-    environment: prd
     env:
       DBT_ACCOUNT: ${{ secrets.DBT_ACCOUNT }}
       DBT_USER: ${{ secrets.DBT_USER }}
