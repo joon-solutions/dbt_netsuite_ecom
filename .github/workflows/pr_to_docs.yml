@@ -1,6 +1,8 @@
 name: "pr_to_docs"
 
 on:
+  pull_request:
+
   workflow_dispatch:
 
 env:
