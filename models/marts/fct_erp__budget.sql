@@ -54,11 +54,7 @@ final as (
         accounting_periods.started_at as budget_month,
         budgets_machines.amount as amount_monthly,
 
-        classifications.class_full_name,
-        classifications.species,
-        classifications.category,
-        classifications.sub_category,
-        classifications.formula
+        classifications.class_name
 
     from budgets_machines
     left join budget

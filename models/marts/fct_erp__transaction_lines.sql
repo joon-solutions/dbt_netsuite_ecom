@@ -47,9 +47,9 @@ final as (
         -- logic confirmed by Finance team on 2023-12-06
         -- fill in customer_id of a Journal Entry transacton with customer_id of its transaction lines
         case
-            when current_transaction.transaction_type = 'Journal Entry'
+            when current_transactions.transaction_type = 'Journal Entry'
                 then transaction_lines.entity_id
-            else current_transaction.entity_id
+            else current_transactions.entity_id
         end as customer_id, -- FK to dim_erp__customers
 
         parent_transaction.tran_display_name as created_from_transaction,
@@ -59,9 +59,9 @@ final as (
 
         departments.department_full_name,
 
-        current_transaction.transaction_date,
-        current_transaction.transaction_type,
-        current_transaction.type_based_document_number as document_number,
+        current_transactions.transaction_date,
+        current_transactions.transaction_type,
+        current_transactions.type_based_document_number as document_number,
 
         accounts.account_type,
         accounts.account_name,
@@ -76,7 +76,7 @@ final as (
         transaction_lines.quantity___fl as transaction_line_quantity,
 
         -- amount related fields
-        current_transaction.posting_period_id,
+        current_transactions.posting_period_id,
 
         currencies.currency_name,
         --transaction_accounting_lines.amount,
@@ -107,12 +107,12 @@ final as (
         on transaction_accounting_lines.account_id = accounts.account_id
     left join departments
         on transaction_lines.department_id = departments.department_id
-    left join transactions as current_transaction
-        on transaction_lines.transaction_id = current_transaction.transaction_id
+    left join transactions as current_transactions
+        on transaction_lines.transaction_id = current_transactions.transaction_id
     left join transactions as parent_transaction
         on transaction_lines.created_from_id = parent_transaction.transaction_id
     left join currencies
-        on current_transaction.currency_id = currencies.currency_id
+        on current_transactions.currency_id = currencies.currency_id
     left join account_types
         on accounts.account_type = account_types.account_type_id
     where
@@ -122,8 +122,8 @@ final as (
             from deleted_records
             where
                 true
-                and current_transaction.transaction_id = deleted_records.record_id
-                and current_transaction.record_type = deleted_records.record_type
+                and current_transactions.transaction_id = deleted_records.record_id
+                and current_transactions.record_type = deleted_records.record_type
         )
 
 )
