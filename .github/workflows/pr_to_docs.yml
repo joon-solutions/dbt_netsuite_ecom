@@ -3,19 +3,20 @@ name: "pr_to_docs"
 on:
   workflow_dispatch:
 
+env:
+  DBT_ACCOUNT: ${{ secrets.DBT_ACCOUNT }}
+  DBT_USER: ${{ secrets.DBT_USER }}
+  DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
+  DBT_ROLE: ${{ secrets.DBT_ROLE }}
+  DBT_DB: ${{ secrets.DBT_DB }}
+  DBT_WH: ${{ secrets.DBT_WH }}
+  DBT_SCHEMA: ${{ secrets.DBT_SCHEMA }}      
+  NESTUITE_SOURCE_SCHEMA: ${{ secrets.NESTUITE_SOURCE_SCHEMA }}
+
 jobs:
   docs_generate:
     name: docs_generate
     runs-on: ubuntu-latest
-    env:
-      DBT_ACCOUNT: ${{ secrets.DBT_ACCOUNT }}
-      DBT_USER: ${{ secrets.DBT_USER }}
-      DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
-      DBT_ROLE: ${{ secrets.DBT_ROLE }}
-      DBT_DB: ${{ secrets.DBT_DB }}
-      DBT_WH: ${{ secrets.DBT_WH }}
-      DBT_SCHEMA: ${{ secrets.DBT_SCHEMA }}      
-      NESTUITE_SOURCE_SCHEMA: ${{ secrets.NESTUITE_SOURCE_SCHEMA }}
 
     steps:
       - name: Step 01 - Checkout current branch
