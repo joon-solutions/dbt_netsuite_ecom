@@ -1,7 +1,9 @@
 name: pr_to_main
 
 on:
-  pull_request:
+  #pull_request:
+
+  workflow_dispatch:
 
 env:
   # specify value of the variables in repository's secret,
