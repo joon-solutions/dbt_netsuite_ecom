@@ -180,3 +180,51 @@ models:
       - name: generalrate
         description: "The general rate associated with the account."
         data_type: varchar          
+
+  - name: stg_netsuite__budget
+    config:
+      contract:
+        enforced: true         
+    columns:
+      - name: budget_id
+        description: "The unique identifier for the budget."
+        data_type: numeric(38,0)
+        tests:
+          - unique
+          - not_null        
+      - name: customer_id
+        description: "The unique identifier for the customer associated with the budget."
+        data_type: numeric(38,0)
+      - name: department_id
+        description: "The unique identifier for the department associated with the budget."
+        data_type: numeric(38,0)
+      - name: subsidiary_id
+        description: "The unique identifier for the subsidiary associated with the budget."
+        data_type: numeric(38,0)
+      - name: currency_id
+        description: "The unique identifier for the currency associated with the budget."
+        data_type: numeric(38,0)
+      - name: class_id
+        description: "The unique identifier for the class associated with the budget."
+        data_type: numeric(38,0)
+      - name: account_id
+        description: "The unique identifier for the account associated with the budget."
+        data_type: numeric(38,0)
+      - name: accountingbook_id
+        description: "The unique identifier for the accounting book associated with the budget."
+        data_type: numeric(38,0)
+      - name: item_id
+        description: "The unique identifier for the item associated with the budget."
+        data_type: numeric(38,0)
+      - name: category_id
+        description: "The unique identifier for the category associated with the budget."
+        data_type: numeric(38,0)
+      - name: location_id
+        description: "The unique identifier for the location associated with the budget."
+        data_type: numeric(38,0)
+      - name: year_id
+        description: "The unique identifier for the year associated with the budget."
+        data_type: numeric(38,0)
+      - name: amount
+        description: "The budget amount"
+        data_type: float
