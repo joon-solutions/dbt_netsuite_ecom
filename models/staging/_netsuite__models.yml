@@ -102,3 +102,81 @@ models:
       - name: is_year
         description: "Specifies whether the accounting period is a year."
         data_type: boolean
+
+  - name: stg_netsuite__accounts
+    config:
+      contract:
+        enforced: true       
+    columns:
+      - name: account_id
+        description: "The unique identifier for the account."
+        data_type: number(38,0)
+        tests:
+          - unique
+          - not_null        
+      - name: currency_id
+        description: "The unique identifier for the currency associated with the account."
+        data_type: number(38,0)
+      - name: department_id
+        description: "The unique identifier for the department associated with the account."
+        data_type: number(38,0)
+      - name: external_id
+        description: "The external identifier for the account."
+        data_type: number(38,0)
+      - name: parent_id
+        description: "The identifier of the parent account."
+        data_type: number(38,0)
+      - name: subsidiary_id
+        description: "The unique identifier for the subsidiary associated with the account."
+        data_type: number(38,0)
+      - name: last_modified_at
+        description: "The date when the account was last modified."
+        data_type: timestamp_tz
+      - name: account_number
+        description: "The account number."
+        data_type: varchar
+      - name: account_type
+        description: "The type of the account."
+        data_type: varchar
+      - name: sspec_acct
+        description: "The specific account associated with the account."
+        data_type: varchar
+      - name: display_name_with_hierarchy
+        description: "The display name of the account with its hierarchy."
+        data_type: varchar
+      - name: account_full_name
+        description: "The full name of the account."
+        data_type: varchar
+      - name: account_name
+        description: "The name of the account."
+        data_type: varchar
+      - name: is_inactive
+        description: "Specifies whether the account is inactive."
+        data_type: boolean
+      - name: is_summary
+        description: "Specifies whether the account is a summary account."
+        data_type: boolean
+      - name: is_eliminate
+        description: "Specifies whether the account is an elimination account."
+        data_type: boolean
+      - name: is_revalue
+        description: "Specifies whether the account is a revaluation account."
+        data_type: boolean
+      - name: is_include_children
+        description: "Specifies whether children accounts are included with this account."
+        data_type: boolean
+      - name: is_inventory
+        description: "Specifies whether the account is an inventory account."
+        data_type: boolean
+      - name: is_reconcile_with_matching
+        description: "Specifies whether reconciliation is done with matching."
+        data_type: boolean
+      - name: cashflow_rate
+        description: "The cash flow rate associated with the account."
+        data_type: varchar
+      - name: description
+        description: "The description of the account."
+        data_type: varchar
+      - name: generalrate
+        description: "The general rate associated with the account."
+        data_type: varchar          
