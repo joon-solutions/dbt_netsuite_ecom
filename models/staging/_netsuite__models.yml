@@ -385,3 +385,46 @@ models:
       - name: is_inactive
         description: "Specifies whether the currency is inactive."
         data_type: boolean
+
+  - name: stg_netsuite__customer_subsidiary_relationship
+    description: "Stage table containing data related to customer-subsidiary relationships from Netsuite. This table stores information about the relationships between customers and subsidiaries, including their identifiers, primary currency, balances, and other relevant attributes."
+    config:
+      contract:
+        enforced: true            
+    columns:
+      - name: customer_subsidiary_relationship_id
+        description: "The unique identifier for the customer-subsidiary relationship."
+        data_type: number(38,0)
+        tests:
+          - unique
+          - not_null
+      - name: entity_id
+        description: "The entity identifier for the relationship."
+        data_type: number(38,0)
+      - name: last_modified_at
+        description: "The timestamp when the customer-subsidiary relationship was last modified."
+        data_type: timestamp_tz
+      - name: primary_currency_id
+        description: "The unique identifier for the primary currency associated with the relationship."
+        data_type: number(38,0)
+      - name: subsidiary_id
+        description: "The unique identifier for the subsidiary associated with the relationship."
+        data_type: number(38,0)
+      - name: subsidiary_name
+        description: "The name of the subsidiary associated with the relationship."
+        data_type: text
+      - name: balance__de
+        description: "The balance in the currency (Direct Exchange)."
+        data_type: numeric(38,0)
+      - name: balance__fl
+        description: "The balance in the currency (Floating Exchange)."
+        data_type: float
+      - name: deposit_balance
+        description: "The deposit balance."
+        data_type: float
+      - name: unbilled_orders
+        description: "The amount of unbilled orders."
+        data_type: float
+      - name: is_primary_sub
+        description: "Specifies whether the subsidiary is the primary subsidiary."
+        data_type: boolean
