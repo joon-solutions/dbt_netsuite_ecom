@@ -253,4 +253,43 @@ models:
       - name: amount
         description: "The budget amount."
         data_type: float
-             
+
+  - name: stg_netsuite__classifications
+    description: "Stage table containing classifications data in Netsuite."
+    config:
+      contract:
+        enforced: true           
+    columns:
+      - name: class_id
+        description: "The unique identifier for the class."
+        data_type: numeric(38,0)
+        tests:
+          - unique
+          - not_null        
+      - name: external_id
+        description: "The external identifier for the class."
+        data_type: varchar
+      - name: parent_id
+        description: "The identifier of the parent class."
+        data_type: numeric(38,0)
+      - name: subsidiary_ids
+        description: "The unique identifier for the subsidiaries associated with the class."
+        data_type: varchar
+      - name: class_name
+        description: "The name of the class."
+        data_type: varchar
+      - name: last_modified_at
+        description: "The timestamp when the class was last modified."
+        data_type: timestamp_tz
+      - name: nspb_segment_code
+        description: "The NSPB segment code associated with the class."
+        data_type: varchar
+      - name: class_full_name
+        description: "The full name of the class."
+        data_type: varchar
+      - name: has_children
+        description: "Specifies whether the class has children."
+        data_type: boolean
+      - name: is_inactive
+        description: "Specifies whether the class is inactive."
+        data_type: boolean
