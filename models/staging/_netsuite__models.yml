@@ -2,6 +2,7 @@ version: 2
 
 models:
   - name: stg_netsuite__account_types
+    description: "Stage table containing data related to account types from Netsuite"
     config:
       contract:
         enforced: true      
@@ -44,6 +45,7 @@ models:
         data_type: boolean
 
   - name: stg_netsuite__accounting_periods
+    description: "Stage table containing data related to accounting periods from Netsuite."
     config:
       contract:
         enforced: true      
@@ -104,6 +106,7 @@ models:
         data_type: boolean
 
   - name: stg_netsuite__accounts
+    description: "Stage table containing data related to accounts from Netsuite."
     config:
       contract:
         enforced: true       
@@ -182,6 +185,7 @@ models:
         data_type: varchar          
 
   - name: stg_netsuite__budget
+    description: "Stage table containing data related to budgets from Netsuite."
     config:
       contract:
         enforced: true         
@@ -228,3 +232,25 @@ models:
       - name: amount
         description: "The budget amount"
         data_type: float
+
+  - name: stg_netsuite__budgets_machines
+    description: "Stage table containing machine-generated budgets data"
+    config:
+      contract:
+        enforced: true            
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - budget_id
+            - accounting_period_id
+    columns:
+      - name: budget_id
+        description: "The unique identifier for the budget."
+        data_type: numeric(38,0)
+      - name: accounting_period_id
+        description: "The unique identifier for the accounting period associated with the budget."
+        data_type: numeric(38,0)
+      - name: amount
+        description: "The budget amount."
+        data_type: float
+             
