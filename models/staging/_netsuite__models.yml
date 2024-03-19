@@ -333,3 +333,55 @@ models:
       - name: historical_rate
         description: "The historical exchange rate."
         data_type: float
+
+  - name: stg_netsuite__currencies
+    description: "Stage table containing data related to currencies from Netsuite. This table stores information about various currencies, including their names, symbols, precision, exchange rates, and other currency-related attributes."
+    config:
+      contract:
+        enforced: true            
+    columns:
+      - name: currency_id
+        description: "The unique identifier for the currency."
+        data_type: number(38,0)
+        tests:
+          - unique
+          - not_null         
+      - name: currency_name
+        description: "The name of the currency."
+        data_type: varchar
+      - name: currency_symbol
+        description: "The symbol of the currency."
+        data_type: varchar
+      - name: last_modified_at
+        description: "The timestamp when the currency record was last modified."
+        data_type: timestamp_tz
+      - name: currency_precision
+        description: "The precision of the currency."
+        data_type: numeric(38,0)
+      - name: display_symbol
+        description: "The symbol used for displaying the currency."
+        data_type: varchar
+      - name: exchange_rate__de
+        description: "The exchange rate for the currency (Direct Exchange)."
+        data_type: numeric(38,0)
+      - name: exchange_rate__fl
+        description: "The exchange rate for the currency (Floating Exchange)."
+        data_type: float
+      - name: fx_rate_update_timezone
+        description: "The timezone for updating the currency exchange rate."
+        data_type: numeric(38,0)
+      - name: symbol_placement
+        description: "The placement of the currency symbol."
+        data_type: numeric(38,0)
+      - name: is_include_in_fx_rate_updates
+        description: "Specifies whether the currency is included in foreign exchange rate updates."
+        data_type: boolean
+      - name: is_override_currency_format
+        description: "Specifies whether the currency format is overridden."
+        data_type: boolean
+      - name: is_base_currency
+        description: "Specifies whether the currency is the base currency."
+        data_type: boolean
+      - name: is_inactive
+        description: "Specifies whether the currency is inactive."
+        data_type: boolean
