@@ -45,7 +45,7 @@ models:
         data_type: boolean
 
   - name: stg_netsuite__accounting_periods
-    description: "Stage table containing data related to accounting periods from Netsuite."
+    description: "Stage table containing data related to accounting periods from Netsuite. This table stores information about accounting periods, including their unique identifiers, start and end dates, statuses, and other relevant attributes used for financial period closing and reporting."
     config:
       contract:
         enforced: true      
@@ -255,7 +255,7 @@ models:
         data_type: float
 
   - name: stg_netsuite__classifications
-    description: "Stage table containing classifications data in Netsuite."
+    description: "Stage table containing data related to classifications from Netsuite. This table stores information about various classifications such as classes, departments, locations, etc., which are used for categorizing transactions and financial reporting."
     config:
       contract:
         enforced: true           
@@ -293,3 +293,43 @@ models:
       - name: is_inactive
         description: "Specifies whether the class is inactive."
         data_type: boolean
+
+  - name: stg_netsuite__consolidated_exchange_rates
+    description: "Stage table containing data related to consolidated exchange rates fetched from Netsuite. This table stores information about the exchange rates between different currencies for a specific period, which is used for financial consolidation and reporting."
+    config:
+      contract:
+        enforced: true           
+    columns:
+      - name: exchange_rate_id
+        description: "The unique identifier for the exchange rate."
+        tests:
+          - unique
+          - not_null      
+        data_type: number(38,0)
+      - name: posting_period_id
+        description: "The unique identifier for the posting period associated with the exchange rate."
+        data_type: number(38,0)
+      - name: accounting_book_id
+        description: "The unique identifier for the accounting book associated with the exchange rate."
+        data_type: number(38,0)
+      - name: from_subsidiary_id
+        description: "The unique identifier for the 'from' subsidiary associated with the exchange rate."
+        data_type: number(38,0)
+      - name: to_subsidiary_id
+        description: "The unique identifier for the 'to' subsidiary associated with the exchange rate."
+        data_type: number(38,0)
+      - name: from_currency_id
+        description: "The unique identifier for the 'from' currency associated with the exchange rate."
+        data_type: number(38,0)
+      - name: to_currency_id
+        description: "The unique identifier for the 'to' currency associated with the exchange rate."
+        data_type: number(38,0)
+      - name: average_rate
+        description: "The average exchange rate for the period."
+        data_type: float
+      - name: current_rate
+        description: "The current exchange rate."
+        data_type: float
+      - name: historical_rate
+        description: "The historical exchange rate."
+        data_type: float
