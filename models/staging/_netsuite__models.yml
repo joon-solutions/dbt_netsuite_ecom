@@ -412,7 +412,7 @@ models:
         data_type: number(38,0)
       - name: subsidiary_name
         description: "The name of the subsidiary associated with the relationship."
-        data_type: text
+        data_type: varchar
       - name: balance__de
         description: "The balance in the currency (Direct Exchange)."
         data_type: numeric(38,0)
@@ -428,3 +428,190 @@ models:
       - name: is_primary_sub
         description: "Specifies whether the subsidiary is the primary subsidiary."
         data_type: boolean
+
+  - name: stg_netsuite__customers
+    description: "Stage table containing data related to customers from Netsuite. This table stores information about customers, including their identifiers, contact details, company information, transaction history, and other relevant attributes."
+    config:
+      contract:
+        enforced: true        
+    columns:
+      - name: customer_id
+        description: "The unique identifier for the customer."
+        tests:
+          - unique
+          - not_null        
+        data_type: number(38,0)
+      - name: external_id
+        description: "The external identifier for the customer."
+        data_type: varchar
+      - name: customer_department_id
+        description: "The unique identifier for the department associated with the customer."
+        data_type: number(38,0)
+      - name: parent_id
+        description: "The unique identifier for the parent customer."
+        data_type: number(38,0)
+      - name: entity_status_id
+        description: "The entity status identifier for the customer."
+        data_type: number(38,0)
+      - name: company_name
+        description: "The name of the customer's company."
+        data_type: varchar
+      - name: alternative_name
+        description: "An alternative name for the customer."
+        data_type: varchar
+      - name: phone
+        description: "The phone number of the customer."
+        data_type: varchar
+      - name: entity_name
+        description: "The name of the entity associated with the customer."
+        data_type: varchar
+      - name: entity_title
+        description: "The title of the entity associated with the customer."
+        data_type: varchar
+      - name: fax
+        description: "The fax number of the customer."
+        data_type: varchar
+      - name: customer_url
+        description: "The URL of the customer."
+        data_type: varchar
+      - name: closed_at
+        description: "The timestamp when the customer account was closed."
+        data_type: timestamp_tz
+      - name: created_at
+        description: "The timestamp when the customer record was created."
+        data_type: timestamp_tz
+      - name: last_modified_date
+        description: "The timestamp when the customer record was last modified."
+        data_type: timestamp_tz
+      - name: last_order_date
+        description: "The date of the last order placed by the customer."
+        data_type: timestamp_tz
+      - name: last_sale_date
+        description: "The date of the last sale to the customer."
+        data_type: timestamp_tz
+      - name: first_order_date
+        description: "The date of the first order placed by the customer."
+        data_type: timestamp_tz
+      - name: first_sale_date
+        description: "The date of the first sale to the customer."
+        data_type: timestamp_tz
+      - name: email
+        description: "The email address of the customer."
+        data_type: varchar
+      - name: email_preference
+        description: "The email preference of the customer."
+        data_type: varchar
+      - name: email_transactions
+        description: "Specifies whether email transactions are enabled for the customer."
+        data_type: varchar
+      - name: is_shipcomplete
+        description: "Specifies whether the customer requires complete shipment."
+        data_type: boolean
+      - name: shipping_carrier
+        description: "The shipping carrier associated with the customer."
+        data_type: varchar
+      - name: shipping_item
+        description: "The shipping item associated with the customer."
+        data_type: numeric(38, 0)
+      - name: shipping_terms
+        description: "The shipping terms associated with the customer."
+        data_type: numeric(38, 0)
+      - name: default_allocation_strategy
+        description: "The default allocation strategy for the customer."
+        data_type: numeric(38, 0)
+      - name: default_billing_address_id
+        description: "The default billing address identifier for the customer."
+        data_type: number(38,0)
+      - name: default_shipping_address_id
+        description: "The default shipping address identifier for the customer."
+        data_type: number(38,0)
+      - name: consol_balance_search
+        description: "The consolidated balance search."
+        data_type: float
+      - name: consol_days_over_dues_earch
+        description: "The consolidated days overdue search."
+        data_type: numeric(38, 0)
+      - name: consol_overdue_balance_search
+        description: "The consolidated overdue balance search."
+        data_type: float
+      - name: consol_unbilled_orders_search
+        description: "The consolidated unbilled orders search."
+        data_type: float
+      - name: has_budget_approved
+        description: "Specifies whether the customer's budget is approved."
+        data_type: boolean
+      - name: is_auto_generated_representing_entity
+        description: "Specifies whether the entity associated with the customer is auto-generated."
+        data_type: boolean
+      - name: is_duplicate
+        description: "Specifies whether the customer record is a duplicate."
+        data_type: boolean
+      - name: is_fax_transactions
+        description: "Specifies whether the transaction with the customer involves fax communication."
+        data_type: boolean
+      - name: is_inactive
+        description: "Specifies whether the customer is inactive."
+        data_type: boolean
+      - name: is_on_credit_hold
+        description: "Specifies whether the customer is on credit hold."
+        data_type: boolean
+      - name: is_person
+        description: "Specifies whether the customer is a person."
+        data_type: boolean
+      - name: is_print_transactions
+        description: "Specifies whether transactions with the customer are printed."
+        data_type: boolean
+      - name: alcohol_recipient_type
+        description: "The alcohol recipient type."
+        data_type: varchar
+      - name: balance_search__de
+        description: "The balance search in the currency (Direct Exchange)."
+        data_type: numeric(38, 0)
+      - name: balance_search__fl
+        description: "The balance search in the currency (Floating Exchange)."
+        data_type: float
+      - name: unbilled_orders_search__de
+        description: "The unbilled orders search in the currency (Direct Exchange)."
+        data_type: numeric(38, 0)
+      - name: unbilled_orders_search__fl
+        description: "The unbilled orders search in the currency (Floating Exchange)."
+        data_type: float
+      - name: contact_list
+        description: "The contact list associated with the customer."
+        data_type: varchar
+      - name: credit_hold_override
+        description: "The credit hold override for the customer."
+        data_type: varchar
+      - name: credit_limit
+        description: "The credit limit for the customer."
+        data_type: float
+      - name: cseg_channel
+        description: "The channel associated with the customer."
+        data_type: numeric(38, 0)
+      - name: currency
+        description: "The currency associated with the customer."
+        data_type: numeric(38, 0)
+      - name: cseg_geography
+        description: "The geography associated with the customer."
+        data_type: numeric(38, 0)
+      - name: price_level
+        description: "The price level associated with the customer."
+        data_type: numeric(38, 0)
+      - name: probability
+        description: "The probability associated with the customer."
+        data_type: float
+      - name: receivables_account
+        description: "The receivables account associated with the customer."
+        data_type: numeric(38, 0)
+      - name: representing_subsidiary
+        description: "The subsidiary representing the customer."
+        data_type: numeric(38, 0)
+      - name: resale_number
+        description: "The resale number associated with the customer."
+        data_type: varchar
+      - name: search_stage
+        description: "The search stage associated with the customer."
+        data_type: varchar
+      - name: terms
+        description: "The terms associated with the customer."
+        data_type: number(38,0)     
