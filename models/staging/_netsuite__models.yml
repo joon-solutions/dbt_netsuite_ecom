@@ -841,4 +841,20 @@ models:
         data_type: boolean
       - name: entity_status
         description: "The status of the entity."
+        data_type: varchar
+
+  - name: stg_netsuite__item_units
+    description: "Stage table containing data related to item units from Netsuite. This table stores information about units associated with items, including unit identifiers and names."
+    config:
+      contract:
+        enforced: true            
+    columns:
+      - name: item_unit_id
+        description: "The unique identifier for the item unit."
+        data_type: number(38,0)
+        tests:
+          - unique
+          - not_null        
+      - name: name
+        description: "The name of the item unit."
         data_type: varchar          
