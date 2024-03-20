@@ -1323,13 +1323,13 @@ models:
         data_type: float       
       - name: bill_of_materials
         description: "Specifies whether the transaction line is a bill of materials."
-        data_type: numeric(38, 0)
+        data_type: number(38,0)
       - name: bill_variance_status
         description: "The variance status of the bill associated with the transaction line."
         data_type: varchar        
       - name: bill_of_materials_revision
         description: "The revision of the bill of materials associated with the transaction line."
-        data_type: numeric(38, 0)
+        data_type: number(38,0)
       - name: item_type
         description: "The type of item associated with the transaction line."
         data_type: varchar
@@ -1521,4 +1521,310 @@ models:
         data_type: float
       - name: create_out_sourced_wo
         description: "Specifies whether to create an outsourced work order associated with the transaction line."
-        data_type: varchar    
+        data_type: varchar
+
+  - name: stg_netsuite__transactions
+    config:
+      contract:
+        enforced: true           
+    columns:   
+      - name: transaction_id
+        description: "The unique identifier for the transaction."
+        data_type: number(38,0)
+        tests:
+          - unique
+          - not_null        
+      - name: tran_id
+        description: "The transaction ID."
+        data_type: varchar
+      - name: external_id
+        description: "The external identifier for the transaction."
+        data_type: varchar
+      - name: transaction_number
+        description: "The transaction number."
+        data_type: varchar
+      - name: vendor_id
+        description: "The identifier of the vendor associated with the transaction."
+        data_type: number(38,0)
+      - name: entity_id
+        description: "The identifier of the entity associated with the transaction."
+        data_type: number(38,0)
+      - name: currency_id
+        description: "The identifier of the currency associated with the transaction."
+        data_type: number(38,0)
+      - name: posting_period_id
+        description: "The identifier of the posting period associated with the transaction."
+        data_type: number(38,0)
+      - name: created_by
+        description: "The user who created the transaction."
+        data_type: number(38,0)
+      - name: last_modified_by
+        description: "The user who last modified the transaction."
+        data_type: number(38,0)
+      - name: created_at
+        description: "The timestamp when the transaction was created."
+        data_type: timestamp_tz
+      - name: lastmodified_date
+        description: "The timestamp when the transaction was last modified."
+        data_type: timestamp_tz
+      - name: transaction_date
+        description: "The date of the transaction."
+        data_type: timestamp_tz
+      - name: ship_at
+        description: "The shipping date of the transaction."
+        data_type: timestamp_tz
+      - name: actualship_at
+        description: "The actual shipping date of the transaction."
+        data_type: timestamp_tz
+      - name: start_at
+        description: "The start date of the transaction."
+        data_type: timestamp_tz
+      - name: due_at
+        description: "The due date of the transaction."
+        data_type: timestamp_tz
+      - name: end_at
+        description: "The end date of the transaction."
+        data_type: timestamp_tz
+      - name: close_at
+        description: "The close date of the transaction."
+        data_type: timestamp_tz
+      - name: next_bill_date
+        description: "The next bill date of the transaction."
+        data_type: timestamp_tz
+      - name: actual_productionend_date
+        description: "The actual production end date of the transaction."
+        data_type: timestamp_tz
+      - name: actual_productionstart_date
+        description: "The actual production start date of the transaction."
+        data_type: timestamp_tz
+      - name: account_based_number
+        description: "The account-based number of the transaction."
+        data_type: varchar
+      - name: tran_display_name
+        description: "The display name of the transaction."
+        data_type: varchar
+      - name: type_based_document_number
+        description: "The type-based document number of the transaction."
+        data_type: varchar
+      - name: fax
+        description: "The fax associated with the transaction."
+        data_type: varchar
+      - name: email
+        description: "The email associated with the transaction."
+        data_type: varchar
+      - name: transaction_status
+        description: "The status of the transaction."
+        data_type: varchar
+      - name: balseg_status
+        description: "The balance segment status of the transaction."
+        data_type: number(38,0)
+      - name: interco_status
+        description: "The intercompany status of the transaction."
+        data_type: number(38,0)
+      - name: payment_hold
+        description: "Specifies whether the transaction is on payment hold."
+        data_type: varchar
+      - name: is_ship_complete
+        description: "Specifies whether the transaction is fully shipped."
+        data_type: varchar
+      - name: payment_method
+        description: "The payment method associated with the transaction."
+        data_type: number(38,0)
+      - name: payment_option
+        description: "The payment option associated with the transaction."
+        data_type: number(38,0)
+      - name: foreign_amount_paid
+        description: "The foreign amount paid associated with the transaction."
+        data_type: float
+      - name: foreign_amount_unpaid
+        description: "The foreign amount unpaid associated with the transaction."
+        data_type: float
+      - name: foreign_payment_amount_unused
+        description: "The foreign payment amount unused associated with the transaction."
+        data_type: float
+      - name: foreign_payment_amount_used
+        description: "The foreign payment amount used associated with the transaction."
+        data_type: float
+      - name: foreign_total
+        description: "The foreign total amount associated with the transaction."
+        data_type: float
+      - name: billing_address_id
+        description: "The billing address associated with the transaction."
+        data_type: number(38,0)
+      - name: bill_of_materials
+        description: "Specifies whether the transaction is a bill of materials."
+        data_type: number(38,0)
+      - name: bill_of_materials_revision
+        description: "The revision of the bill of materials associated with the transaction."
+        data_type: number(38,0)
+      - name: shipping_address_id
+        description: "The shipping address associated with the transaction."
+        data_type: number(38,0)
+      - name: transfer_location
+        description: "The transfer location associated with the transaction."
+        data_type: number(38,0)
+      - name: has_use_item_cost_as_transfer_cost
+        description: "Specifies whether to use the item cost as the transfer cost."
+        data_type: varchar
+      - name: cseg_channel
+        description: "The channel associated with the transaction."
+        data_type: number(38,0)
+      - name: cseg_geography
+        description: "The geography associated with the transaction."
+        data_type: number(38,0)
+      - name: incoterm
+        description: "The incoterm associated with the transaction."
+        data_type: number(38,0)
+      - name: memo
+        description: "The memo associated with the transaction."
+        data_type: varchar
+      - name: next_approver
+        description: "The next approver associated with the transaction."
+        data_type: number(38,0)
+      - name: to_be_printed
+        description: "Specifies whether the transaction is to be printed."
+        data_type: varchar
+      - name: terms
+        description: "The terms associated with the transaction."
+        data_type: number(38,0)
+      - name: approval_status
+        description: "The approval status of the transaction."
+        data_type: number(38,0)
+      - name: est_gross_profit
+        description: "The estimated gross profit of the transaction."
+        data_type: float
+      - name: total_cost_estimate
+        description: "The total cost estimate associated with the transaction."
+        data_type: float
+      - name: type
+        description: "The type of the transaction."
+        data_type: varchar
+      - name: abbrev_type
+        description: "The abbreviated type of the transaction."
+        data_type: varchar
+      - name: custom_type
+        description: "The custom type of the transaction."
+        data_type: number(38,0)
+      - name: journal_type
+        description: "The journal type of the transaction."
+        data_type: varchar
+      - name: record_type
+        description: "The record type of the transaction."
+        data_type: varchar
+      - name: transaction_type
+        description: "The type of the transaction."
+        data_type: varchar
+      - name: reversal
+        description: "Specifies whether the transaction is a reversal."
+        data_type: number(38,0)
+      - name: reversal_date
+        description: "The reversal date of the transaction."
+        data_type: timestamp_tz
+      - name: reversal_defer
+        description: "Specifies whether the reversal is deferred."
+        data_type: varchar
+      - name: linked_inventory_transfer
+        description: "Specifies whether the transaction is linked to an inventory transfer."
+        data_type: number(38,0)
+      - name: linked_ir
+        description: "Specifies whether the transaction is linked to an internal requisition."
+        data_type: number(38,0)
+      - name: linked_po
+        description: "Specifies whether the transaction is linked to a purchase order."
+        data_type: number(38,0)
+      - name: other_refnum
+        description: "The other reference number associated with the transaction."
+        data_type: varchar
+      - name: committed
+        description: "Specifies whether the transaction is committed."
+        data_type: float
+      - name: days_open
+        description: "The number of days the transaction has been open."
+        data_type: number(38,0)
+      - name: days_over_due_search
+        description: "The number of days the transaction is overdue."
+        data_type: number(38,0)
+      - name: employee
+        description: "The employee associated with the transaction."
+        data_type: number(38,0)
+      - name: memdoc
+        description: "The document associated with the transaction."
+        data_type: number(38,0)
+      - name: nexus
+        description: "The nexus associated with the transaction."
+        data_type: number(38,0)
+      - name: number
+        description: "The number associated with the transaction."
+        data_type: number(38,0)
+      - name: outsourcing_charge
+        description: "The outsourcing charge associated with the transaction."
+        data_type: number(38,0)
+      - name: outsourcing_charge_unit_price
+        description: "The unit price of the outsourcing charge associated with the transaction."
+        data_type: float
+      - name: required_deposit_due
+        description: "The required deposit due for the transaction."
+        data_type: float
+      - name: required_deposit_percentage
+        description: "The required deposit percentage for the transaction."
+        data_type: float
+      - name: ship_carrier
+        description: "The shipping carrier associated with the transaction."
+        data_type: varchar
+      - name: to_subsidiary
+        description: "The subsidiary associated with the transaction."
+        data_type: number(38,0)
+      - name: source
+        description: "The source of the transaction."
+        data_type: varchar
+      - name: is_firmed
+        description: "Specifies whether the transaction is firmed."
+        data_type: varchar
+      - name: is_posting
+        description: "Specifies whether the transaction is posting."
+        data_type: boolean
+      - name: is_printed_picking_ticket
+        description: "Specifies whether the transaction is printed picking ticket."
+        data_type: boolean
+      - name: is_use_revenue_arrangement
+        description: "Specifies whether the transaction uses revenue arrangement."
+        data_type: boolean
+      - name: is_void
+        description: "Specifies whether the transaction is void."
+        data_type: boolean
+      - name: is_voided
+        description: "Specifies whether the transaction is voided."
+        data_type: boolean
+      - name: is_visibletocustomer
+        description: "Specifies whether the transaction is visible to the customer."
+        data_type: boolean
+      - name: is_actual_prod_end_date_entered_manually
+        description: "Specifies whether the actual production end date is entered manually."
+        data_type: boolean
+      - name: is_actual_prod_start_date_entered_manually
+        description: "Specifies whether the actual production start date is entered manually."
+        data_type: boolean
+      - name: is_finchrg
+        description: "Specifies whether the transaction is fin charge."
+        data_type: boolean
+      - name: is_reversal
+        description: "Specifies whether the transaction is reversal."
+        data_type: boolean
+      - name: is_wip
+        description: "Specifies whether the transaction is WIP."
+        data_type: boolean
+      - name: is_ord_picked
+        description: "Specifies whether the order is picked."
+        data_type: boolean
+      - name: is_ord_received
+        description: "Specifies whether the order is received."
+        data_type: boolean
+      - name: is_out_sourced
+        description: "Specifies whether the transaction is outsourced."
+        data_type: boolean
+      - name: has_billing_status
+        description: "Specifies whether the transaction has billing status."
+        data_type: boolean
+      - name: is_include_in_forecast
+        description: "Specifies whether the transaction is included in the forecast."
+        data_type: boolean        

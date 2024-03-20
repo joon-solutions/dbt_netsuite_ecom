@@ -37,7 +37,7 @@ renamed as (
         typebaseddocumentnumber as type_based_document_number,
         fax,
         email,
-        "STATUS" as trasaction_status,
+        "STATUS" as transaction_status,
         balsegstatus as balseg_status,
         intercostatus as interco_status,
 
@@ -55,10 +55,10 @@ renamed as (
         foreigntotal as foreign_total,
 
         --billing & shipping
-        billingaddress as billing_address,
+        billingaddress as billing_address_id,
         billofmaterials as bill_of_materials,
         billofmaterialsrevision as bill_of_materials_revision,
-        shippingaddress as shipping_address,
+        shippingaddress as shipping_address_id,
         transferlocation as transfer_location,
         useitemcostastransfercost as has_use_item_cost_as_transfer_cost,
 
