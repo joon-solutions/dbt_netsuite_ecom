@@ -63,11 +63,6 @@ renamed as (
 
         --other
         alcoholrecipienttype as alcohol_recipient_type,
-        balancesearch__de as balance_search__de,
-        balancesearch__fl as balance_search__fl,
-        unbilledorderssearch__de as unbilled_orders_search__de,
-        unbilledorderssearch__fl as unbilled_orders_search__fl,
-
         contactlist as contact_list,
         creditholdoverride as credit_hold_override,
         creditlimit as credit_limit,

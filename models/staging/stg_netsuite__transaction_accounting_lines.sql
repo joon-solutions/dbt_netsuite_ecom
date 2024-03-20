@@ -21,7 +21,6 @@ renamed as (
         coalesce(credit, 0) as amount_credit,
         coalesce(debit, 0) as amount_debit,
 
-        exchangerate__de as exchange_rate__de,
         exchangerate as exchange_rate,
         paymentamountunused as payment_amount_unused,
         paymentamountused as payment_amount_used,

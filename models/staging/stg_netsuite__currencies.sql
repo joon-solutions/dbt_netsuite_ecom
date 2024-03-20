@@ -12,8 +12,6 @@ renamed as (
 
         currencyprecision as currency_precision,
         displaysymbol as display_symbol,
-        exchangerate__de as exchange_rate__de,
-        exchangerate__fl as exchange_rate__fl,
         fxrateupdatetimezone as fx_rate_update_timezone,
         symbolplacement as symbol_placement,
         includeinfxrateupdates = 'T' as is_include_in_fx_rate_updates,

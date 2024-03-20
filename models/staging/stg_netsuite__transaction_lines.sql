@@ -149,7 +149,6 @@ renamed as (
         orderpriority as order_priority,
         paymentmethod as payment_method,
         buildvariance as build_variance,
-        buildvariance__de as build_variance__de,
         componentyield as component_yield,
         createoutsourcedwo as create_out_sourced_wo
 

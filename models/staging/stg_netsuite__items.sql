@@ -32,8 +32,6 @@ renamed as (
         costestimatetype as cost_estimate_type,
         costingmethod as costing_method,
         costingmethoddisplay as costing_method_display,
-        averagecost__de,
-        averagecost__fl,
         fxcost as fx_cost,
         tracklandedcost as track_landed_cost,
 
@@ -45,10 +43,6 @@ renamed as (
         billpricevarianceacct as bill_price_variance_acct,
         billqtyvarianceacct as bill_quantity_variance_acct,
 
-        --price
-        lastpurchaseprice__de as last_purchase_price__de,
-        lastpurchaseprice__fl as last_purchase_price__fl,
-
         --weight
         "WEIGHT" as item_weight,
         weightunit as weight_unit_id,
@@ -59,8 +53,6 @@ renamed as (
         saleunit as sale_unit,
         stockunit as stock_unit,
         consumptionunit as consumption_unit,
-        totalquantityonhand__de as total_quantity_on_hand__de,
-        totalquantityonhand__fl as total_quantity_on_hand__fl,
 
         --type
         itemtype as item_type,
