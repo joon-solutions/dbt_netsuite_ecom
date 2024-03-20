@@ -512,13 +512,13 @@ models:
         data_type: varchar
       - name: shipping_item
         description: "The shipping item associated with the customer."
-        data_type: numeric(38, 0)
+        data_type: number(38,0)
       - name: shipping_terms
         description: "The shipping terms associated with the customer."
-        data_type: numeric(38, 0)
+        data_type: number(38,0)
       - name: default_allocation_strategy
         description: "The default allocation strategy for the customer."
-        data_type: numeric(38, 0)
+        data_type: number(38,0)
       - name: default_billing_address_id
         description: "The default billing address identifier for the customer."
         data_type: number(38,0)
@@ -530,7 +530,7 @@ models:
         data_type: float
       - name: consol_days_over_dues_earch
         description: "The consolidated days overdue search."
-        data_type: numeric(38, 0)
+        data_type: number(38,0)
       - name: consol_overdue_balance_search
         description: "The consolidated overdue balance search."
         data_type: float
@@ -566,13 +566,13 @@ models:
         data_type: varchar
       - name: balance_search__de
         description: "The balance search in the currency (Direct Exchange)."
-        data_type: numeric(38, 0)
+        data_type: number(38,0)
       - name: balance_search__fl
         description: "The balance search in the currency (Floating Exchange)."
         data_type: float
       - name: unbilled_orders_search__de
         description: "The unbilled orders search in the currency (Direct Exchange)."
-        data_type: numeric(38, 0)
+        data_type: number(38,0)
       - name: unbilled_orders_search__fl
         description: "The unbilled orders search in the currency (Floating Exchange)."
         data_type: float
@@ -587,25 +587,25 @@ models:
         data_type: float
       - name: cseg_channel
         description: "The channel associated with the customer."
-        data_type: numeric(38, 0)
+        data_type: number(38,0)
       - name: currency
         description: "The currency associated with the customer."
-        data_type: numeric(38, 0)
+        data_type: number(38,0)
       - name: cseg_geography
         description: "The geography associated with the customer."
-        data_type: numeric(38, 0)
+        data_type: number(38,0)
       - name: price_level
         description: "The price level associated with the customer."
-        data_type: numeric(38, 0)
+        data_type: number(38,0)
       - name: probability
         description: "The probability associated with the customer."
         data_type: float
       - name: receivables_account
         description: "The receivables account associated with the customer."
-        data_type: numeric(38, 0)
+        data_type: number(38,0)
       - name: representing_subsidiary
         description: "The subsidiary representing the customer."
-        data_type: numeric(38, 0)
+        data_type: number(38,0)
       - name: resale_number
         description: "The resale number associated with the customer."
         data_type: varchar
@@ -829,7 +829,7 @@ models:
         data_type: varchar
       - name: probability
         description: "The probability associated with the entity status."
-        data_type: numeric(38, 0)
+        data_type: number(38,0)
       - name: is_inactive
         description: "Specifies whether the entity status is inactive."
         data_type: boolean
@@ -857,4 +857,227 @@ models:
           - not_null        
       - name: name
         description: "The name of the item unit."
-        data_type: varchar          
+        data_type: addr_varchar
+
+  - name: stg_netsuite__items
+    description: "Stage table containing data related to items from Netsuite. This table stores information about various items, including their identifiers, descriptions, accounting details, and other relevant attributes."
+    config:
+      contract:
+        enforced: true            
+    columns:
+      - name: item_id
+        description: "The unique identifier for the item."
+        data_type: number(38,0)
+        tests:
+          - unique
+          - not_null        
+      - name: external_id
+        description: "The external identifier for the item."
+        data_type: varchar
+      - name: department_id
+        description: "The identifier for the department associated with the item."
+        data_type: number(38,0)
+      - name: created_date
+        description: "The date when the item was created."
+        data_type: timestamp_tz
+      - name: last_modified_date
+        description: "The date when the item was last modified."
+        data_type: timestamp_tz
+      - name: class_id
+        description: "The identifier for the class associated with the item."
+        data_type: number(38,0)
+      - name: stock_description
+        description: "The description of the stock associated with the item."
+        data_type: varchar
+      - name: item_description
+        description: "The description of the item."
+        data_type: varchar
+      - name: item_display_name
+        description: "The display name of the item."
+        data_type: varchar
+      - name: manufacturer
+        description: "The manufacturer of the item."
+        data_type: varchar
+      - name: item_location
+        description: "The location of the item."
+        data_type: number(38,0)
+      - name: org_sku
+        description: "The original SKU of the item."
+        data_type: varchar
+      - name: sku
+        description: "The SKU of the item."
+        data_type: varchar
+      - name: sku_order
+        description: "The order of the SKU."
+        data_type: number(38,0)
+      - name: cost
+        description: "The cost of the item."
+        data_type: float
+      - name: cost_estimate
+        description: "The estimated cost of the item."
+        data_type: float
+      - name: cost_estimate_type
+        description: "The type of cost estimate for the item."
+        data_type: varchar
+      - name: costing_method
+        description: "The costing method used for the item."
+        data_type: varchar
+      - name: costing_method_display
+        description: "The display of the costing method used for the item."
+        data_type: varchar
+      - name: averagecost__de
+        description: "The average cost of the item."
+        data_type: number(38,0)
+      - name: averagecost__fl
+        description: "The floating-point average cost of the item."
+        data_type: float
+      - name: fx_cost
+        description: "The foreign exchange cost of the item."
+        data_type: float
+      - name: track_landed_cost
+        description: "Specifies whether the item tracks landed costs."
+        data_type: varchar
+      - name: asset_account
+        description: "The asset account associated with the item."
+        data_type: number(38,0)
+      - name: expense_account
+        description: "The expense account associated with the item."
+        data_type: number(38,0)
+      - name: income_account
+        description: "The income account associated with the item."
+        data_type: number(38,0)
+      - name: bill_exchrate_variance_acct
+        description: "The bill exchange rate variance account associated with the item."
+        data_type: number(38,0)
+      - name: bill_price_variance_acct
+        description: "The bill price variance account associated with the item."
+        data_type: number(38,0)
+      - name: bill_quantity_variance_acct
+        description: "The bill quantity variance account associated with the item."
+        data_type: number(38,0)
+      - name: last_purchase_price__de
+        description: "The last purchase price (decimal) of the item."
+        data_type: number(38,0)
+      - name: last_purchase_price__fl
+        description: "The last purchase price (floating-point) of the item."
+        data_type: float
+      - name: item_weight
+        description: "The weight of the item."
+        data_type: float
+      - name: weight_unit_id
+        description: "The identifier for the weight unit of the item."
+        data_type: number(38,0)
+      - name: weight_units
+        description: "The units of weight of the item."
+        data_type: varchar
+      - name: purchase_unit
+        description: "The purchase unit of the item."
+        data_type: number(38,0)
+      - name: sale_unit
+        description: "The sale unit of the item."
+        data_type: number(38,0)
+      - name: stock_unit
+        description: "The stock unit of the item."
+        data_type: number(38,0)
+      - name: consumption_unit
+        description: "The consumption unit of the item."
+        data_type: number(38,0)
+      - name: total_quantity_on_hand__de
+        description: "The total quantity on hand (decimal) of the item."
+        data_type: number(38,0)
+      - name: total_quantity_on_hand__fl
+        description: "The total quantity on hand (floating-point) of the item."
+        data_type: float
+      - name: item_type
+        description: "The type of the item."
+        data_type: varchar
+      - name: sub_type
+        description: "The subtype of the item."
+        data_type: varchar
+      - name: units_type
+        description: "The units type of the item."
+        data_type: number(38,0)
+      - name: is_include_children
+        description: "Specifies whether children items are included."
+        data_type: boolean
+      - name: is_dropship_item
+        description: "Specifies whether the item is a dropship item."
+        data_type: boolean
+      - name: is_fulfillable
+        description: "Specifies whether the item is fulfillable."
+        data_type: boolean
+      - name: is_inactive
+        description: "Specifies whether the item is inactive."
+        data_type: boolean
+      - name: is_lot_item
+        description: "Specifies whether the item is a lot item."
+        data_type: boolean
+      - name: is_online
+        description: "Specifies whether the item is available online."
+        data_type: boolean
+      - name: is_phantom
+        description: "Specifies whether the item is a phantom item."
+        data_type: boolean
+      - name: is_serial_item
+        description: "Specifies whether the item is a serial item."
+        data_type: boolean
+      - name: is_special_order_item
+        description: "Specifies whether the item is a special order item."
+        data_type: boolean
+      - name: is_special_work_order_item
+        description: "Specifies whether the item is a special work order item."
+        data_type: boolean        
+      - name: is_ship_individually
+        description: "Specifies whether the item is shipped individually."
+        data_type: boolean
+      - name: generate_accruals
+        description: "Specifies whether accruals are generated for the item."
+        data_type: boolean
+      - name: is_enforce_minqty_internally
+        description: "Specifies whether the minimum quantity is enforced internally for the item."
+        data_type: boolean
+      - name: is_match_bill_to_receipt
+        description: "Specifies whether the bill matches the receipt for the item."
+        data_type: boolean
+      - name: is_print_items
+        description: "Specifies whether items are printed for the item."
+        data_type: boolean
+      - name: is_copy_description
+        description: "Specifies whether the description is copied for the item."
+        data_type: boolean
+      - name: is_build_entire_assembly
+        description: "Specifies whether the entire assembly is built for the item."
+        data_type: boolean
+      - name: is_seasonal_demand
+        description: "Specifies whether the item has seasonal demand."
+        data_type: boolean
+      - name: is_round_up_as_component
+        description: "Specifies whether the item is rounded up as a component."
+        data_type: boolean
+      - name: is_use_marginal_rates
+        description: "Specifies whether marginal rates are used for the item."
+        data_type: boolean
+      - name: atp_method
+        description: "The available-to-promise method for the item."
+        data_type: varchar
+      - name: supply_replenishment_method
+        description: "The supply replenishment method for the item."
+        data_type: varchar
+      - name: country_of_manufacture
+        description: "The country of manufacture for the item."
+        data_type: varchar
+      - name: full_name
+        description: "The full name of the item."
+        data_type: varchar
+      - name: purchase_description
+        description: "The purchase description of the item."
+        data_type: varchar
+      - name: subsidiary
+        description: "The subsidiary associated with the item."
+        data_type: varchar
+      - name: total_value
+        description: "The total value of the item."
+        data_type: float
+      - name: vendor_name
+        description: "The name of the vendor associated with the item."
+        data_type: varchar        
