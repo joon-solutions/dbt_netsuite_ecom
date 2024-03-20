@@ -694,4 +694,62 @@ models:
         data_type: boolean
       - name: is_inactive
         description: "Specifies whether the department is inactive."
-        data_type: boolean             
+        data_type: boolean
+
+  - name: stg_netsuite__entities
+    description: "Stage table containing data related to entities from Netsuite. This table stores information about various entities, including their identifiers, contact details, entity types, and other relevant attributes."
+    config:
+      contract:
+        enforced: true            
+    columns:
+      - name: entity_id
+        description: "The unique identifier for the entity."
+        data_type: number(38,0)
+        tests:
+          - unique
+          - not_null          
+      - name: contact_id
+        description: "The identifier for the contact associated with the entity."
+        data_type: number(38,0)
+      - name: customer_id
+        description: "The identifier for the customer associated with the entity."
+        data_type: number(38,0)
+      - name: employee_id
+        description: "The identifier for the employee associated with the entity."
+        data_type: number(38,0)
+      - name: group_id
+        description: "The identifier for the group associated with the entity."
+        data_type: number(38,0)
+      - name: other_name_id
+        description: "The identifier for the other name associated with the entity."
+        data_type: number(38,0)
+      - name: vendor_id
+        description: "The identifier for the vendor associated with the entity."
+        data_type: number(38,0)
+      - name: top_level_parent_id
+        description: "The identifier for the top-level parent entity."
+        data_type: number(38,0)
+      - name: created_at
+        description: "The timestamp when the entity record was created."
+        data_type: timestamp_tz
+      - name: last_modified_at
+        description: "The timestamp when the entity record was last modified."
+        data_type: timestamp_tz
+      - name: entity_title
+        description: "The title of the entity."
+        data_type: varchar
+      - name: entity_name
+        description: "The name of the entity."
+        data_type: varchar
+      - name: alternative_name
+        description: "An alternative name for the entity."
+        data_type: varchar
+      - name: type
+        description: "The type of the entity."
+        data_type: varchar
+      - name: is_inactive
+        description: "Specifies whether the entity is inactive."
+        data_type: boolean
+      - name: is_person
+        description: "Specifies whether the entity is a system person."
+        data_type: boolean                       
