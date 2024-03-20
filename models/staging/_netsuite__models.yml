@@ -1080,4 +1080,83 @@ models:
         data_type: float
       - name: vendor_name
         description: "The name of the vendor associated with the item."
-        data_type: varchar        
+        data_type: varchar
+
+  - name: stg_netsuite__subsidiaries
+    description: "Stage table containing data related to subsidiaries from Netsuite. This table stores information about subsidiaries, including their identifiers, currencies, parent subsidiaries, representing customers and vendors, fiscal calendars, and other relevant attributes."
+    config:
+      contract:
+        enforced: true            
+    columns:
+      - name: subsidiary_id
+        description: "The unique identifier for the subsidiary."
+        data_type: number(38,0)
+        tests:
+          - unique
+          - not_null
+      - name: currency_id
+        description: "The identifier for the currency associated with the subsidiary."
+        data_type: number(38,0)
+      - name: parent_id
+        description: "The identifier for the parent subsidiary."
+        data_type: number(38,0)
+      - name: representing_customer_id
+        description: "The identifier for the customer representing the subsidiary."
+        data_type: number(38,0)
+      - name: representing_vendor_id
+        description: "The identifier for the vendor representing the subsidiary."
+        data_type: number(38,0)
+      - name: fiscal_calendar_id
+        description: "The identifier for the fiscal calendar associated with the subsidiary."
+        data_type: number(38,0)
+      - name: last_modified_at
+        description: "The timestamp when the subsidiary record was last modified."
+        data_type: timestamp_tz
+      - name: email
+        description: "The email address associated with the subsidiary."
+        data_type: varchar
+      - name: full_name
+        description: "The full name of the subsidiary."
+        data_type: varchar
+      - name: legal_name
+        description: "The legal name of the subsidiary."
+        data_type: varchar
+      - name: name
+        description: "The name of the subsidiary."
+        data_type: varchar
+      - name: main_address
+        description: "The main address of the subsidiary."
+        data_type: number(38,0)
+      - name: return_address_id
+        description: "The identifier for the return address associated with the subsidiary."
+        data_type: number(38,0)
+      - name: shipping_address_id
+        description: "The identifier for the shipping address associated with the subsidiary."
+        data_type: number(38,0)
+      - name: drop_down_state
+        description: "The dropdown state of the subsidiary."
+        data_type: varchar
+      - name: country
+        description: "The country of the subsidiary."
+        data_type: varchar
+      - name: edition
+        description: "The edition of the subsidiary."
+        data_type: varchar
+      - name: state
+        description: "The state of the subsidiary."
+        data_type: varchar
+      - name: custrecord_psg_lc_test_mode
+        description: "The test mode of the subsidiary."
+        data_type: varchar
+      - name: url
+        description: "The URL associated with the subsidiary."
+        data_type: varchar
+      - name: is_show_subsidiary_name
+        description: "Specifies whether the subsidiary name is shown."
+        data_type: boolean
+      - name: is_elimination
+        description: "Specifies whether the subsidiary is for elimination."
+        data_type: boolean
+      - name: is_inactive
+        description: "Specifies whether the subsidiary is inactive."
+        data_type: boolean          
