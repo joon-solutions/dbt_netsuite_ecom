@@ -614,4 +614,50 @@ models:
         data_type: varchar
       - name: terms
         description: "The terms associated with the customer."
-        data_type: number(38,0)     
+        data_type: number(38,0)
+
+  - name: stg_netsuite__deleted_records
+    description: >
+      Stage table containing data related to deleted records from Netsuite. 
+      This table is append-only and thus does not have a unique key
+    config:
+      contract:
+        enforced: true        
+    columns:
+      - name: record_id
+        description: "The unique identifier for the deleted record."
+        data_type: number(38,0)
+      - name: record_type
+        description: "The type of the deleted record."
+        data_type: varchar
+      - name: script_id
+        description: "The script identifier associated with the deleted record."
+        data_type: varchar
+      - name: name
+        description: "The name of the deleted record."
+        data_type: varchar
+      - name: type
+        description: "The type of the deleted record."
+        data_type: varchar
+      - name: context
+        description: >
+            see https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_4032860783.html for a comprehensive list of values
+            SLT: Script (RESTlet)
+            UIF: User Interface
+            WST: Web Store        
+        data_type: varchar
+      - name: deleted_by
+        description: "The user id who deleted the record."
+        data_type: number(38,0)
+      - name: deleted_date
+        description: "The timestamp when the record was deleted."
+        data_type: timestamp_tz
+      - name: is_custom_list
+        description: "Specifies whether the record is a custom list."
+        data_type: boolean
+      - name: is_custom_record
+        description: "Specifies whether the record is a custom record."
+        data_type: boolean
+      - name: is_custom_transaction
+        description: "Specifies whether the record is a custom transaction."
+        data_type: boolean            
