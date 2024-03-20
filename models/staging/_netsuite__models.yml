@@ -361,12 +361,6 @@ models:
       - name: display_symbol
         description: "The symbol used for displaying the currency."
         data_type: varchar
-      - name: exchange_rate__de
-        description: "The exchange rate for the currency (Direct Exchange)."
-        data_type: numeric(38,0)
-      - name: exchange_rate__fl
-        description: "The exchange rate for the currency (Floating Exchange)."
-        data_type: float
       - name: fx_rate_update_timezone
         description: "The timezone for updating the currency exchange rate."
         data_type: numeric(38,0)
@@ -416,9 +410,6 @@ models:
       - name: balance__de
         description: "The balance in the currency (Direct Exchange)."
         data_type: numeric(38,0)
-      - name: balance__fl
-        description: "The balance in the currency (Floating Exchange)."
-        data_type: float
       - name: deposit_balance
         description: "The deposit balance."
         data_type: float
@@ -567,15 +558,9 @@ models:
       - name: balance_search__de
         description: "The balance search in the currency (Direct Exchange)."
         data_type: number(38,0)
-      - name: balance_search__fl
-        description: "The balance search in the currency (Floating Exchange)."
-        data_type: float
       - name: unbilled_orders_search__de
         description: "The unbilled orders search in the currency (Direct Exchange)."
         data_type: number(38,0)
-      - name: unbilled_orders_search__fl
-        description: "The unbilled orders search in the currency (Floating Exchange)."
-        data_type: float
       - name: contact_list
         description: "The contact list associated with the customer."
         data_type: varchar
@@ -928,9 +913,6 @@ models:
       - name: averagecost__de
         description: "The average cost of the item."
         data_type: number(38,0)
-      - name: averagecost__fl
-        description: "The floating-point average cost of the item."
-        data_type: float
       - name: fx_cost
         description: "The foreign exchange cost of the item."
         data_type: float
@@ -958,9 +940,6 @@ models:
       - name: last_purchase_price__de
         description: "The last purchase price (decimal) of the item."
         data_type: number(38,0)
-      - name: last_purchase_price__fl
-        description: "The last purchase price (floating-point) of the item."
-        data_type: float
       - name: item_weight
         description: "The weight of the item."
         data_type: float
@@ -982,12 +961,6 @@ models:
       - name: consumption_unit
         description: "The consumption unit of the item."
         data_type: number(38,0)
-      - name: total_quantity_on_hand__de
-        description: "The total quantity on hand (decimal) of the item."
-        data_type: number(38,0)
-      - name: total_quantity_on_hand__fl
-        description: "The total quantity on hand (floating-point) of the item."
-        data_type: float
       - name: item_type
         description: "The type of the item."
         data_type: varchar
@@ -1224,3 +1197,328 @@ models:
       - name: is_posting
         description: "Specifies whether the accounting line is posting."
         data_type: boolean
+
+  - name: stg_netsuite__transaction_lines
+    description: "Stage table containing data related to transaction lines from Netsuite. This table stores information about transaction lines, including unique identifiers, transaction details, item details, accounting information, quantities, amounts, and other relevant attributes."
+    config:
+      contract:
+        enforced: true            
+    columns:
+      - name: unique_key
+        description: "The unique key for the transaction line."
+        data_type: number(38,0)
+        tests:
+          - unique
+          - not_null        
+      - name: transaction_line_id
+        description: "The unique identifier for the transaction line."
+        data_type: number(38,0)
+      - name: category_id
+        description: "The identifier for the category associated with the transaction line."
+        data_type: number(38,0)
+      - name: class_id
+        description: "The identifier for the class associated with the transaction line."
+        data_type: number(38,0)
+      - name: entity_id
+        description: "The identifier for the entity associated with the transaction line."
+        data_type: number(38,0)
+      - name: transaction_id
+        description: "The unique identifier for the transaction."
+        data_type: number(38,0)
+      - name: item_id
+        description: "The identifier for the item associated with the transaction line."
+        data_type: number(38,0)
+      - name: subsidiary_id
+        description: "The identifier for the subsidiary associated with the transaction line."
+        data_type: number(38,0)
+      - name: department_id
+        description: "The identifier for the department associated with the transaction line."
+        data_type: number(38,0)
+      - name: location_id
+        description: "The identifier for the location associated with the transaction line."
+        data_type: number(38,0)
+      - name: transfer_order_item_line_id
+        description: "The identifier for the transfer order item line associated with the transaction line."
+        data_type: number(38,0)
+      - name: actualship_at
+        description: "The actual ship date associated with the transaction line."
+        data_type: timestamp_tz
+      - name: closed_at
+        description: "The closed date associated with the transaction line."
+        data_type: timestamp_tz
+      - name: expected_ship_at
+        description: "The expected ship date associated with the transaction line."
+        data_type: timestamp_tz
+      - name: line_last_modified_at
+        description: "The timestamp when the transaction line record was last modified."
+        data_type: timestamp_tz
+      - name: requested_date
+        description: "The requested date associated with the transaction line."
+        data_type: timestamp_tz
+      - name: memo
+        description: "The memo associated with the transaction line."
+        data_type: varchar
+      - name: cleared_date
+        description: "The cleared date associated with the transaction line."
+        data_type: timestamp_tz
+      - name: amortization_end_date
+        description: "The end date of amortization associated with the transaction line."
+        data_type: timestamp_tz
+      - name: amortiz_start_date
+        description: "The start date of amortization associated with the transaction line."
+        data_type: timestamp_tz
+      - name: production_end_date
+        description: "The end date of production associated with the transaction line."
+        data_type: timestamp_tz
+      - name: production_start_date
+        description: "The start date of production associated with the transaction line."
+        data_type: timestamp_tz
+      - name: expected_receipt_date
+        description: "The expected receipt date associated with the transaction line."
+        data_type: timestamp_tz
+      - name: created_from_id
+        description: "The identifier for the entity from which the transaction line was created."
+        data_type: number(38,0)
+      - name: expense_account
+        description: "The expense account associated with the transaction line."
+        data_type: number(38,0)
+      - name: accounting_line_type
+        description: "The accounting line type associated with the transaction line."
+        data_type: varchar
+      - name: price
+        description: "The price associated with the transaction line."
+        data_type: number(38,0)
+      - name: units
+        description: "The units associated with the transaction line."
+        data_type: number(38,0)
+      - name: quantity_allocated
+        description: "The quantity allocated associated with the transaction line."
+        data_type: float
+      - name: quantity_backordered
+        description: "The quantity backordered associated with the transaction line."
+        data_type: float
+      - name: quantity_billed
+        description: "The quantity billed associated with the transaction line."
+        data_type: float
+      - name: quantity_committed
+        description: "The quantity committed associated with the transaction line."
+        data_type: float
+      - name: quantity_packed
+        description: "The quantity packed associated with the transaction line."
+        data_type: float
+      - name: quantity_picked
+        description: "The quantity picked associated with the transaction line."
+        data_type: float
+      - name: quantity_rejected
+        description: "The quantity rejected associated with the transaction line."
+        data_type: float
+      - name: quantity_shiprecv
+        description: "The quantity shipped associated with the transaction line."
+        data_type: float
+      - name: quantity_demand_allocated
+        description: "The quantity demand allocated associated with the transaction line."
+        data_type: float        
+      - name: quantity
+        description: "The quantity associated with the transaction line."
+        data_type: float       
+      - name: bill_of_materials
+        description: "Specifies whether the transaction line is a bill of materials."
+        data_type: numeric(38, 0)
+      - name: bill_variance_status
+        description: "The variance status of the bill associated with the transaction line."
+        data_type: varchar        
+      - name: bill_of_materials_revision
+        description: "The revision of the bill of materials associated with the transaction line."
+        data_type: numeric(38, 0)
+      - name: item_type
+        description: "The type of item associated with the transaction line."
+        data_type: varchar
+      - name: bom_quantity
+        description: "The bill of materials quantity associated with the transaction line."
+        data_type: float
+      - name: item_source
+        description: "The source of the item associated with the transaction line."
+        data_type: varchar
+      - name: is_billable
+        description: "Specifies whether the transaction line is billable."
+        data_type: boolean
+      - name: is_closed
+        description: "Specifies whether the transaction line is closed."
+        data_type: boolean
+      - name: is_cleared
+        description: "Specifies whether the transaction line is cleared."
+        data_type: boolean
+      - name: is_dropship
+        description: "Specifies whether the transaction line is a dropship item."
+        data_type: boolean
+      - name: is_eliminate
+        description: "Specifies whether the transaction line is eliminated."
+        data_type: boolean
+      - name: is_fulfillable
+        description: "Specifies whether the transaction line is fulfillable."
+        data_type: boolean
+      - name: has_fulfillable_items
+        description: "Specifies whether the transaction line has fulfillable items."
+        data_type: boolean
+      - name: is_scrap
+        description: "Specifies whether the transaction line is scrap."
+        data_type: boolean
+      - name: cost_estimate
+        description: "The cost estimate associated with the transaction line."
+        data_type: float
+      - name: cost_estimate_type
+        description: "The type of cost estimate associated with the transaction line."
+        data_type: varchar
+      - name: is_blanded_cost
+        description: "Specifies whether the cost associated with the transaction line is blended."
+        data_type: boolean
+      - name: is_landed_cost_per_line
+        description: "Specifies whether the landed cost is per line for the transaction line."
+        data_type: boolean
+      - name: rate_percent
+        description: "The rate percentage associated with the transaction line."
+        data_type: float
+      - name: est_gross_profit
+        description: "The estimated gross profit associated with the transaction line."
+        data_type: float
+      - name: assembly
+        description: "Specifies whether the transaction line is an assembly."
+        data_type: number(38,0)
+      - name: assembly_units
+        description: "The units associated with the assembly."
+        data_type: varchar
+      - name: is_assembly_component
+        description: "Specifies whether the transaction line is an assembly component."
+        data_type: boolean
+      - name: is_cogs
+        description: "Specifies whether the transaction line is cost of goods sold (COGS)."
+        data_type: boolean
+      - name: is_customgl_line
+        description: "Specifies whether the transaction line is a custom general ledger line."
+        data_type: boolean
+      - name: is_freeze_firm_allocation
+        description: "Specifies whether the firm allocation is frozen for the transaction line."
+        data_type: boolean
+      - name: is_fully_shipped
+        description: "Specifies whether the transaction line is fully shipped."
+        data_type: boolean
+      - name: is_fx_variance
+        description: "Specifies whether the transaction line is foreign exchange (FX) variance."
+        data_type: boolean
+      - name: is_inventory_affecting
+        description: "Specifies whether the transaction line affects inventory."
+        data_type: boolean
+      - name: is_revrec_transaction
+        description: "Specifies whether the transaction line is a revenue recognition transaction."
+        data_type: boolean
+      - name: is_allocatefirminvtonly
+        description: "Specifies whether the allocation is firm inventory only for the transaction line."
+        data_type: boolean
+      - name: is_special_order
+        description: "Specifies whether the transaction line is a special order."
+        data_type: boolean
+      - name: is_tax_line
+        description: "Specifies whether the transaction line is a tax line."
+        data_type: boolean
+      - name: is_old_commitment_firm
+        description: "Specifies whether the old commitment is firm for the transaction line."
+        data_type: boolean
+      - name: is_transaction_discount
+        description: "Specifies whether the transaction line is a transaction discount."
+        data_type: boolean
+      - name: is_main_line
+        description: "Specifies whether the transaction line is the main line."
+        data_type: boolean
+      - name: is_match_bill_to_receipt
+        description: "Specifies whether the bill matches the receipt for the transaction line."
+        data_type: boolean
+      - name: is_commitment_firm
+        description: "Specifies whether the commitment is firm for the transaction line."
+        data_type: boolean
+      - name: is_displayed
+        description: "Specifies whether the transaction line is displayed."
+        data_type: boolean
+      - name: is_exclude_fromp_redictive_risk
+        description: "Specifies whether the transaction line is excluded from predictive risk."
+        data_type: boolean
+      - name: is_kit_component
+        description: "Specifies whether the transaction line is a kit component."
+        data_type: boolean
+      - name: net_amount
+        description: "The net amount associated with the transaction line."
+        data_type: float
+      - name: foreign_amount
+        description: "The foreign amount associated with the transaction line."
+        data_type: float
+      - name: debit_foreign_amount
+        description: "The foreign debit amount associated with the transaction line."
+        data_type: float
+      - name: credit_foreign_amount
+        description: "The foreign credit amount associated with the transaction line."
+        data_type: float
+      - name: fx_amount_linked
+        description: "The foreign exchange (FX) amount linked to the transaction line."
+        data_type: float
+      - name: foreign_amount_paid
+        description: "The foreign amount paid associated with the transaction line."
+        data_type: float
+      - name: foreign_amount_unpaid
+        description: "The foreign amount unpaid associated with the transaction line."
+        data_type: float
+      - name: foreign_payment_amount_unused
+        description: "The foreign payment amount unused associated with the transaction line."
+        data_type: float
+      - name: foreign_payment_amount_used
+        description: "The foreign payment amount used associated with the transaction line."
+        data_type: float
+      - name: cseg_channel_id
+        description: "The channel identifier associated with the transaction line."
+        data_type: number(38,0)
+      - name: cseg_geography_id
+        description: "The geography identifier associated with the transaction line."
+        data_type: number(38,0)
+      - name: allocation_alert
+        description: "Specifies whether there is an allocation alert associated with the transaction line."
+        data_type: varchar
+      - name: days_late
+        description: "The number of days late associated with the transaction line."
+        data_type: number(38,0)
+      - name: document_number
+        description: "The document number associated with the transaction line."
+        data_type: varchar
+      - name: inventory_reporting_location_id
+        description: "The identifier for the inventory reporting location associated with the transaction line."
+        data_type: number(38,0)
+      - name: orderal_location_strategy_id
+        description: "The identifier for the order location strategy associated with the transaction line."
+        data_type: number(38,0)
+      - name: kit_member_of
+        description: "Specifies whether the transaction line is a member of a kit."
+        data_type: number(38,0)
+      - name: line_sequence_number
+        description: "The sequence number of the transaction line."
+        data_type: number(38,0)
+      - name: processed_by_rev_commit
+        description: "Specifies whether the transaction line is processed by revenue commitment."
+        data_type: varchar
+      - name: transaction_line_type
+        description: "The type of the transaction line."
+        data_type: varchar
+      - name: amortization_sched
+        description: "The amortization schedule associated with the transaction line."
+        data_type: number(38,0)
+      - name: order_priority
+        description: "The priority of the order associated with the transaction line."
+        data_type: float
+      - name: payment_method
+        description: "The payment method associated with the transaction line."
+        data_type: number(38,0)
+      - name: build_variance
+        description: "The build variance associated with the transaction line."
+        data_type: float
+      - name: component_yield
+        description: "The yield of the component associated with the transaction line."
+        data_type: float
+      - name: create_out_sourced_wo
+        description: "Specifies whether to create an outsourced work order associated with the transaction line."
+        data_type: varchar    

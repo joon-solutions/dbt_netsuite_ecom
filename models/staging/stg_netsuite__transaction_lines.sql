@@ -52,11 +52,7 @@ renamed as (
         bomquantity as bom_quantity,
 
         quantitydemandallocated as quantity_demand_allocated,
-        quantitypacked__de as quantity_packed__de,
-        quantitypicked__de as quantity_picked__de,
-        quantityshiprecv__de as quantity_ship_recv__de,
-        quantity__de as quantity___de,
-        quantity__fl as quantity___fl,
+        quantity__fl as quantity,
 
         --bill
         billofmaterials as bill_of_materials,
@@ -77,26 +73,19 @@ renamed as (
 
         --cost
         costestimate as cost_estimate,
-        costestimaterate__de as cost_estimaterate__de,
         costestimatetype as cost_estimate_type,
         blandedcost = 'T' as is_blanded_cost,
         landedcostperline = 'T' as is_landed_cost_per_line,
 
         --rate
-        rateamount__fl as rate_amount__fl,
         ratepercent as rate_percent,
-        rate__fl,
-        rate__de,
-        rateamount__de as rate_amount__de,
 
         --est
         estgrossprofit as est_gross_profit,
-        estgrossprofitpercent__de as est_gross_profit_percent__de,
-        costestimaterate__fl as cost_estimate_rate__fl,
 
         --assembly
         assembly,
-        assemblyunits,
+        assemblyunits as assembly_units,
         assemblycomponent = 'T' as is_assembly_component,
 
         --boolean
