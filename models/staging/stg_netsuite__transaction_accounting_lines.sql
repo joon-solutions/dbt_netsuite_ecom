@@ -25,7 +25,7 @@ renamed as (
         exchangerate as exchange_rate,
         paymentamountunused as payment_amount_unused,
         paymentamountused as payment_amount_used,
-        processedbyrevcommit = 'T' as is_processed_by_revcommit,
+        processedbyrevcommit = 'T' as is_processed_by_revenue_commit,
         posting = 'T' as is_posting
 
         --abs(abs(coalesce(debit_amount,0)) - abs(coalesce(credit_amount,0))) as amount
