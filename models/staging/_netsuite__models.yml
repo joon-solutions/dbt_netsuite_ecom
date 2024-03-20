@@ -752,4 +752,59 @@ models:
         data_type: boolean
       - name: is_person
         description: "Specifies whether the entity is a system person."
-        data_type: boolean                       
+        data_type: boolean
+
+  - name: stg_netsuite__entity_address
+    description: "Stage table containing data related to entity addresses from Netsuite. This table stores information about addresses associated with entities, including address details, owner identifiers, and other relevant attributes."
+    config:
+       contract:
+        enforced: true           
+    columns:
+      - name: address_id
+        description: "The unique identifier for the address."
+        tests:
+          - unique
+          - not_null        
+        data_type: number(38,0)
+      - name: record_owner_id
+        description: "The identifier for the owner of the address record."
+        data_type: number(38,0)
+      - name: last_modified_at
+        description: "The timestamp when the address record was last modified."
+        data_type: timestamp_tz
+      - name: addr1
+        description: "The first line of the address."
+        data_type: varchar
+      - name: addr2
+        description: "The second line of the address."
+        data_type: varchar
+      - name: addressee
+        description: "The addressee of the address."
+        data_type: varchar
+      - name: addr_phone
+        description: "The phone number associated with the address."
+        data_type: varchar
+      - name: addr_text
+        description: "The varchar representation of the address."
+        data_type: varchar
+      - name: state
+        description: "The state of the address."
+        data_type: varchar
+      - name: zip
+        description: "The ZIP code of the address."
+        data_type: varchar
+      - name: city
+        description: "The city of the address."
+        data_type: varchar
+      - name: country
+        description: "The country of the address."
+        data_type: varchar
+      - name: attention
+        description: "The attention line of the address."
+        data_type: varchar
+      - name: dropdown_state
+        description: "The dropdown state of the address."
+        data_type: varchar
+      - name: is_override
+        description: "Specifies whether the address override is enabled."
+        data_type: boolean          
