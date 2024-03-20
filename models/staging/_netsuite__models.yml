@@ -1159,4 +1159,68 @@ models:
         data_type: boolean
       - name: is_inactive
         description: "Specifies whether the subsidiary is inactive."
-        data_type: boolean          
+        data_type: boolean
+
+  - name: stg_netsuite__transaction_accounting_lines
+    description: "Stage table containing data related to transaction accounting lines from Netsuite. This table stores information about accounting lines associated with transactions, including transaction identifiers, account details, amounts, exchange rates, and other relevant attributes."
+    config:
+      contract:
+        enforced: true            
+    columns:
+      - name: unique_id
+        description: "Surrogate key of transaction_id and transaction_line_id"
+        data_type: varchar
+        tests:
+          - unique
+          - not_null
+      - name: transaction_id
+        description: "The unique identifier for the transaction."
+        data_type: number(38,0)
+      - name: transaction_line_id
+        description: "The unique identifier for the transaction line."
+        data_type: number(38,0)
+      - name: last_modified_at
+        description: "The timestamp when the accounting line record was last modified."
+        data_type: timestamp_tz
+      - name: account_id
+        description: "The identifier for the account associated with the accounting line."
+        data_type: number(38,0)
+      - name: accounting_book_id
+        description: "The identifier for the accounting book associated with the accounting line."
+        data_type: number(38,0)
+      - name: amount_linked
+        description: "The linked amount associated with the accounting line."
+        data_type: float
+      - name: amount_paid
+        description: "The paid amount associated with the accounting line."
+        data_type: float
+      - name: amount_unpaid
+        description: "The unpaid amount associated with the accounting line."
+        data_type: float
+      - name: net_amount
+        description: "The net amount associated with the accounting line."
+        data_type: float
+      - name: amount_credit
+        description: "The credit amount associated with the accounting line."
+        data_type: float
+      - name: amount_debit
+        description: "The debit amount associated with the accounting line."
+        data_type: float
+      - name: exchange_rate__de
+        description: "The exchange rate (decimal) associated with the accounting line."
+        data_type: number(38,0)
+      - name: exchange_rate
+        description: "The exchange rate associated with the accounting line."
+        data_type: float
+      - name: payment_amount_unused
+        description: "The unused payment amount associated with the accounting line."
+        data_type: float
+      - name: payment_amount_used
+        description: "The used payment amount associated with the accounting line."
+        data_type: float
+      - name: is_processed_by_revenue_commit
+        description: "Specifies whether the accounting line is processed by revenue commitment."
+        data_type: boolean
+      - name: is_posting
+        description: "Specifies whether the accounting line is posting."
+        data_type: boolean
