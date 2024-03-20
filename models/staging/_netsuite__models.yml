@@ -784,7 +784,7 @@ models:
       - name: addr_phone
         description: "The phone number associated with the address."
         data_type: varchar
-      - name: addr_text
+      - name: addr_varchar
         description: "The varchar representation of the address."
         data_type: varchar
       - name: state
@@ -808,3 +808,37 @@ models:
       - name: is_override
         description: "Specifies whether the address override is enabled."
         data_type: boolean          
+
+  - name: stg_netsuite__entity_status
+    description: "Stage table containing data related to entity statuses from Netsuite. This table stores information about statuses associated with entities, including status identifiers, names, types, and other relevant attributes."
+    config:
+      contract:
+        enforced: true           
+    columns:
+      - name: entity_status_id
+        description: "The unique identifier for the entity status."
+        data_type: number(38,0)
+        tests:
+          - unique
+          - not_null        
+      - name: entity_name
+        description: "The name of the entity."
+        data_type: varchar
+      - name: entity_type
+        description: "The type of the entity."
+        data_type: varchar
+      - name: probability
+        description: "The probability associated with the entity status."
+        data_type: numeric(38, 0)
+      - name: is_inactive
+        description: "Specifies whether the entity status is inactive."
+        data_type: boolean
+      - name: is_includeinleadreports
+        description: "Specifies whether the entity status is included in lead reports."
+        data_type: boolean
+      - name: is_readonly
+        description: "Specifies whether the entity status is read-only."
+        data_type: boolean
+      - name: entity_status
+        description: "The status of the entity."
+        data_type: varchar          
