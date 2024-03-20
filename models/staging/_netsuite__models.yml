@@ -639,7 +639,7 @@ models:
       - name: type
         description: "The type of the deleted record."
         data_type: varchar
-      - name: context
+      - name: convarchar
         description: >
             see https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_4032860783.html for a comprehensive list of values
             SLT: Script (RESTlet)
@@ -661,3 +661,37 @@ models:
       - name: is_custom_transaction
         description: "Specifies whether the record is a custom transaction."
         data_type: boolean            
+
+  - name: stg_netsuite__departments
+    description: "Stage table containing data related to departments from Netsuite. This table stores information about departments, including their identifiers, names, parent departments, subsidiary associations, and other relevant attributes."
+    config:
+      contract:
+        enforced: true            
+    columns:
+      - name: department_id
+        description: "The unique identifier for the department."
+        data_type: number(38,0)
+        tests:
+          - unique
+          - not_null        
+      - name: parent_id
+        description: "The unique identifier for the parent department."
+        data_type: number(38,0)
+      - name: subsidiary_id
+        description: "The unique identifier for the subsidiaries associated with the department."
+        data_type: varchar
+      - name: department_name
+        description: "The name of the department."
+        data_type: varchar
+      - name: last_modified_at
+        description: "The timestamp when the department record was last modified."
+        data_type: timestamp_tz
+      - name: department_full_name
+        description: "The full name of the department."
+        data_type: varchar
+      - name: is_include_children
+        description: "Specifies whether children departments are included."
+        data_type: boolean
+      - name: is_inactive
+        description: "Specifies whether the department is inactive."
+        data_type: boolean             
