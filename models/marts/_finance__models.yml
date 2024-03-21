@@ -190,7 +190,10 @@ models:
           expression: "amount_credit >= 0"      
 
   - name: fct_erp__consolidated_exchange_rate
-    description: This table holds the CER for each account at each accounting(posting) period
+    description: This table holds the consolidated exchange rate (CER) for each account at each accounting(posting) period
+    config:
+      contract:
+        enforced: true     
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
@@ -198,3 +201,22 @@ models:
             - posting_period_id
             - from_subsidiary_id
             - to_subsidiary_id
+    columns:
+      - name: account_id
+        description: "The unique identifier for the account."
+        data_type: numeric(38,0)
+      - name: general_rate
+        description: "The general rate for the exchange."
+        data_type: text
+      - name: posting_period_id
+        description: "The identifier for the posting period."
+        data_type: numeric(38,0)
+      - name: from_subsidiary_id
+        description: "The unique identifier for the 'from' subsidiary."
+        data_type: numeric(38,0)
+      - name: to_subsidiary_id
+        description: "The unique identifier for the 'to' subsidiary."
+        data_type: numeric(38,0)
+      - name: consolidated_exchange_rate
+        description: "The CER computed from historical, average or current rate by field `general_rate`., by accounts"
+        data_type: float      
