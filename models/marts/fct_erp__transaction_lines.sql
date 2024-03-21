@@ -4,12 +4,12 @@ with transactions as (
 
 transaction_accounting_lines as (
     select * from {{ ref('stg_netsuite__transaction_accounting_lines') }}
-    where is_posting
+    where is_posting -- exclude not posted transaction lines
 ),
 
 transaction_lines as (
     select * from {{ ref('stg_netsuite__transaction_lines') }}
-    where is_displayed
+    where is_displayed -- exclude not displayed transaction lines
 ),
 
 accounts as (
@@ -44,16 +44,15 @@ final as (
         transaction_lines.department_id,
         transaction_lines.location_id,
 
-        -- logic confirmed by Finance team on 2023-12-06
         -- fill in customer_id of a Journal Entry transacton with customer_id of its transaction lines
         case
             when current_transactions.transaction_type = 'Journal Entry'
                 then transaction_lines.entity_id
             else current_transactions.entity_id
-        end as customer_id, -- FK to dim_erp__customers
+        end as customer_id,
 
         parent_transaction.tran_display_name as created_from_transaction,
-        parent_transaction.entity_id as created_from_transaction__customer_id, -- FK to dim_erp__customers
+        parent_transaction.entity_id as created_from_transaction__customer_id,
         parent_transaction.transaction_date as created_from_transaction__transaction_date,
         parent_transaction.transaction_type as created_from_transaction__transaction_type,
 
@@ -79,7 +78,6 @@ final as (
         current_transactions.posting_period_id,
 
         currencies.currency_name,
-        --transaction_accounting_lines.amount,
         transaction_accounting_lines.amount_debit,
         transaction_accounting_lines.amount_credit,
 
@@ -87,11 +85,6 @@ final as (
         div0(transaction_accounting_lines.amount_debit, transaction_accounting_lines.exchange_rate) as amount_debit_foreign,
         div0(transaction_accounting_lines.amount_credit, transaction_accounting_lines.exchange_rate) as amount_credit_foreign,
 
-        --For some accounts, the side will be either on the left (Debit) or right (Credit). This depends on accounting equation Assets = Liabilities + Equity
-        --For example, asset, expense account will be on the debit side since they decrease equity of business (drawings)
-        --Liabilities and revenue will be on the credit side since they icnrease equity of the business (investments)
-        --There're also cases of reverse entries. For example, when customer return an order => revenue will be reduced and on the debit side => net amount will be difference between debit and credit
-        --The case when condition whether to put debit or credit first in the equation, which depends on the above principle
         case
             when account_types.is_account_left_side then transaction_accounting_lines.amount_debit - transaction_accounting_lines.amount_credit
             else transaction_accounting_lines.amount_credit - transaction_accounting_lines.amount_debit

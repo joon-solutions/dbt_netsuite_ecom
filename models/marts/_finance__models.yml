@@ -175,19 +175,7 @@ models:
         data_type: float
       - name: class_name
         description: "The name of the classification."
-        data_type: text
-
-  - name: fct_erp__transaction_lines
-    columns:
-      - name: unique_key
-        tests:
-          - unique
-          - not_null
-    tests:
-      - dbt_utils.expression_is_true:
-          expression: "amount_debit >= 0"          
-      - dbt_utils.expression_is_true:
-          expression: "amount_credit >= 0"      
+        data_type: text   
 
   - name: fct_erp__consolidated_exchange_rate
     description: This table holds the consolidated exchange rate (CER) for each account at each accounting(posting) period
@@ -220,3 +208,123 @@ models:
       - name: consolidated_exchange_rate
         description: "The CER computed from historical, average or current rate by field `general_rate`., by accounts"
         data_type: float      
+
+  - name: fct_erp__transaction_lines
+    description: "Fact table containing transaction line information."
+    config:
+      contract:
+        enforced: true  
+    tests:
+      - dbt_utils.expression_is_true:
+          expression: "amount_debit >= 0"          
+      - dbt_utils.expression_is_true:
+          expression: "amount_credit >= 0"
+    columns:
+      - name: unique_key
+        description: "Unique key identifying the transaction line."
+        data_type: number(38,0)
+        tests:
+          - unique
+          - not_null        
+      - name: transaction_line_id
+        description: "Unique identifier for the transaction line."
+        data_type: numeric(38,0)
+      - name: transaction_id
+        description: "Unique identifier for the transaction."
+        data_type: numeric(38,0)
+      - name: item_id
+        description: "Unique identifier for the item."
+        data_type: numeric(38,0)
+      - name: account_id
+        description: "Unique identifier for the account."
+        data_type: numeric(38,0)
+      - name: subsidiary_id
+        description: "Unique identifier for the subsidiary."
+        data_type: numeric(38,0)
+      - name: department_id
+        description: "Unique identifier for the department."
+        data_type: numeric(38,0)
+      - name: location_id
+        description: "Unique identifier for the location."
+        data_type: numeric(38,0)
+      - name: customer_id
+        description: "Unique identifier for the customer. This is foreign key to dim_erp__customers"
+        data_type: numeric(38,0)
+      - name: created_from_transaction
+        description: "Transaction from which this transaction line was created."
+        data_type: text
+      - name: created_from_transaction__customer_id
+        description: "Customer associated with the transaction from which this transaction line was created. This is foreign key to dim_erp__customers"
+        data_type: numeric(38,0)
+      - name: created_from_transaction__transaction_date
+        description: "Transaction date of the transaction from which this transaction line was created."
+        data_type: timestamp_tz
+      - name: created_from_transaction__transaction_type
+        description: "Transaction type of the transaction from which this transaction line was created."
+        data_type: text
+      - name: department_full_name
+        description: "Full name of the department associated with the transaction line."
+        data_type: text
+      - name: transaction_date
+        description: "Created date of the transaction line."
+        data_type: timestamp_tz
+      - name: transaction_type
+        description: "Type of the transaction line."
+        data_type: text
+      - name: document_number
+        description: "Document number associated with the transaction line."
+        data_type: text
+      - name: account_type
+        description: "Type of the account associated with the transaction line."
+        data_type: text
+      - name: account_name
+        description: "Name of the account associated with the transaction line."
+        data_type: text
+      - name: is_sales_account
+        description: "Indicates if the account associated with the transaction line is a sales account."
+        data_type: boolean
+      - name: is_cogs_account
+        description: "Indicates if the account associated with the transaction line is a cost of goods sold account."
+        data_type: boolean
+      - name: is_displayed
+        description: "Indicates if the transaction line is displayed."
+        data_type: boolean
+      - name: is_posting
+        description: "Indicates if the transaction line is posted."
+        data_type: boolean
+      - name: transaction_line_quantity
+        description: "Quantity associated with the transaction line."
+        data_type: float
+      - name: posting_period_id
+        description: "Identifier for the posting period associated with the transaction line."
+        data_type: number(38,0)
+      - name: currency_name
+        description: "Name of the currency associated with the transaction line."
+        data_type: text
+      - name: amount_debit
+        description: "Amount debited associated with the transaction line."
+        data_type: float
+      - name: amount_credit
+        description: "Amount credited associated with the transaction line."
+        data_type: float
+      - name: exchange_rate
+        description: "Exchange rate associated with the transaction line."
+        data_type: float
+      - name: amount_debit_foreign
+        description: "Amount debited in foreign currency associated with the transaction line."
+        data_type: float
+      - name: amount_credit_foreign
+        description: "Amount credited in foreign currency associated with the transaction line."
+        data_type: float
+      - name: amount
+        description: >
+          Transaction amount, difference between amount debit and credit.
+          For some accounts, the side will be either on the left (Debit) or right (Credit). This depends on accounting equation Assets = Liabilities + Equity
+          For example, asset, expense account will be on the debit side since they decrease equity of business (drawings)
+          Liabilities and revenue will be on the credit side since they increase equity of the business (investments)
+          There're also cases of reverse entries. For example, when customer return an order => revenue will be reduced and on the debit side => net amount will be difference between debit and credit
+          The case when condition decides whether to put debit or credit first in the equation, which depends on the above principle
+        data_type: float
+      - name: amount_credit_foreign
+        description: "Amount converted to foreign currency by the field `exchange_rate`"
+        data_type: float
