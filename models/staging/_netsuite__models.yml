@@ -1506,6 +1506,11 @@ models:
         data_type: text
 
   - name: stg_netsuite__transactions
+    description: >
+      This table contains transactional data from Netsuite, including various types of transactions such as sales orders, purchase orders, invoices, payments, and more. 
+      Each row represents a single transaction record within Netsuite's system, capturing essential details such as transaction ID, type, date, status, amounts, customer/vendor information, and transaction-related flags.
+      The data is extracted and staged for further processing and analysis, providing insights into the organization's financial activities, customer interactions, and supply chain operations.
+
     config:
       contract:
         enforced: true           
