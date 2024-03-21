@@ -23,6 +23,7 @@ departments as (
     select * from {{ ref('stg_netsuite__departments') }}
 ),
 
+-- adjust base on parent company
 adjusted_customers as (
     select
         customers.*,
@@ -53,32 +54,7 @@ final as (
         entity_address.country,
         entity_status.entity_status,
         entities.entity_id,
-        replace(customer_subsidiary_relationship.subsidiary_name, entities.entity_name || ' - ', '') as primary_subsidiary_name,
-        case
-            when
-                adjusted_customers.parent_id in (
-                    2469, -- Transcon Trading Company
-                    2464, -- Southeast Pet
-                    2444, -- Pet Valu Canada Ltd.
-                    2454 -- Pan Pacific Pet Limited
-                )
-                then adjusted_customers.parent_id
-            else adjusted_customers.customer_id
-        end
-            as budgeted_customer_id,
-
-        case
-            when
-                adjusted_customers.parent_id in (
-                    2469, -- Transcon Trading Company
-                    2464, -- Southeast Pet
-                    2444, -- Pet Valu Canada Ltd.
-                    2454 -- Pan Pacific Pet Limited
-                )
-                then adjusted_customers.parent_name
-            else adjusted_customers.company_name
-        end
-            as budgeted_company_name
+        replace(customer_subsidiary_relationship.subsidiary_name, entities.entity_name || ' - ', '') as primary_subsidiary_name
 
     from adjusted_customers
     left join entities

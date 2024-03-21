@@ -2,13 +2,59 @@ version: 2
 
 models:
   - name: dim_erp__customers
+    description: "Dimension table containing information about customers. THE TABLE CONTENT PII INFORMATION, USE IT CAREFULLY"
     columns:
       - name: customer_id
+        description: "The unique identifier for the customer."
         tests:
           - unique
           - not_null
+        data_type: text
+      - name: external_id
+        description: "The external identifier for the customer."
+        data_type: text
+      - name: company_name
+        description: "The name of the customer company."
+        data_type: text
+      - name: parent_id
+        description: "The unique identifier of the parent company of the customer."
+        data_type: text
+      - name: parent_name
+        description: "The name of the parent company of the customer."
+        data_type: text
+      - name: department_full_name
+        description: "The full name of the department associated with the customer."
+        data_type: text
+      - name: phone
+        description: "The phone number of the customer."
+        data_type: text
+      - name: email
+        description: "The email address of the customer."
+        data_type: text
+      - name: default_address_id
+        description: "The default address identifier for the customer."
+        data_type: text
+      - name: addr_text
+        description: "The text of the address associated with the customer."
+        data_type: text
+      - name: state
+        description: "The state of the customer."
+        data_type: text
+      - name: country
+        description: "The country of the customer."
+        data_type: text
+      - name: entity_status
+        description: "The status of the entity associated with the customer."
+        data_type: text
+      - name: entity_id
+        description: "The unique identifier of the entity associated with the customer."
+        data_type: text
+      - name: primary_subsidiary_name
+        description: "The name of the primary subsidiary associated with the customer."
+        data_type: text
 
   - name: dim_erp__items
+    description: "Dimension table containing information about items (products)"
     columns:
       - name: item_id
         tests:
