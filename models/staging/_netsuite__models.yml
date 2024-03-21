@@ -1,230 +1,1812 @@
 version: 2
 
 models:
-  - name: stg_netsuite__weight_units
+  - name: stg_netsuite__account_types
+    description: "Stage table containing data related to account types from Netsuite"
     config:
-      tags: "netsuite"  
+      contract:
+        enforced: true      
     columns:
-      - name: weight_unit_id
+      - name: account_type_id
+        description: "The unique identifier for the account type."
+        data_type: text    
+        tests:
+          - unique
+          - not_null
+      - name: internal_id
+        description: "The internal identifier for the account type."
+        data_type: number(38,0)       
+      - name: default_cash_flow_rate_type
+        description: "The default cash flow rate type for the account."
+        data_type: text
+      - name: default_general_rate_type
+        description: "The default general rate type for the account."
+        data_type: text
+      - name: eliminational_go
+        description: "The elimination algorithm used for the account."
+        data_type: text
+      - name: long_name
+        description: "The long name of the account type."
+        data_type: text
+      - name: seqnum
+        description: "The sequence number(38,0) of the account type."
+        data_type: number(38,0)
+      - name: is_account_left_side
+        description: "Specifies whether the account is on the left side of the balance sheet."
+        data_type: boolean
+      - name: is_include_inreval_default
+        description: "Specifies whether the account is included in the default revaluation."
+        data_type: boolean
+      - name: is_in_balance_sheet
+        description: "Specifies whether the account is a balance sheet account."
+        data_type: boolean
+      - name: has_user_can_change_reval_option
+        description: "Specifies whether the user can change the revaluation option for the account."
+        data_type: boolean
+
+  - name: stg_netsuite__accounting_periods
+    description: "Stage table containing data related to accounting periods from Netsuite. This table stores information about accounting periods, including their unique identifiers, start and end dates, statuses, and other relevant attributes used for financial period closing and reporting."
+    config:
+      contract:
+        enforced: true      
+    columns:
+      - name: accounting_period_id
+        description: "The unique identifier for the accounting period."
+        data_type: number(38,0)    
         tests:
           - unique
           - not_null        
+      - name: parent_id
+        description: "The identifier of the parent accounting period."
+        data_type: number(38,0)
+      - name: started_at
+        description: "The start date of the accounting period."
+        data_type: timestamp_tz
+      - name: ended_at
+        description: "The end date of the accounting period."
+        data_type: timestamp_tz
+      - name: closed_at
+        description: "The date when the accounting period was closed."
+        data_type: timestamp_tz
+      - name: last_modified_at
+        description: "The date when the accounting period was last modified."
+        data_type: timestamp_tz
+      - name: period_name
+        description: "The name of the accounting period."
+        data_type: text
+      - name: is_allow_non_gl_changes
+        description: "Specifies whether non-GL changes are allowed for the accounting period."
+        data_type: boolean
+      - name: is_alllocked
+        description: "Specifies whether all transactions are locked for the accounting period."
+        data_type: boolean
+      - name: is_aplocked
+        description: "Specifies whether accounts payable transactions are locked for the accounting period."
+        data_type: boolean
+      - name: is_arlocked
+        description: "Specifies whether accounts receivable transactions are locked for the accounting period."
+        data_type: boolean
+      - name: is_closed
+        description: "Specifies whether the accounting period is closed."
+        data_type: boolean
+      - name: is_adjust
+        description: "Specifies whether adjustments are allowed for the accounting period."
+        data_type: boolean
+      - name: is_inactive
+        description: "Specifies whether the accounting period is inactive."
+        data_type: boolean
+      - name: is_posting
+        description: "Specifies whether posting is allowed for the accounting period."
+        data_type: boolean
+      - name: is_quarter
+        description: "Specifies whether the accounting period is a quarter."
+        data_type: boolean
+      - name: is_year
+        description: "Specifies whether the accounting period is a year."
+        data_type: boolean
 
   - name: stg_netsuite__accounts
+    description: "Stage table containing data related to accounts from Netsuite."
     config:
-      tags: "netsuite"    
+      contract:
+        enforced: true       
     columns:
       - name: account_id
+        description: "The unique identifier for the account."
+        data_type: number(38,0)
         tests:
           - unique
-          - not_null
-
-  - name: stg_netsuite__account_types
-    config:
-      tags: "netsuite"    
-    columns:
-      - name: account_type_id
-        tests:
-          - unique
-          - not_null
-          
-  - name: stg_netsuite__accounting_periods
-    config:
-      tags: "netsuite"    
-    columns:
-      - name: accounting_period_id
-        tests:
-          - unique
-          - not_null
+          - not_null        
+      - name: currency_id
+        description: "The unique identifier for the currency associated with the account."
+        data_type: number(38,0)
+      - name: department_id
+        description: "The unique identifier for the department associated with the account."
+        data_type: number(38,0)
+      - name: external_id
+        description: "The external identifier for the account."
+        data_type: text
+      - name: parent_id
+        description: "The identifier of the parent account."
+        data_type: number(38,0)
+      - name: subsidiary_id
+        description: "The unique identifier for the subsidiary associated with the account."
+        data_type: text
+      - name: last_modified_at
+        description: "The date when the account was last modified."
+        data_type: timestamp_tz
+      - name: account_number
+        description: "The account number."
+        data_type: text
+      - name: account_type
+        description: "The type of the account."
+        data_type: text
+      - name: sspec_acct
+        description: "The specific account associated with the account."
+        data_type: text
+      - name: display_name_with_hierarchy
+        description: "The display name of the account with its hierarchy."
+        data_type: text
+      - name: account_full_name
+        description: "The full name of the account."
+        data_type: text
+      - name: account_name
+        description: "The name of the account."
+        data_type: text
+      - name: is_inactive
+        description: "Specifies whether the account is inactive."
+        data_type: boolean
+      - name: is_summary
+        description: "Specifies whether the account is a summary account."
+        data_type: boolean
+      - name: is_eliminate
+        description: "Specifies whether the account is an elimination account."
+        data_type: boolean
+      - name: is_revalue
+        description: "Specifies whether the account is a revaluation account."
+        data_type: boolean
+      - name: is_include_children
+        description: "Specifies whether children accounts are included with this account."
+        data_type: boolean
+      - name: is_inventory
+        description: "Specifies whether the account is an inventory account."
+        data_type: boolean
+      - name: is_reconcile_with_matching
+        description: "Specifies whether reconciliation is done with matching."
+        data_type: boolean
+      - name: cashflow_rate
+        description: "The cash flow rate associated with the account."
+        data_type: text
+      - name: description
+        description: "The description of the account."
+        data_type: text
+      - name: general_rate
+        description: "The general rate associated with the account."
+        data_type: text          
 
   - name: stg_netsuite__budget
+    description: "Stage table containing data related to budgets from Netsuite."
     config:
-      tags: "netsuite"  
+      contract:
+        enforced: true         
     columns:
       - name: budget_id
+        description: "The unique identifier for the budget."
+        data_type: numeric(38,0)
         tests:
           - unique
-          - not_null
+          - not_null        
+      - name: customer_id
+        description: "The unique identifier for the customer associated with the budget."
+        data_type: numeric(38,0)
+      - name: department_id
+        description: "The unique identifier for the department associated with the budget."
+        data_type: numeric(38,0)
+      - name: subsidiary_id
+        description: "The unique identifier for the subsidiary associated with the budget."
+        data_type: numeric(38,0)
+      - name: currency_id
+        description: "The unique identifier for the currency associated with the budget."
+        data_type: numeric(38,0)
+      - name: class_id
+        description: "The unique identifier for the class associated with the budget."
+        data_type: numeric(38,0)
+      - name: account_id
+        description: "The unique identifier for the account associated with the budget."
+        data_type: numeric(38,0)
+      - name: accountingbook_id
+        description: "The unique identifier for the accounting book associated with the budget."
+        data_type: numeric(38,0)
+      - name: item_id
+        description: "The unique identifier for the item associated with the budget."
+        data_type: numeric(38,0)
       - name: category_id
-        tests:
-          # This column is always 3 ('Locked Budget'), put test here for alert purpose
-          # Refer to `budgetcategory` table for full list of values
-          - accepted_values:
-              values: [3]
-              quote: false
- 
+        description: "The unique identifier for the category associated with the budget."
+        data_type: numeric(38,0)
+      - name: location_id
+        description: "The unique identifier for the location associated with the budget."
+        data_type: numeric(38,0)
+      - name: year_id
+        description: "The unique identifier for the year associated with the budget."
+        data_type: numeric(38,0)
+      - name: amount
+        description: "The budget amount"
+        data_type: float
+
   - name: stg_netsuite__budgets_machines
+    description: "Stage table containing machine-generated budgets data"
     config:
-      tags: "netsuite"    
+      contract:
+        enforced: true            
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
             - budget_id
-            - accounting_period_id      
-
-  - name: stg_netsuite__budget_histories
-    config:
-      tags: "netsuite"  
+            - accounting_period_id
     columns:
-      - name: unique_id
-        tests:
-          - unique
-          - not_null
+      - name: budget_id
+        description: "The unique identifier for the budget."
+        data_type: numeric(38,0)
+      - name: accounting_period_id
+        description: "The unique identifier for the accounting period associated with the budget."
+        data_type: numeric(38,0)
+      - name: amount
+        description: "The budget amount."
+        data_type: float
 
   - name: stg_netsuite__classifications
+    description: "Stage table containing data related to classifications from Netsuite. This table stores information about various classifications such as classes, departments, locations, etc., which are used for categorizing transactions and financial reporting."
     config:
-      tags: "netsuite"    
+      contract:
+        enforced: true           
     columns:
       - name: class_id
+        description: "The unique identifier for the class."
+        data_type: numeric(38,0)
+        tests:
+          - unique
+          - not_null        
+      - name: external_id
+        description: "The external identifier for the class."
+        data_type: text
+      - name: parent_id
+        description: "The identifier of the parent class."
+        data_type: numeric(38,0)
+      - name: subsidiary_ids
+        description: "The unique identifier for the subsidiaries associated with the class."
+        data_type: text
+      - name: class_name
+        description: "The name of the class."
+        data_type: text
+      - name: last_modified_at
+        description: "The timestamp when the class was last modified."
+        data_type: timestamp_tz
+      - name: nspb_segment_code
+        description: "The NSPB segment code associated with the class."
+        data_type: text
+      - name: class_full_name
+        description: "The full name of the class."
+        data_type: text
+      - name: has_children
+        description: "Specifies whether the class has children."
+        data_type: boolean
+      - name: is_inactive
+        description: "Specifies whether the class is inactive."
+        data_type: boolean
+
+  - name: stg_netsuite__consolidated_exchange_rates
+    description: "Stage table containing data related to consolidated exchange rates fetched from Netsuite. This table stores information about the exchange rates between different currencies for a specific period, which is used for financial consolidation and reporting."
+    config:
+      contract:
+        enforced: true           
+    columns:
+      - name: exchange_rate_id
+        description: "The unique identifier for the exchange rate."
+        tests:
+          - unique
+          - not_null      
+        data_type: number(38,0)
+      - name: posting_period_id
+        description: "The unique identifier for the posting period associated with the exchange rate."
+        data_type: number(38,0)
+      - name: accounting_book_id
+        description: "The unique identifier for the accounting book associated with the exchange rate."
+        data_type: number(38,0)
+      - name: from_subsidiary_id
+        description: "The unique identifier for the 'from' subsidiary associated with the exchange rate."
+        data_type: number(38,0)
+      - name: to_subsidiary_id
+        description: "The unique identifier for the 'to' subsidiary associated with the exchange rate."
+        data_type: number(38,0)
+      - name: from_currency_id
+        description: "The unique identifier for the 'from' currency associated with the exchange rate."
+        data_type: number(38,0)
+      - name: to_currency_id
+        description: "The unique identifier for the 'to' currency associated with the exchange rate."
+        data_type: number(38,0)
+      - name: average_rate
+        description: "The average exchange rate for the period."
+        data_type: float
+      - name: current_rate
+        description: "The current exchange rate."
+        data_type: float
+      - name: historical_rate
+        description: "The historical exchange rate."
+        data_type: float
+
+  - name: stg_netsuite__currencies
+    description: "Stage table containing data related to currencies from Netsuite. This table stores information about various currencies, including their names, symbols, precision, exchange rates, and other currency-related attributes."
+    config:
+      contract:
+        enforced: true            
+    columns:
+      - name: currency_id
+        description: "The unique identifier for the currency."
+        data_type: number(38,0)
+        tests:
+          - unique
+          - not_null         
+      - name: currency_name
+        description: "The name of the currency."
+        data_type: text
+      - name: currency_symbol
+        description: "The symbol of the currency."
+        data_type: text
+      - name: last_modified_at
+        description: "The timestamp when the currency record was last modified."
+        data_type: timestamp_tz
+      - name: currency_precision
+        description: "The precision of the currency."
+        data_type: numeric(38,0)
+      - name: display_symbol
+        description: "The symbol used for displaying the currency."
+        data_type: text
+      - name: fx_rate_update_timezone
+        description: "The timezone for updating the currency exchange rate."
+        data_type: numeric(38,0)
+      - name: symbol_placement
+        description: "The placement of the currency symbol."
+        data_type: numeric(38,0)
+      - name: is_include_in_fx_rate_updates
+        description: "Specifies whether the currency is included in foreign exchange rate updates."
+        data_type: boolean
+      - name: is_override_currency_format
+        description: "Specifies whether the currency format is overridden."
+        data_type: boolean
+      - name: is_base_currency
+        description: "Specifies whether the currency is the base currency."
+        data_type: boolean
+      - name: is_inactive
+        description: "Specifies whether the currency is inactive."
+        data_type: boolean
+
+  - name: stg_netsuite__customer_subsidiary_relationship
+    description: "Stage table containing data related to customer-subsidiary relationships from Netsuite. This table stores information about the relationships between customers and subsidiaries, including their identifiers, primary currency, balances, and other relevant attributes."
+    config:
+      contract:
+        enforced: true            
+    columns:
+      - name: customer_subsidiary_relationship_id
+        description: "The unique identifier for the customer-subsidiary relationship."
+        data_type: number(38,0)
         tests:
           - unique
           - not_null
+      - name: entity_id
+        description: "The entity identifier for the relationship."
+        data_type: number(38,0)
+      - name: last_modified_at
+        description: "The timestamp when the customer-subsidiary relationship was last modified."
+        data_type: timestamp_tz
+      - name: primary_currency_id
+        description: "The unique identifier for the primary currency associated with the relationship."
+        data_type: number(38,0)
+      - name: subsidiary_id
+        description: "The unique identifier for the subsidiary associated with the relationship."
+        data_type: number(38,0)
+      - name: subsidiary_name
+        description: "The name of the subsidiary associated with the relationship."
+        data_type: text
+      - name: deposit_balance
+        description: "The deposit balance."
+        data_type: float
+      - name: unbilled_orders
+        description: "The amount of unbilled orders."
+        data_type: float
+      - name: is_primary_sub
+        description: "Specifies whether the subsidiary is the primary subsidiary."
+        data_type: boolean
 
   - name: stg_netsuite__customers
+    description: "Stage table containing data related to customers from Netsuite. This table stores information about customers, including their identifiers, contact details, company information, transaction history, and other relevant attributes."
     config:
-      tags: "netsuite"    
+      contract:
+        enforced: true        
     columns:
       - name: customer_id
+        description: "The unique identifier for the customer."
         tests:
           - unique
-          - not_null
+          - not_null        
+        data_type: number(38,0)
+      - name: external_id
+        description: "The external identifier for the customer."
+        data_type: text
+      - name: customer_department_id
+        description: "The unique identifier for the department associated with the customer."
+        data_type: number(38,0)
+      - name: parent_id
+        description: "The unique identifier for the parent customer."
+        data_type: number(38,0)
+      - name: entity_status_id
+        description: "The entity status identifier for the customer."
+        data_type: number(38,0)
+      - name: company_name
+        description: "The name of the customer's company."
+        data_type: text
+      - name: alternative_name
+        description: "An alternative name for the customer."
+        data_type: text
+      - name: phone
+        description: "The phone number of the customer."
+        data_type: text
+      - name: entity_name
+        description: "The name of the entity associated with the customer."
+        data_type: text
+      - name: entity_title
+        description: "The title of the entity associated with the customer."
+        data_type: text
+      - name: fax
+        description: "The fax number of the customer."
+        data_type: text
+      - name: customer_url
+        description: "The URL of the customer."
+        data_type: text
+      - name: closed_at
+        description: "The timestamp when the customer account was closed."
+        data_type: timestamp_tz
+      - name: created_at
+        description: "The timestamp when the customer record was created."
+        data_type: timestamp_tz
+      - name: last_modified_date
+        description: "The timestamp when the customer record was last modified."
+        data_type: timestamp_tz
+      - name: last_order_date
+        description: "The date of the last order placed by the customer."
+        data_type: timestamp_tz
+      - name: last_sale_date
+        description: "The date of the last sale to the customer."
+        data_type: timestamp_tz
+      - name: first_order_date
+        description: "The date of the first order placed by the customer."
+        data_type: timestamp_tz
+      - name: first_sale_date
+        description: "The date of the first sale to the customer."
+        data_type: timestamp_tz
+      - name: email
+        description: "The email address of the customer."
+        data_type: text
+      - name: email_preference
+        description: "The email preference of the customer."
+        data_type: text
+      - name: email_transactions
+        description: "Specifies whether email transactions are enabled for the customer."
+        data_type: text
+      - name: is_shipcomplete
+        description: "Specifies whether the customer requires complete shipment."
+        data_type: boolean
+      - name: shipping_carrier
+        description: "The shipping carrier associated with the customer."
+        data_type: text
+      - name: shipping_item
+        description: "The shipping item associated with the customer."
+        data_type: number(38,0)
+      - name: shipping_terms
+        description: "The shipping terms associated with the customer."
+        data_type: number(38,0)
+      - name: default_allocation_strategy
+        description: "The default allocation strategy for the customer."
+        data_type: number(38,0)
+      - name: default_billing_address_id
+        description: "The default billing address identifier for the customer."
+        data_type: number(38,0)
+      - name: default_shipping_address_id
+        description: "The default shipping address identifier for the customer."
+        data_type: number(38,0)
+      - name: consol_balance_search
+        description: "The consolidated balance search."
+        data_type: float
+      - name: consol_days_over_dues_earch
+        description: "The consolidated days overdue search."
+        data_type: number(38,0)
+      - name: consol_overdue_balance_search
+        description: "The consolidated overdue balance search."
+        data_type: float
+      - name: consol_unbilled_orders_search
+        description: "The consolidated unbilled orders search."
+        data_type: float
+      - name: has_budget_approved
+        description: "Specifies whether the customer's budget is approved."
+        data_type: boolean
+      - name: is_auto_generated_representing_entity
+        description: "Specifies whether the entity associated with the customer is auto-generated."
+        data_type: boolean
+      - name: is_duplicate
+        description: "Specifies whether the customer record is a duplicate."
+        data_type: boolean
+      - name: is_fax_transactions
+        description: "Specifies whether the transaction with the customer involves fax communication."
+        data_type: boolean
+      - name: is_inactive
+        description: "Specifies whether the customer is inactive."
+        data_type: boolean
+      - name: is_on_credit_hold
+        description: "Specifies whether the customer is on credit hold."
+        data_type: boolean
+      - name: is_person
+        description: "Specifies whether the customer is a person."
+        data_type: boolean
+      - name: is_print_transactions
+        description: "Specifies whether transactions with the customer are printed."
+        data_type: boolean
+      - name: alcohol_recipient_type
+        description: "The alcohol recipient type."
+        data_type: text
+      - name: contact_list
+        description: "The contact list associated with the customer."
+        data_type: text
+      - name: credit_hold_override
+        description: "The credit hold override for the customer."
+        data_type: text
+      - name: credit_limit
+        description: "The credit limit for the customer."
+        data_type: float
+      - name: cseg_channel
+        description: "The channel associated with the customer."
+        data_type: number(38,0)
+      - name: currency
+        description: "The currency associated with the customer."
+        data_type: number(38,0)
+      - name: cseg_geography
+        description: "The geography associated with the customer."
+        data_type: number(38,0)
+      - name: price_level
+        description: "The price level associated with the customer."
+        data_type: number(38,0)
+      - name: probability
+        description: "The probability associated with the customer."
+        data_type: float
+      - name: receivables_account
+        description: "The receivables account associated with the customer."
+        data_type: number(38,0)
+      - name: representing_subsidiary
+        description: "The subsidiary representing the customer."
+        data_type: number(38,0)
+      - name: resale_number
+        description: "The resale number associated with the customer."
+        data_type: text
+      - name: search_stage
+        description: "The search stage associated with the customer."
+        data_type: text
+      - name: terms
+        description: "The terms associated with the customer."
+        data_type: number(38,0)
 
   - name: stg_netsuite__deleted_records
-    description: this table is append-only and thus does not have a unique key
+    description: >
+      Stage table containing data related to deleted records from Netsuite. 
+      This table is append-only and thus does not have a unique key
     config:
-      tags: "netsuite"
+      contract:
+        enforced: true        
     columns:
-      - name: contexgt
+      - name: record_id
+        description: "The unique identifier for the deleted record."
+        data_type: number(38,0)
+      - name: record_type
+        description: "The type of the deleted record."
+        data_type: text
+      - name: script_id
+        description: "The script identifier associated with the deleted record."
+        data_type: text
+      - name: name
+        description: "The name of the deleted record."
+        data_type: text
+      - name: type
+        description: "The type of the deleted record."
+        data_type: text
+      - name: context
         description: >
             see https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_4032860783.html for a comprehensive list of values
             SLT: Script (RESTlet)
             UIF: User Interface
-            WST: Web Store
-    # tests:
-    #   - dbt_utils.unique_combination_of_columns:
-    #       combination_of_columns:
-    #         - record_id
-    #         - type
-    #         - name
-    #         - deleted_date
-    #         - deleted_by
-
-  - name: stg_netsuite__customer_subsidiary_relationship
-    config:
-      tags: "netsuite"    
-    columns:
-      - name: customer_subsidiary_relationship_id
-        tests:
-          - unique
-          - not_null
+            WST: Web Store        
+        data_type: text
+      - name: deleted_by
+        description: "The user id who deleted the record."
+        data_type: number(38,0)
+      - name: deleted_date
+        description: "The timestamp when the record was deleted."
+        data_type: timestamp_tz
+      - name: is_custom_list
+        description: "Specifies whether the record is a custom list."
+        data_type: boolean
+      - name: is_custom_record
+        description: "Specifies whether the record is a custom record."
+        data_type: boolean
+      - name: is_custom_transaction
+        description: "Specifies whether the record is a custom transaction."
+        data_type: boolean            
 
   - name: stg_netsuite__departments
+    description: "Stage table containing data related to departments from Netsuite. This table stores information about departments, including their identifiers, names, parent departments, subsidiary associations, and other relevant attributes."
     config:
-      tags: "netsuite"    
+      contract:
+        enforced: true            
     columns:
       - name: department_id
+        description: "The unique identifier for the department."
+        data_type: number(38,0)
         tests:
           - unique
-          - not_null          
+          - not_null        
+      - name: parent_id
+        description: "The unique identifier for the parent department."
+        data_type: number(38,0)
+      - name: subsidiary_id
+        description: "The unique identifier for the subsidiaries associated with the department."
+        data_type: text
+      - name: department_name
+        description: "The name of the department."
+        data_type: text
+      - name: last_modified_at
+        description: "The timestamp when the department record was last modified."
+        data_type: timestamp_tz
+      - name: department_full_name
+        description: "The full name of the department."
+        data_type: text
+      - name: is_include_children
+        description: "Specifies whether children departments are included."
+        data_type: boolean
+      - name: is_inactive
+        description: "Specifies whether the department is inactive."
+        data_type: boolean
 
   - name: stg_netsuite__entities
+    description: "Stage table containing data related to entities from Netsuite. This table stores information about various entities, including their identifiers, contact details, entity types, and other relevant attributes."
     config:
-      tags: "netsuite"    
+      contract:
+        enforced: true            
     columns:
       - name: entity_id
+        description: "The unique identifier for the entity."
+        data_type: number(38,0)
         tests:
           - unique
-          - not_null      
+          - not_null          
+      - name: contact_id
+        description: "The identifier for the contact associated with the entity."
+        data_type: number(38,0)
+      - name: customer_id
+        description: "The identifier for the customer associated with the entity."
+        data_type: number(38,0)
+      - name: employee_id
+        description: "The identifier for the employee associated with the entity."
+        data_type: number(38,0)
+      - name: group_id
+        description: "The identifier for the group associated with the entity."
+        data_type: number(38,0)
+      - name: other_name_id
+        description: "The identifier for the other name associated with the entity."
+        data_type: number(38,0)
+      - name: vendor_id
+        description: "The identifier for the vendor associated with the entity."
+        data_type: number(38,0)
+      - name: top_level_parent_id
+        description: "The identifier for the top-level parent entity."
+        data_type: number(38,0)
+      - name: created_at
+        description: "The timestamp when the entity record was created."
+        data_type: timestamp_tz
+      - name: last_modified_at
+        description: "The timestamp when the entity record was last modified."
+        data_type: timestamp_tz
+      - name: entity_title
+        description: "The title of the entity."
+        data_type: text
+      - name: entity_name
+        description: "The name of the entity."
+        data_type: text
+      - name: alternative_name
+        description: "An alternative name for the entity."
+        data_type: text
+      - name: type
+        description: "The type of the entity."
+        data_type: text
+      - name: is_inactive
+        description: "Specifies whether the entity is inactive."
+        data_type: boolean
+      - name: is_person
+        description: "Specifies whether the entity is a system person."
+        data_type: boolean
 
   - name: stg_netsuite__entity_address
+    description: "Stage table containing data related to entity addresses from Netsuite. This table stores information about addresses associated with entities, including address details, owner identifiers, and other relevant attributes."
     config:
-      tags: "netsuite"    
+       contract:
+        enforced: true           
     columns:
       - name: address_id
+        description: "The unique identifier for the address."
         tests:
           - unique
-          - not_null      
+          - not_null        
+        data_type: number(38,0)
       - name: record_owner_id
-          - unique
-             
+        description: "The identifier for the owner of the address record."
+        data_type: number(38,0)
+      - name: last_modified_at
+        description: "The timestamp when the address record was last modified."
+        data_type: timestamp_tz
+      - name: addr1
+        description: "The first line of the address."
+        data_type: text
+      - name: addr2
+        description: "The second line of the address."
+        data_type: text
+      - name: addressee
+        description: "The addressee of the address."
+        data_type: text
+      - name: addr_phone
+        description: "The phone number associated with the address."
+        data_type: text
+      - name: addr_text
+        description: "The text representation of the address."
+        data_type: text
+      - name: state
+        description: "The state of the address."
+        data_type: text
+      - name: zip
+        description: "The ZIP code of the address."
+        data_type: text
+      - name: city
+        description: "The city of the address."
+        data_type: text
+      - name: country
+        description: "The country of the address."
+        data_type: text
+      - name: attention
+        description: "The attention line of the address."
+        data_type: text
+      - name: dropdown_state
+        description: "The dropdown state of the address."
+        data_type: text
+      - name: is_override
+        description: "Specifies whether the address override is enabled."
+        data_type: boolean          
+
   - name: stg_netsuite__entity_status
+    description: "Stage table containing data related to entity statuses from Netsuite. This table stores information about statuses associated with entities, including status identifiers, names, types, and other relevant attributes."
     config:
-      tags: "netsuite"    
+      contract:
+        enforced: true           
     columns:
       - name: entity_status_id
+        description: "The unique identifier for the entity status."
+        data_type: number(38,0)
         tests:
           - unique
-          - not_null      
-
-  - name: stg_netsuite__items
-    config:
-      tags: "netsuite"    
-    columns:
-      - name: item_id
-        tests:
-          - unique
-          - not_null
+          - not_null        
+      - name: entity_name
+        description: "The name of the entity."
+        data_type: text
+      - name: entity_type
+        description: "The type of the entity."
+        data_type: text
+      - name: probability
+        description: "The probability associated with the entity status."
+        data_type: number(38,0)
+      - name: is_inactive
+        description: "Specifies whether the entity status is inactive."
+        data_type: boolean
+      - name: is_includeinleadreports
+        description: "Specifies whether the entity status is included in lead reports."
+        data_type: boolean
+      - name: is_readonly
+        description: "Specifies whether the entity status is read-only."
+        data_type: boolean
+      - name: entity_status
+        description: "The status of the entity."
+        data_type: text
 
   - name: stg_netsuite__item_units
+    description: "Stage table containing data related to item units from Netsuite. This table stores information about units associated with items, including unit identifiers and names."
     config:
-      tags: "netsuite"    
+      contract:
+        enforced: true            
     columns:
       - name: item_unit_id
+        description: "The unique identifier for the item unit."
+        data_type: number(38,0)
+        tests:
+          - unique
+          - not_null        
+      - name: name
+        description: "The name of the item unit."
+        data_type: text
+
+  - name: stg_netsuite__items
+    description: "Stage table containing data related to items from Netsuite. This table stores information about various items, including their identifiers, descriptions, accounting details, and other relevant attributes."
+    config:
+      contract:
+        enforced: true            
+    columns:
+      - name: item_id
+        description: "The unique identifier for the item."
+        data_type: number(38,0)
+        tests:
+          - unique
+          - not_null        
+      - name: external_id
+        description: "The external identifier for the item."
+        data_type: text
+      - name: department_id
+        description: "The identifier for the department associated with the item."
+        data_type: number(38,0)
+      - name: created_date
+        description: "The date when the item was created."
+        data_type: timestamp_tz
+      - name: last_modified_date
+        description: "The date when the item was last modified."
+        data_type: timestamp_tz
+      - name: class_id
+        description: "The identifier for the class associated with the item."
+        data_type: number(38,0)
+      - name: stock_description
+        description: "The description of the stock associated with the item."
+        data_type: text
+      - name: item_description
+        description: "The description of the item."
+        data_type: text
+      - name: item_display_name
+        description: "The display name of the item."
+        data_type: text
+      - name: manufacturer
+        description: "The manufacturer of the item."
+        data_type: text
+      - name: item_location
+        description: "The location of the item."
+        data_type: number(38,0)
+      - name: org_sku
+        description: "The original SKU of the item."
+        data_type: text
+      - name: sku
+        description: "The SKU of the item."
+        data_type: text
+      - name: sku_order
+        description: "The order of the SKU."
+        data_type: number(38,0)
+      - name: cost
+        description: "The cost of the item."
+        data_type: float
+      - name: cost_estimate
+        description: "The estimated cost of the item."
+        data_type: float
+      - name: cost_estimate_type
+        description: "The type of cost estimate for the item."
+        data_type: text
+      - name: costing_method
+        description: "The costing method used for the item."
+        data_type: text
+      - name: costing_method_display
+        description: "The display of the costing method used for the item."
+        data_type: text
+      - name: fx_cost
+        description: "The foreign exchange cost of the item."
+        data_type: float
+      - name: track_landed_cost
+        description: "Specifies whether the item tracks landed costs."
+        data_type: text
+      - name: asset_account
+        description: "The asset account associated with the item."
+        data_type: number(38,0)
+      - name: expense_account
+        description: "The expense account associated with the item."
+        data_type: number(38,0)
+      - name: income_account
+        description: "The income account associated with the item."
+        data_type: number(38,0)
+      - name: bill_exchrate_variance_acct
+        description: "The bill exchange rate variance account associated with the item."
+        data_type: number(38,0)
+      - name: bill_price_variance_acct
+        description: "The bill price variance account associated with the item."
+        data_type: number(38,0)
+      - name: bill_quantity_variance_acct
+        description: "The bill quantity variance account associated with the item."
+        data_type: number(38,0)
+      - name: item_weight
+        description: "The weight of the item."
+        data_type: float
+      - name: weight_unit_id
+        description: "The identifier for the weight unit of the item."
+        data_type: number(38,0)
+      - name: weight_units
+        description: "The units of weight of the item."
+        data_type: text
+      - name: purchase_unit
+        description: "The purchase unit of the item."
+        data_type: number(38,0)
+      - name: sale_unit
+        description: "The sale unit of the item."
+        data_type: number(38,0)
+      - name: stock_unit
+        description: "The stock unit of the item."
+        data_type: number(38,0)
+      - name: consumption_unit
+        description: "The consumption unit of the item."
+        data_type: number(38,0)
+      - name: item_type
+        description: "The type of the item."
+        data_type: text
+      - name: sub_type
+        description: "The subtype of the item."
+        data_type: text
+      - name: units_type
+        description: "The units type of the item."
+        data_type: number(38,0)
+      - name: is_include_children
+        description: "Specifies whether children items are included."
+        data_type: boolean
+      - name: is_dropship_item
+        description: "Specifies whether the item is a dropship item."
+        data_type: boolean
+      - name: is_fulfillable
+        description: "Specifies whether the item is fulfillable."
+        data_type: boolean
+      - name: is_inactive
+        description: "Specifies whether the item is inactive."
+        data_type: boolean
+      - name: is_lot_item
+        description: "Specifies whether the item is a lot item."
+        data_type: boolean
+      - name: is_online
+        description: "Specifies whether the item is available online."
+        data_type: boolean
+      - name: is_phantom
+        description: "Specifies whether the item is a phantom item."
+        data_type: boolean
+      - name: is_serial_item
+        description: "Specifies whether the item is a serial item."
+        data_type: boolean
+      - name: is_special_order_item
+        description: "Specifies whether the item is a special order item."
+        data_type: boolean
+      - name: is_special_work_order_item
+        description: "Specifies whether the item is a special work order item."
+        data_type: boolean        
+      - name: is_ship_individually
+        description: "Specifies whether the item is shipped individually."
+        data_type: boolean
+      - name: generate_accruals
+        description: "Specifies whether accruals are generated for the item."
+        data_type: boolean
+      - name: is_enforce_minqty_internally
+        description: "Specifies whether the minimum quantity is enforced internally for the item."
+        data_type: boolean
+      - name: is_match_bill_to_receipt
+        description: "Specifies whether the bill matches the receipt for the item."
+        data_type: boolean
+      - name: is_print_items
+        description: "Specifies whether items are printed for the item."
+        data_type: boolean
+      - name: is_copy_description
+        description: "Specifies whether the description is copied for the item."
+        data_type: boolean
+      - name: is_build_entire_assembly
+        description: "Specifies whether the entire assembly is built for the item."
+        data_type: boolean
+      - name: is_seasonal_demand
+        description: "Specifies whether the item has seasonal demand."
+        data_type: boolean
+      - name: is_round_up_as_component
+        description: "Specifies whether the item is rounded up as a component."
+        data_type: boolean
+      - name: is_use_marginal_rates
+        description: "Specifies whether marginal rates are used for the item."
+        data_type: boolean
+      - name: atp_method
+        description: "The available-to-promise method for the item."
+        data_type: text
+      - name: supply_replenishment_method
+        description: "The supply replenishment method for the item."
+        data_type: text
+      - name: country_of_manufacture
+        description: "The country of manufacture for the item."
+        data_type: text
+      - name: full_name
+        description: "The full name of the item."
+        data_type: text
+      - name: purchase_description
+        description: "The purchase description of the item."
+        data_type: text
+      - name: subsidiary
+        description: "The subsidiary associated with the item."
+        data_type: text
+      - name: total_value
+        description: "The total value of the item."
+        data_type: float
+      - name: vendor_name
+        description: "The name of the vendor associated with the item."
+        data_type: text
+
+  - name: stg_netsuite__subsidiaries
+    description: "Stage table containing data related to subsidiaries from Netsuite. This table stores information about subsidiaries, including their identifiers, currencies, parent subsidiaries, representing customers and vendors, fiscal calendars, and other relevant attributes."
+    config:
+      contract:
+        enforced: true            
+    columns:
+      - name: subsidiary_id
+        description: "The unique identifier for the subsidiary."
+        data_type: number(38,0)
         tests:
           - unique
           - not_null
-
-  - name: stg_netsuite__subsidiaries
-    config:
-      tags: "netsuite"    
-    columns:
-      - name: subsidiary_id
-        tests:
-          - unique
-          - not_null     
+      - name: currency_id
+        description: "The identifier for the currency associated with the subsidiary."
+        data_type: number(38,0)
+      - name: parent_id
+        description: "The identifier for the parent subsidiary."
+        data_type: number(38,0)
+      - name: representing_customer_id
+        description: "The identifier for the customer representing the subsidiary."
+        data_type: number(38,0)
+      - name: representing_vendor_id
+        description: "The identifier for the vendor representing the subsidiary."
+        data_type: number(38,0)
+      - name: fiscal_calendar_id
+        description: "The identifier for the fiscal calendar associated with the subsidiary."
+        data_type: number(38,0)
+      - name: last_modified_at
+        description: "The timestamp when the subsidiary record was last modified."
+        data_type: timestamp_tz
+      - name: email
+        description: "The email address associated with the subsidiary."
+        data_type: text
+      - name: full_name
+        description: "The full name of the subsidiary."
+        data_type: text
+      - name: legal_name
+        description: "The legal name of the subsidiary."
+        data_type: text
+      - name: name
+        description: "The name of the subsidiary."
+        data_type: text
+      - name: main_address
+        description: "The main address of the subsidiary."
+        data_type: number(38,0)
+      - name: return_address_id
+        description: "The identifier for the return address associated with the subsidiary."
+        data_type: number(38,0)
+      - name: shipping_address_id
+        description: "The identifier for the shipping address associated with the subsidiary."
+        data_type: number(38,0)
+      - name: drop_down_state
+        description: "The dropdown state of the subsidiary."
+        data_type: text
+      - name: country
+        description: "The country of the subsidiary."
+        data_type: text
+      - name: edition
+        description: "The edition of the subsidiary."
+        data_type: text
+      - name: state
+        description: "The state of the subsidiary."
+        data_type: text
+      - name: custrecord_psg_lc_test_mode
+        description: "The test mode of the subsidiary."
+        data_type: text
+      - name: url
+        description: "The URL associated with the subsidiary."
+        data_type: text
+      - name: is_show_subsidiary_name
+        description: "Specifies whether the subsidiary name is shown."
+        data_type: boolean
+      - name: is_elimination
+        description: "Specifies whether the subsidiary is for elimination."
+        data_type: boolean
+      - name: is_inactive
+        description: "Specifies whether the subsidiary is inactive."
+        data_type: boolean
 
   - name: stg_netsuite__transaction_accounting_lines
+    description: "Stage table containing data related to transaction accounting lines from Netsuite. This table stores information about accounting lines associated with transactions, including transaction identifiers, account details, amounts, exchange rates, and other relevant attributes."
     config:
-      tags: "netsuite"    
+      contract:
+        enforced: true            
     columns:
       - name: unique_id
+        description: "Surrogate key of transaction_id and transaction_line_id"
+        data_type: text
         tests:
           - unique
-          - not_null          
+          - not_null
+      - name: transaction_id
+        description: "The unique identifier for the transaction."
+        data_type: number(38,0)
+      - name: transaction_line_id
+        description: "The unique identifier for the transaction line."
+        data_type: number(38,0)
+      - name: last_modified_at
+        description: "The timestamp when the accounting line record was last modified."
+        data_type: timestamp_tz
+      - name: account_id
+        description: "The identifier for the account associated with the accounting line."
+        data_type: number(38,0)
+      - name: accounting_book_id
+        description: "The identifier for the accounting book associated with the accounting line."
+        data_type: number(38,0)
+      - name: amount_linked
+        description: "The linked amount associated with the accounting line."
+        data_type: float
+      - name: amount_paid
+        description: "The paid amount associated with the accounting line."
+        data_type: float
+      - name: amount_unpaid
+        description: "The unpaid amount associated with the accounting line."
+        data_type: float
+      - name: net_amount
+        description: "The net amount associated with the accounting line."
+        data_type: float
+      - name: amount_credit
+        description: "The credit amount associated with the accounting line."
+        data_type: float
+      - name: amount_debit
+        description: "The debit amount associated with the accounting line."
+        data_type: float
+      - name: exchange_rate
+        description: "The exchange rate associated with the accounting line."
+        data_type: float
+      - name: payment_amount_unused
+        description: "The unused payment amount associated with the accounting line."
+        data_type: float
+      - name: payment_amount_used
+        description: "The used payment amount associated with the accounting line."
+        data_type: float
+      - name: is_processed_by_revenue_commit
+        description: "Specifies whether the accounting line is processed by revenue commitment."
+        data_type: boolean
+      - name: is_posting
+        description: "Specifies whether the accounting line is posting."
+        data_type: boolean
 
   - name: stg_netsuite__transaction_lines
+    description: "Stage table containing data related to transaction lines from Netsuite. This table stores information about transaction lines, including unique identifiers, transaction details, item details, accounting information, quantities, amounts, and other relevant attributes."
     config:
-      tags: "netsuite"    
+      contract:
+        enforced: true            
     columns:
       - name: unique_key
+        description: "The unique key for the transaction line."
+        data_type: number(38,0)
         tests:
           - unique
-          - not_null          
+          - not_null        
+      - name: transaction_line_id
+        description: "The unique identifier for the transaction line."
+        data_type: number(38,0)
+      - name: category_id
+        description: "The identifier for the category associated with the transaction line."
+        data_type: number(38,0)
+      - name: class_id
+        description: "The identifier for the class associated with the transaction line."
+        data_type: number(38,0)
+      - name: entity_id
+        description: "The identifier for the entity associated with the transaction line."
+        data_type: number(38,0)
+      - name: transaction_id
+        description: "The unique identifier for the transaction."
+        data_type: number(38,0)
+      - name: item_id
+        description: "The identifier for the item associated with the transaction line."
+        data_type: number(38,0)
+      - name: subsidiary_id
+        description: "The identifier for the subsidiary associated with the transaction line."
+        data_type: number(38,0)
+      - name: department_id
+        description: "The identifier for the department associated with the transaction line."
+        data_type: number(38,0)
+      - name: location_id
+        description: "The identifier for the location associated with the transaction line."
+        data_type: number(38,0)
+      - name: transfer_order_item_line_id
+        description: "The identifier for the transfer order item line associated with the transaction line."
+        data_type: number(38,0)
+      - name: actualship_at
+        description: "The actual ship date associated with the transaction line."
+        data_type: timestamp_tz
+      - name: closed_at
+        description: "The closed date associated with the transaction line."
+        data_type: timestamp_tz
+      - name: expected_ship_at
+        description: "The expected ship date associated with the transaction line."
+        data_type: timestamp_tz
+      - name: line_last_modified_at
+        description: "The timestamp when the transaction line record was last modified."
+        data_type: timestamp_tz
+      - name: requested_date
+        description: "The requested date associated with the transaction line."
+        data_type: timestamp_tz
+      - name: memo
+        description: "The memo associated with the transaction line."
+        data_type: text
+      - name: cleared_date
+        description: "The cleared date associated with the transaction line."
+        data_type: timestamp_tz
+      - name: amortization_end_date
+        description: "The end date of amortization associated with the transaction line."
+        data_type: timestamp_tz
+      - name: amortiz_start_date
+        description: "The start date of amortization associated with the transaction line."
+        data_type: timestamp_tz
+      - name: production_end_date
+        description: "The end date of production associated with the transaction line."
+        data_type: timestamp_tz
+      - name: production_start_date
+        description: "The start date of production associated with the transaction line."
+        data_type: timestamp_tz
+      - name: expected_receipt_date
+        description: "The expected receipt date associated with the transaction line."
+        data_type: timestamp_tz
+      - name: created_from_id
+        description: "The identifier for the entity from which the transaction line was created."
+        data_type: number(38,0)
+      - name: expense_account
+        description: "The expense account associated with the transaction line."
+        data_type: number(38,0)
+      - name: accounting_line_type
+        description: "The accounting line type associated with the transaction line."
+        data_type: text
+      - name: price
+        description: "The price associated with the transaction line."
+        data_type: number(38,0)
+      - name: units
+        description: "The units associated with the transaction line."
+        data_type: number(38,0)
+      - name: quantity_allocated
+        description: "The quantity allocated associated with the transaction line."
+        data_type: float
+      - name: quantity_backordered
+        description: "The quantity backordered associated with the transaction line."
+        data_type: float
+      - name: quantity_billed
+        description: "The quantity billed associated with the transaction line."
+        data_type: float
+      - name: quantity_committed
+        description: "The quantity committed associated with the transaction line."
+        data_type: float
+      - name: quantity_packed
+        description: "The quantity packed associated with the transaction line."
+        data_type: float
+      - name: quantity_picked
+        description: "The quantity picked associated with the transaction line."
+        data_type: float
+      - name: quantity_rejected
+        description: "The quantity rejected associated with the transaction line."
+        data_type: float
+      - name: quantity_shiprecv
+        description: "The quantity shipped associated with the transaction line."
+        data_type: float
+      - name: quantity_demand_allocated
+        description: "The quantity demand allocated associated with the transaction line."
+        data_type: float        
+      - name: quantity
+        description: "The quantity associated with the transaction line."
+        data_type: float       
+      - name: bill_of_materials
+        description: "Specifies whether the transaction line is a bill of materials."
+        data_type: number(38,0)
+      - name: bill_variance_status
+        description: "The variance status of the bill associated with the transaction line."
+        data_type: text        
+      - name: bill_of_materials_revision
+        description: "The revision of the bill of materials associated with the transaction line."
+        data_type: number(38,0)
+      - name: item_type
+        description: "The type of item associated with the transaction line."
+        data_type: text
+      - name: bom_quantity
+        description: "The bill of materials quantity associated with the transaction line."
+        data_type: float
+      - name: item_source
+        description: "The source of the item associated with the transaction line."
+        data_type: text
+      - name: is_billable
+        description: "Specifies whether the transaction line is billable."
+        data_type: boolean
+      - name: is_closed
+        description: "Specifies whether the transaction line is closed."
+        data_type: boolean
+      - name: is_cleared
+        description: "Specifies whether the transaction line is cleared."
+        data_type: boolean
+      - name: is_dropship
+        description: "Specifies whether the transaction line is a dropship item."
+        data_type: boolean
+      - name: is_eliminate
+        description: "Specifies whether the transaction line is eliminated."
+        data_type: boolean
+      - name: is_fulfillable
+        description: "Specifies whether the transaction line is fulfillable."
+        data_type: boolean
+      - name: has_fulfillable_items
+        description: "Specifies whether the transaction line has fulfillable items."
+        data_type: boolean
+      - name: is_scrap
+        description: "Specifies whether the transaction line is scrap."
+        data_type: boolean
+      - name: cost_estimate
+        description: "The cost estimate associated with the transaction line."
+        data_type: float
+      - name: cost_estimate_type
+        description: "The type of cost estimate associated with the transaction line."
+        data_type: text
+      - name: is_blanded_cost
+        description: "Specifies whether the cost associated with the transaction line is blended."
+        data_type: boolean
+      - name: is_landed_cost_per_line
+        description: "Specifies whether the landed cost is per line for the transaction line."
+        data_type: boolean
+      - name: rate_percent
+        description: "The rate percentage associated with the transaction line."
+        data_type: float
+      - name: est_gross_profit
+        description: "The estimated gross profit associated with the transaction line."
+        data_type: float
+      - name: assembly
+        description: "Specifies whether the transaction line is an assembly."
+        data_type: number(38,0)
+      - name: assembly_units
+        description: "The units associated with the assembly."
+        data_type: text
+      - name: is_assembly_component
+        description: "Specifies whether the transaction line is an assembly component."
+        data_type: boolean
+      - name: is_cogs
+        description: "Specifies whether the transaction line is cost of goods sold (COGS)."
+        data_type: boolean
+      - name: is_customgl_line
+        description: "Specifies whether the transaction line is a custom general ledger line."
+        data_type: boolean
+      - name: is_freeze_firm_allocation
+        description: "Specifies whether the firm allocation is frozen for the transaction line."
+        data_type: boolean
+      - name: is_fully_shipped
+        description: "Specifies whether the transaction line is fully shipped."
+        data_type: boolean
+      - name: is_fx_variance
+        description: "Specifies whether the transaction line is foreign exchange (FX) variance."
+        data_type: boolean
+      - name: is_inventory_affecting
+        description: "Specifies whether the transaction line affects inventory."
+        data_type: boolean
+      - name: is_revrec_transaction
+        description: "Specifies whether the transaction line is a revenue recognition transaction."
+        data_type: boolean
+      - name: is_allocatefirminvtonly
+        description: "Specifies whether the allocation is firm inventory only for the transaction line."
+        data_type: boolean
+      - name: is_special_order
+        description: "Specifies whether the transaction line is a special order."
+        data_type: boolean
+      - name: is_tax_line
+        description: "Specifies whether the transaction line is a tax line."
+        data_type: boolean
+      - name: is_old_commitment_firm
+        description: "Specifies whether the old commitment is firm for the transaction line."
+        data_type: boolean
+      - name: is_transaction_discount
+        description: "Specifies whether the transaction line is a transaction discount."
+        data_type: boolean
+      - name: is_main_line
+        description: "Specifies whether the transaction line is the main line."
+        data_type: boolean
+      - name: is_match_bill_to_receipt
+        description: "Specifies whether the bill matches the receipt for the transaction line."
+        data_type: boolean
+      - name: is_commitment_firm
+        description: "Specifies whether the commitment is firm for the transaction line."
+        data_type: boolean
+      - name: is_displayed
+        description: "Specifies whether the transaction line is displayed."
+        data_type: boolean
+      - name: is_exclude_fromp_redictive_risk
+        description: "Specifies whether the transaction line is excluded from predictive risk."
+        data_type: boolean
+      - name: is_kit_component
+        description: "Specifies whether the transaction line is a kit component."
+        data_type: boolean
+      - name: net_amount
+        description: "The net amount associated with the transaction line."
+        data_type: float
+      - name: foreign_amount
+        description: "The foreign amount associated with the transaction line."
+        data_type: float
+      - name: debit_foreign_amount
+        description: "The foreign debit amount associated with the transaction line."
+        data_type: float
+      - name: credit_foreign_amount
+        description: "The foreign credit amount associated with the transaction line."
+        data_type: float
+      - name: fx_amount_linked
+        description: "The foreign exchange (FX) amount linked to the transaction line."
+        data_type: float
+      - name: foreign_amount_paid
+        description: "The foreign amount paid associated with the transaction line."
+        data_type: float
+      - name: foreign_amount_unpaid
+        description: "The foreign amount unpaid associated with the transaction line."
+        data_type: float
+      - name: foreign_payment_amount_unused
+        description: "The foreign payment amount unused associated with the transaction line."
+        data_type: float
+      - name: foreign_payment_amount_used
+        description: "The foreign payment amount used associated with the transaction line."
+        data_type: float
+      - name: cseg_channel_id
+        description: "The channel identifier associated with the transaction line."
+        data_type: number(38,0)
+      - name: cseg_geography_id
+        description: "The geography identifier associated with the transaction line."
+        data_type: number(38,0)
+      - name: allocation_alert
+        description: "Specifies whether there is an allocation alert associated with the transaction line."
+        data_type: text
+      - name: days_late
+        description: "The number of days late associated with the transaction line."
+        data_type: number(38,0)
+      - name: document_number
+        description: "The document number associated with the transaction line."
+        data_type: text
+      - name: inventory_reporting_location_id
+        description: "The identifier for the inventory reporting location associated with the transaction line."
+        data_type: number(38,0)
+      - name: orderal_location_strategy_id
+        description: "The identifier for the order location strategy associated with the transaction line."
+        data_type: number(38,0)
+      - name: kit_member_of
+        description: "Specifies whether the transaction line is a member of a kit."
+        data_type: number(38,0)
+      - name: line_sequence_number
+        description: "The sequence number of the transaction line."
+        data_type: number(38,0)
+      - name: processed_by_rev_commit
+        description: "Specifies whether the transaction line is processed by revenue commitment."
+        data_type: text
+      - name: transaction_line_type
+        description: "The type of the transaction line."
+        data_type: text
+      - name: amortization_sched
+        description: "The amortization schedule associated with the transaction line."
+        data_type: number(38,0)
+      - name: order_priority
+        description: "The priority of the order associated with the transaction line."
+        data_type: float
+      - name: payment_method
+        description: "The payment method associated with the transaction line."
+        data_type: number(38,0)
+      - name: build_variance
+        description: "The build variance associated with the transaction line."
+        data_type: float
+      - name: component_yield
+        description: "The yield of the component associated with the transaction line."
+        data_type: float
+      - name: create_out_sourced_wo
+        description: "Specifies whether to create an outsourced work order associated with the transaction line."
+        data_type: text
 
   - name: stg_netsuite__transactions
     config:
-      tags: "netsuite"    
-    columns:
+      contract:
+        enforced: true           
+    columns:   
       - name: transaction_id
+        description: "The unique identifier for the transaction."
+        data_type: number(38,0)
         tests:
           - unique
-          - not_null         
-
-  - name: stg_netsuite__consolidated_exchange_rates
-    config:
-      tags: "netsuite"    
-    columns:
-      - name: exchange_rate_id
-        tests:
-          - unique
-          - not_null         
- 
-  - name: stg_netsuite__currencies
-    config:
-      tags: "netsuite"    
-    columns:
+          - not_null        
+      - name: tran_id
+        description: "The transaction ID."
+        data_type: text
+      - name: external_id
+        description: "The external identifier for the transaction."
+        data_type: text
+      - name: transaction_number
+        description: "The transaction number."
+        data_type: text
+      - name: vendor_id
+        description: "The identifier of the vendor associated with the transaction."
+        data_type: number(38,0)
+      - name: entity_id
+        description: "The identifier of the entity associated with the transaction."
+        data_type: number(38,0)
       - name: currency_id
-        tests:
-          - unique
-          - not_null         
- 
+        description: "The identifier of the currency associated with the transaction."
+        data_type: number(38,0)
+      - name: posting_period_id
+        description: "The identifier of the posting period associated with the transaction."
+        data_type: number(38,0)
+      - name: created_by
+        description: "The user who created the transaction."
+        data_type: number(38,0)
+      - name: last_modified_by
+        description: "The user who last modified the transaction."
+        data_type: number(38,0)
+      - name: created_at
+        description: "The timestamp when the transaction was created."
+        data_type: timestamp_tz
+      - name: lastmodified_date
+        description: "The timestamp when the transaction was last modified."
+        data_type: timestamp_tz
+      - name: transaction_date
+        description: "The date of the transaction."
+        data_type: timestamp_tz
+      - name: ship_at
+        description: "The shipping date of the transaction."
+        data_type: timestamp_tz
+      - name: actualship_at
+        description: "The actual shipping date of the transaction."
+        data_type: timestamp_tz
+      - name: start_at
+        description: "The start date of the transaction."
+        data_type: timestamp_tz
+      - name: due_at
+        description: "The due date of the transaction."
+        data_type: timestamp_tz
+      - name: end_at
+        description: "The end date of the transaction."
+        data_type: timestamp_tz
+      - name: close_at
+        description: "The close date of the transaction."
+        data_type: timestamp_tz
+      - name: next_bill_date
+        description: "The next bill date of the transaction."
+        data_type: timestamp_tz
+      - name: actual_productionend_date
+        description: "The actual production end date of the transaction."
+        data_type: timestamp_tz
+      - name: actual_productionstart_date
+        description: "The actual production start date of the transaction."
+        data_type: timestamp_tz
+      - name: account_based_number
+        description: "The account-based number of the transaction."
+        data_type: text
+      - name: tran_display_name
+        description: "The display name of the transaction."
+        data_type: text
+      - name: type_based_document_number
+        description: "The type-based document number of the transaction."
+        data_type: text
+      - name: fax
+        description: "The fax associated with the transaction."
+        data_type: text
+      - name: email
+        description: "The email associated with the transaction."
+        data_type: text
+      - name: transaction_status
+        description: "The status of the transaction."
+        data_type: text
+      - name: balseg_status
+        description: "The balance segment status of the transaction."
+        data_type: number(38,0)
+      - name: interco_status
+        description: "The intercompany status of the transaction."
+        data_type: number(38,0)
+      - name: payment_hold
+        description: "Specifies whether the transaction is on payment hold."
+        data_type: text
+      - name: is_ship_complete
+        description: "Specifies whether the transaction is fully shipped."
+        data_type: text
+      - name: payment_method
+        description: "The payment method associated with the transaction."
+        data_type: number(38,0)
+      - name: payment_option
+        description: "The payment option associated with the transaction."
+        data_type: number(38,0)
+      - name: foreign_amount_paid
+        description: "The foreign amount paid associated with the transaction."
+        data_type: float
+      - name: foreign_amount_unpaid
+        description: "The foreign amount unpaid associated with the transaction."
+        data_type: float
+      - name: foreign_payment_amount_unused
+        description: "The foreign payment amount unused associated with the transaction."
+        data_type: float
+      - name: foreign_payment_amount_used
+        description: "The foreign payment amount used associated with the transaction."
+        data_type: float
+      - name: foreign_total
+        description: "The foreign total amount associated with the transaction."
+        data_type: float
+      - name: billing_address_id
+        description: "The billing address associated with the transaction."
+        data_type: number(38,0)
+      - name: bill_of_materials
+        description: "Specifies whether the transaction is a bill of materials."
+        data_type: number(38,0)
+      - name: bill_of_materials_revision
+        description: "The revision of the bill of materials associated with the transaction."
+        data_type: number(38,0)
+      - name: shipping_address_id
+        description: "The shipping address associated with the transaction."
+        data_type: number(38,0)
+      - name: transfer_location
+        description: "The transfer location associated with the transaction."
+        data_type: number(38,0)
+      - name: has_use_item_cost_as_transfer_cost
+        description: "Specifies whether to use the item cost as the transfer cost."
+        data_type: text
+      - name: cseg_channel
+        description: "The channel associated with the transaction."
+        data_type: number(38,0)
+      - name: cseg_geography
+        description: "The geography associated with the transaction."
+        data_type: number(38,0)
+      - name: incoterm
+        description: "The incoterm associated with the transaction."
+        data_type: number(38,0)
+      - name: memo
+        description: "The memo associated with the transaction."
+        data_type: text
+      - name: next_approver
+        description: "The next approver associated with the transaction."
+        data_type: number(38,0)
+      - name: to_be_printed
+        description: "Specifies whether the transaction is to be printed."
+        data_type: text
+      - name: terms
+        description: "The terms associated with the transaction."
+        data_type: number(38,0)
+      - name: approval_status
+        description: "The approval status of the transaction."
+        data_type: number(38,0)
+      - name: est_gross_profit
+        description: "The estimated gross profit of the transaction."
+        data_type: float
+      - name: total_cost_estimate
+        description: "The total cost estimate associated with the transaction."
+        data_type: float
+      - name: type
+        description: "The type of the transaction."
+        data_type: text
+      - name: abbrev_type
+        description: "The abbreviated type of the transaction."
+        data_type: text
+      - name: custom_type
+        description: "The custom type of the transaction."
+        data_type: number(38,0)
+      - name: journal_type
+        description: "The journal type of the transaction."
+        data_type: text
+      - name: record_type
+        description: "The record type of the transaction."
+        data_type: text
+      - name: transaction_type
+        description: "The type of the transaction."
+        data_type: text
+      - name: reversal
+        description: "Specifies whether the transaction is a reversal."
+        data_type: number(38,0)
+      - name: reversal_date
+        description: "The reversal date of the transaction."
+        data_type: timestamp_tz
+      - name: reversal_defer
+        description: "Specifies whether the reversal is deferred."
+        data_type: text
+      - name: linked_inventory_transfer
+        description: "Specifies whether the transaction is linked to an inventory transfer."
+        data_type: number(38,0)
+      - name: linked_ir
+        description: "Specifies whether the transaction is linked to an internal requisition."
+        data_type: number(38,0)
+      - name: linked_po
+        description: "Specifies whether the transaction is linked to a purchase order."
+        data_type: number(38,0)
+      - name: other_refnum
+        description: "The other reference number associated with the transaction."
+        data_type: text
+      - name: committed
+        description: "Specifies whether the transaction is committed."
+        data_type: float
+      - name: days_open
+        description: "The number of days the transaction has been open."
+        data_type: number(38,0)
+      - name: days_over_due_search
+        description: "The number of days the transaction is overdue."
+        data_type: number(38,0)
+      - name: employee
+        description: "The employee associated with the transaction."
+        data_type: number(38,0)
+      - name: memdoc
+        description: "The document associated with the transaction."
+        data_type: number(38,0)
+      - name: nexus
+        description: "The nexus associated with the transaction."
+        data_type: number(38,0)
+      - name: number
+        description: "The number associated with the transaction."
+        data_type: number(38,0)
+      - name: outsourcing_charge
+        description: "The outsourcing charge associated with the transaction."
+        data_type: number(38,0)
+      - name: outsourcing_charge_unit_price
+        description: "The unit price of the outsourcing charge associated with the transaction."
+        data_type: float
+      - name: required_deposit_due
+        description: "The required deposit due for the transaction."
+        data_type: float
+      - name: required_deposit_percentage
+        description: "The required deposit percentage for the transaction."
+        data_type: float
+      - name: ship_carrier
+        description: "The shipping carrier associated with the transaction."
+        data_type: text
+      - name: to_subsidiary
+        description: "The subsidiary associated with the transaction."
+        data_type: number(38,0)
+      - name: source
+        description: "The source of the transaction."
+        data_type: text
+      - name: is_firmed
+        description: "Specifies whether the transaction is firmed."
+        data_type: text
+      - name: is_posting
+        description: "Specifies whether the transaction is posting."
+        data_type: boolean
+      - name: is_printed_picking_ticket
+        description: "Specifies whether the transaction is printed picking ticket."
+        data_type: boolean
+      - name: is_use_revenue_arrangement
+        description: "Specifies whether the transaction uses revenue arrangement."
+        data_type: boolean
+      - name: is_void
+        description: "Specifies whether the transaction is void."
+        data_type: boolean
+      - name: is_voided
+        description: "Specifies whether the transaction is voided."
+        data_type: boolean
+      - name: is_visibletocustomer
+        description: "Specifies whether the transaction is visible to the customer."
+        data_type: boolean
+      - name: is_actual_prod_end_date_entered_manually
+        description: "Specifies whether the actual production end date is entered manually."
+        data_type: boolean
+      - name: is_actual_prod_start_date_entered_manually
+        description: "Specifies whether the actual production start date is entered manually."
+        data_type: boolean
+      - name: is_finchrg
+        description: "Specifies whether the transaction is fin charge."
+        data_type: boolean
+      - name: is_reversal
+        description: "Specifies whether the transaction is reversal."
+        data_type: boolean
+      - name: is_wip
+        description: "Specifies whether the transaction is WIP."
+        data_type: boolean
+      - name: is_ord_picked
+        description: "Specifies whether the order is picked."
+        data_type: boolean
+      - name: is_ord_received
+        description: "Specifies whether the order is received."
+        data_type: boolean
+      - name: is_out_sourced
+        description: "Specifies whether the transaction is outsourced."
+        data_type: boolean
+      - name: has_billing_status
+        description: "Specifies whether the transaction has billing status."
+        data_type: boolean
+      - name: is_include_in_forecast
+        description: "Specifies whether the transaction is included in the forecast."
+        data_type: boolean        

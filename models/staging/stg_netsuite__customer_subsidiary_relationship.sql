@@ -11,8 +11,6 @@ renamed as (
         primarycurrency as primary_currency_id,
         subsidiary as subsidiary_id,
         name as subsidiary_name,
-        balance__de,
-        balance__fl,
         depositbalance as deposit_balance,
         unbilledorders as unbilled_orders,
         isprimarysub = 'T' as is_primary_sub

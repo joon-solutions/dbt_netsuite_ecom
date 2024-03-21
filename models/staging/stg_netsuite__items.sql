@@ -14,8 +14,6 @@ renamed as (
         lastmodifieddate as last_modified_date,
 
         --item infor
-        custitem_item_category as tem_category,
-        custitem_formulation as formulation,
         class as class_id,
         stockdescription as stock_description,
         "DESCRIPTION" as item_description,
@@ -26,9 +24,6 @@ renamed as (
         --sku
         itemid as org_sku,
         regexp_replace(itemid, '^x', '') as sku,
-        custitem_interal_sku as internal_sku,
-        custitem_internal_sku_description as internal_sku_description,
-        custitem_open_farm_new_sku as new_sku,
         case when itemid like 'x%' then 2 else 1 end as sku_order,
 
         --cost
@@ -37,42 +32,18 @@ renamed as (
         costestimatetype as cost_estimate_type,
         costingmethod as costing_method,
         costingmethoddisplay as costing_method_display,
-        averagecost__de,
-        averagecost__fl,
         fxcost as fx_cost,
         tracklandedcost as track_landed_cost,
 
         --account
         assetaccount as asset_account,
-        custreturnvarianceaccount as custreturn_variance_account,
         expenseaccount as expense_account,
-        {# gainlossaccount as gainloss_account, #}
         incomeaccount as income_account,
         billexchratevarianceacct as bill_exchrate_variance_acct,
-        billpricevarianceacct as bill_pricevariance_acct,
-        billqtyvarianceacct as bill_qtyvariance_acct,
-
-        --price
-        custitem_price_change_approve as price_change_approve,
-        custitem_pricing_formulation as pricing_formulation,
-        lastpurchaseprice__de,
-        lastpurchaseprice__fl,
-
-        --numeric
-        custitemeighty_thousand as eighty_thousand,
-        custitem_twohundred_fifty_thousand as two_hundred_fifty_thousand,
-        custitem_twohundredthousand as two_hundredthousand,
-        custitem_hundredtwentythousand as hundred_twentythousand,
-        custitem_fourty_thousand as fourty_thousand,
-
-        --atlas
-        custitem_atlas_hi as atlas_hi,
-        custitem_atlas_product_group as atlas_product_group,
-        custitem_atlas_ti as atlas_ti,
+        billpricevarianceacct as bill_price_variance_acct,
+        billqtyvarianceacct as bill_quantity_variance_acct,
 
         --weight
-        custitem_gross_weight as gross_weight,
-        custitem_net_weight as net_weight,
         "WEIGHT" as item_weight,
         weightunit as weight_unit_id,
         weightunits as weight_units,
@@ -82,8 +53,6 @@ renamed as (
         saleunit as sale_unit,
         stockunit as stock_unit,
         consumptionunit as consumption_unit,
-        totalquantityonhand__de as total_quantity_on_hand__de,
-        totalquantityonhand__fl as total_quantity_on_hand__fl,
 
         --type
         itemtype as item_type,
@@ -91,8 +60,6 @@ renamed as (
         unitstype as units_type,
 
         --boolean
-        custitem_aln_1_auto_numbered = 'T' as is_aln_1_auto_numbered,
-        custitem_atlas_approved = 'T' as is_atlas_approved,
         includechildren = 'T' as is_include_children,
         isdropshipitem = 'T' as is_dropship_item,
         isfulfillable = 'T' as is_fulfillable,
@@ -115,15 +82,6 @@ renamed as (
         usemarginalrates = 'T' as is_use_marginal_rates,
 
         --other
-        custitem_hj_tc_autopackquantity as hj_tc_autopackquantity,
-        custitem_lot_assembly_upc as lot_assembly_upc,
-        custitem_mhi_of_preferred_vendor as mhi_of_preferred_vendor,
-        custitem_mhi_open_farm_omult as mhi_omult,
-        custitem_open_farm_fulfillment_loc as fulfillment_loc,
-        custitem_open_farm_legacy_item as legacy_item,
-        custitem_open_farm_pallet_in_ea as pallet_in_ea,
-        custitem_of_legacy_item_link as legacy_item_link,
-
         atpmethod as atp_method,
         supplyreplenishmentmethod as supply_replenishment_method,
         countryofmanufacture as country_of_manufacture,

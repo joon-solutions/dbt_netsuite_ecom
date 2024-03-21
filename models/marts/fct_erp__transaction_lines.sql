@@ -73,7 +73,7 @@ final as (
         transaction_accounting_lines.is_posting,
 
         -- quantity field(s)
-        transaction_lines.quantity___fl as transaction_line_quantity,
+        transaction_lines.quantity as transaction_line_quantity,
 
         -- amount related fields
         current_transactions.posting_period_id,

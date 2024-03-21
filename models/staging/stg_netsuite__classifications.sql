@@ -7,7 +7,7 @@ renamed as (
         id as class_id,
         externalid as external_id,
         parent as parent_id,
-        subsidiary as subsidiary_id,
+        subsidiary as subsidiary_ids,
         name as class_name,
         lastmodifieddate as last_modified_at,
         custrecord_nspb_segment_code as nspb_segment_code,
