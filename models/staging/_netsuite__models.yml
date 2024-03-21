@@ -234,7 +234,10 @@ models:
         data_type: float
 
   - name: stg_netsuite__budgets_machines
-    description: "Stage table containing machine-generated budgets data"
+    description: > 
+      Stage table containing machine-generated budgets data
+      A budget machine is a matrix machine containing amounts for budget categories and calendar months
+      Detail at https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_161218135180.html#Budget-Machine
     config:
       contract:
         enforced: true            
