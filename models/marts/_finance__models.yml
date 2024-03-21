@@ -325,6 +325,6 @@ models:
           There're also cases of reverse entries. For example, when customer return an order => revenue will be reduced and on the debit side => net amount will be difference between debit and credit
           The case when condition decides whether to put debit or credit first in the equation, which depends on the above principle
         data_type: float
-      - name: amount_credit_foreign
+      - name: amount_foreign
         description: "Amount converted to foreign currency by the field `exchange_rate`"
         data_type: float
