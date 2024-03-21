@@ -9,7 +9,7 @@ models:
     columns:
       - name: account_type_id
         description: "The unique identifier for the account type."
-        data_type: varchar    
+        data_type: text    
         tests:
           - unique
           - not_null
@@ -18,16 +18,16 @@ models:
         data_type: number(38,0)       
       - name: default_cash_flow_rate_type
         description: "The default cash flow rate type for the account."
-        data_type: varchar
+        data_type: text
       - name: default_general_rate_type
         description: "The default general rate type for the account."
-        data_type: varchar
+        data_type: text
       - name: eliminational_go
         description: "The elimination algorithm used for the account."
-        data_type: varchar
+        data_type: text
       - name: long_name
         description: "The long name of the account type."
-        data_type: varchar
+        data_type: text
       - name: seqnum
         description: "The sequence number(38,0) of the account type."
         data_type: number(38,0)
@@ -73,7 +73,7 @@ models:
         data_type: timestamp_tz
       - name: period_name
         description: "The name of the accounting period."
-        data_type: varchar
+        data_type: text
       - name: is_allow_non_gl_changes
         description: "Specifies whether non-GL changes are allowed for the accounting period."
         data_type: boolean
@@ -125,34 +125,34 @@ models:
         data_type: number(38,0)
       - name: external_id
         description: "The external identifier for the account."
-        data_type: number(38,0)
+        data_type: text
       - name: parent_id
         description: "The identifier of the parent account."
         data_type: number(38,0)
       - name: subsidiary_id
         description: "The unique identifier for the subsidiary associated with the account."
-        data_type: number(38,0)
+        data_type: text
       - name: last_modified_at
         description: "The date when the account was last modified."
         data_type: timestamp_tz
       - name: account_number
         description: "The account number."
-        data_type: varchar
+        data_type: text
       - name: account_type
         description: "The type of the account."
-        data_type: varchar
+        data_type: text
       - name: sspec_acct
         description: "The specific account associated with the account."
-        data_type: varchar
+        data_type: text
       - name: display_name_with_hierarchy
         description: "The display name of the account with its hierarchy."
-        data_type: varchar
+        data_type: text
       - name: account_full_name
         description: "The full name of the account."
-        data_type: varchar
+        data_type: text
       - name: account_name
         description: "The name of the account."
-        data_type: varchar
+        data_type: text
       - name: is_inactive
         description: "Specifies whether the account is inactive."
         data_type: boolean
@@ -176,13 +176,13 @@ models:
         data_type: boolean
       - name: cashflow_rate
         description: "The cash flow rate associated with the account."
-        data_type: varchar
+        data_type: text
       - name: description
         description: "The description of the account."
-        data_type: varchar
-      - name: generalrate
+        data_type: text
+      - name: general_rate
         description: "The general rate associated with the account."
-        data_type: varchar          
+        data_type: text          
 
   - name: stg_netsuite__budget
     description: "Stage table containing data related to budgets from Netsuite."
@@ -268,25 +268,25 @@ models:
           - not_null        
       - name: external_id
         description: "The external identifier for the class."
-        data_type: varchar
+        data_type: text
       - name: parent_id
         description: "The identifier of the parent class."
         data_type: numeric(38,0)
       - name: subsidiary_ids
         description: "The unique identifier for the subsidiaries associated with the class."
-        data_type: varchar
+        data_type: text
       - name: class_name
         description: "The name of the class."
-        data_type: varchar
+        data_type: text
       - name: last_modified_at
         description: "The timestamp when the class was last modified."
         data_type: timestamp_tz
       - name: nspb_segment_code
         description: "The NSPB segment code associated with the class."
-        data_type: varchar
+        data_type: text
       - name: class_full_name
         description: "The full name of the class."
-        data_type: varchar
+        data_type: text
       - name: has_children
         description: "Specifies whether the class has children."
         data_type: boolean
@@ -348,10 +348,10 @@ models:
           - not_null         
       - name: currency_name
         description: "The name of the currency."
-        data_type: varchar
+        data_type: text
       - name: currency_symbol
         description: "The symbol of the currency."
-        data_type: varchar
+        data_type: text
       - name: last_modified_at
         description: "The timestamp when the currency record was last modified."
         data_type: timestamp_tz
@@ -360,7 +360,7 @@ models:
         data_type: numeric(38,0)
       - name: display_symbol
         description: "The symbol used for displaying the currency."
-        data_type: varchar
+        data_type: text
       - name: fx_rate_update_timezone
         description: "The timezone for updating the currency exchange rate."
         data_type: numeric(38,0)
@@ -406,10 +406,7 @@ models:
         data_type: number(38,0)
       - name: subsidiary_name
         description: "The name of the subsidiary associated with the relationship."
-        data_type: varchar
-      - name: balance__de
-        description: "The balance in the currency (Direct Exchange)."
-        data_type: numeric(38,0)
+        data_type: text
       - name: deposit_balance
         description: "The deposit balance."
         data_type: float
@@ -434,7 +431,7 @@ models:
         data_type: number(38,0)
       - name: external_id
         description: "The external identifier for the customer."
-        data_type: varchar
+        data_type: text
       - name: customer_department_id
         description: "The unique identifier for the department associated with the customer."
         data_type: number(38,0)
@@ -446,25 +443,25 @@ models:
         data_type: number(38,0)
       - name: company_name
         description: "The name of the customer's company."
-        data_type: varchar
+        data_type: text
       - name: alternative_name
         description: "An alternative name for the customer."
-        data_type: varchar
+        data_type: text
       - name: phone
         description: "The phone number of the customer."
-        data_type: varchar
+        data_type: text
       - name: entity_name
         description: "The name of the entity associated with the customer."
-        data_type: varchar
+        data_type: text
       - name: entity_title
         description: "The title of the entity associated with the customer."
-        data_type: varchar
+        data_type: text
       - name: fax
         description: "The fax number of the customer."
-        data_type: varchar
+        data_type: text
       - name: customer_url
         description: "The URL of the customer."
-        data_type: varchar
+        data_type: text
       - name: closed_at
         description: "The timestamp when the customer account was closed."
         data_type: timestamp_tz
@@ -488,19 +485,19 @@ models:
         data_type: timestamp_tz
       - name: email
         description: "The email address of the customer."
-        data_type: varchar
+        data_type: text
       - name: email_preference
         description: "The email preference of the customer."
-        data_type: varchar
+        data_type: text
       - name: email_transactions
         description: "Specifies whether email transactions are enabled for the customer."
-        data_type: varchar
+        data_type: text
       - name: is_shipcomplete
         description: "Specifies whether the customer requires complete shipment."
         data_type: boolean
       - name: shipping_carrier
         description: "The shipping carrier associated with the customer."
-        data_type: varchar
+        data_type: text
       - name: shipping_item
         description: "The shipping item associated with the customer."
         data_type: number(38,0)
@@ -554,19 +551,13 @@ models:
         data_type: boolean
       - name: alcohol_recipient_type
         description: "The alcohol recipient type."
-        data_type: varchar
-      - name: balance_search__de
-        description: "The balance search in the currency (Direct Exchange)."
-        data_type: number(38,0)
-      - name: unbilled_orders_search__de
-        description: "The unbilled orders search in the currency (Direct Exchange)."
-        data_type: number(38,0)
+        data_type: text
       - name: contact_list
         description: "The contact list associated with the customer."
-        data_type: varchar
+        data_type: text
       - name: credit_hold_override
         description: "The credit hold override for the customer."
-        data_type: varchar
+        data_type: text
       - name: credit_limit
         description: "The credit limit for the customer."
         data_type: float
@@ -593,10 +584,10 @@ models:
         data_type: number(38,0)
       - name: resale_number
         description: "The resale number associated with the customer."
-        data_type: varchar
+        data_type: text
       - name: search_stage
         description: "The search stage associated with the customer."
-        data_type: varchar
+        data_type: text
       - name: terms
         description: "The terms associated with the customer."
         data_type: number(38,0)
@@ -614,23 +605,23 @@ models:
         data_type: number(38,0)
       - name: record_type
         description: "The type of the deleted record."
-        data_type: varchar
+        data_type: text
       - name: script_id
         description: "The script identifier associated with the deleted record."
-        data_type: varchar
+        data_type: text
       - name: name
         description: "The name of the deleted record."
-        data_type: varchar
+        data_type: text
       - name: type
         description: "The type of the deleted record."
-        data_type: varchar
-      - name: convarchar
+        data_type: text
+      - name: context
         description: >
             see https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_4032860783.html for a comprehensive list of values
             SLT: Script (RESTlet)
             UIF: User Interface
             WST: Web Store        
-        data_type: varchar
+        data_type: text
       - name: deleted_by
         description: "The user id who deleted the record."
         data_type: number(38,0)
@@ -664,16 +655,16 @@ models:
         data_type: number(38,0)
       - name: subsidiary_id
         description: "The unique identifier for the subsidiaries associated with the department."
-        data_type: varchar
+        data_type: text
       - name: department_name
         description: "The name of the department."
-        data_type: varchar
+        data_type: text
       - name: last_modified_at
         description: "The timestamp when the department record was last modified."
         data_type: timestamp_tz
       - name: department_full_name
         description: "The full name of the department."
-        data_type: varchar
+        data_type: text
       - name: is_include_children
         description: "Specifies whether children departments are included."
         data_type: boolean
@@ -722,16 +713,16 @@ models:
         data_type: timestamp_tz
       - name: entity_title
         description: "The title of the entity."
-        data_type: varchar
+        data_type: text
       - name: entity_name
         description: "The name of the entity."
-        data_type: varchar
+        data_type: text
       - name: alternative_name
         description: "An alternative name for the entity."
-        data_type: varchar
+        data_type: text
       - name: type
         description: "The type of the entity."
-        data_type: varchar
+        data_type: text
       - name: is_inactive
         description: "Specifies whether the entity is inactive."
         data_type: boolean
@@ -759,37 +750,37 @@ models:
         data_type: timestamp_tz
       - name: addr1
         description: "The first line of the address."
-        data_type: varchar
+        data_type: text
       - name: addr2
         description: "The second line of the address."
-        data_type: varchar
+        data_type: text
       - name: addressee
         description: "The addressee of the address."
-        data_type: varchar
+        data_type: text
       - name: addr_phone
         description: "The phone number associated with the address."
-        data_type: varchar
-      - name: addr_varchar
-        description: "The varchar representation of the address."
-        data_type: varchar
+        data_type: text
+      - name: addr_text
+        description: "The text representation of the address."
+        data_type: text
       - name: state
         description: "The state of the address."
-        data_type: varchar
+        data_type: text
       - name: zip
         description: "The ZIP code of the address."
-        data_type: varchar
+        data_type: text
       - name: city
         description: "The city of the address."
-        data_type: varchar
+        data_type: text
       - name: country
         description: "The country of the address."
-        data_type: varchar
+        data_type: text
       - name: attention
         description: "The attention line of the address."
-        data_type: varchar
+        data_type: text
       - name: dropdown_state
         description: "The dropdown state of the address."
-        data_type: varchar
+        data_type: text
       - name: is_override
         description: "Specifies whether the address override is enabled."
         data_type: boolean          
@@ -808,10 +799,10 @@ models:
           - not_null        
       - name: entity_name
         description: "The name of the entity."
-        data_type: varchar
+        data_type: text
       - name: entity_type
         description: "The type of the entity."
-        data_type: varchar
+        data_type: text
       - name: probability
         description: "The probability associated with the entity status."
         data_type: number(38,0)
@@ -826,7 +817,7 @@ models:
         data_type: boolean
       - name: entity_status
         description: "The status of the entity."
-        data_type: varchar
+        data_type: text
 
   - name: stg_netsuite__item_units
     description: "Stage table containing data related to item units from Netsuite. This table stores information about units associated with items, including unit identifiers and names."
@@ -842,7 +833,7 @@ models:
           - not_null        
       - name: name
         description: "The name of the item unit."
-        data_type: addr_varchar
+        data_type: text
 
   - name: stg_netsuite__items
     description: "Stage table containing data related to items from Netsuite. This table stores information about various items, including their identifiers, descriptions, accounting details, and other relevant attributes."
@@ -858,7 +849,7 @@ models:
           - not_null        
       - name: external_id
         description: "The external identifier for the item."
-        data_type: varchar
+        data_type: text
       - name: department_id
         description: "The identifier for the department associated with the item."
         data_type: number(38,0)
@@ -873,25 +864,25 @@ models:
         data_type: number(38,0)
       - name: stock_description
         description: "The description of the stock associated with the item."
-        data_type: varchar
+        data_type: text
       - name: item_description
         description: "The description of the item."
-        data_type: varchar
+        data_type: text
       - name: item_display_name
         description: "The display name of the item."
-        data_type: varchar
+        data_type: text
       - name: manufacturer
         description: "The manufacturer of the item."
-        data_type: varchar
+        data_type: text
       - name: item_location
         description: "The location of the item."
         data_type: number(38,0)
       - name: org_sku
         description: "The original SKU of the item."
-        data_type: varchar
+        data_type: text
       - name: sku
         description: "The SKU of the item."
-        data_type: varchar
+        data_type: text
       - name: sku_order
         description: "The order of the SKU."
         data_type: number(38,0)
@@ -903,22 +894,19 @@ models:
         data_type: float
       - name: cost_estimate_type
         description: "The type of cost estimate for the item."
-        data_type: varchar
+        data_type: text
       - name: costing_method
         description: "The costing method used for the item."
-        data_type: varchar
+        data_type: text
       - name: costing_method_display
         description: "The display of the costing method used for the item."
-        data_type: varchar
-      - name: averagecost__de
-        description: "The average cost of the item."
-        data_type: number(38,0)
+        data_type: text
       - name: fx_cost
         description: "The foreign exchange cost of the item."
         data_type: float
       - name: track_landed_cost
         description: "Specifies whether the item tracks landed costs."
-        data_type: varchar
+        data_type: text
       - name: asset_account
         description: "The asset account associated with the item."
         data_type: number(38,0)
@@ -937,9 +925,6 @@ models:
       - name: bill_quantity_variance_acct
         description: "The bill quantity variance account associated with the item."
         data_type: number(38,0)
-      - name: last_purchase_price__de
-        description: "The last purchase price (decimal) of the item."
-        data_type: number(38,0)
       - name: item_weight
         description: "The weight of the item."
         data_type: float
@@ -948,7 +933,7 @@ models:
         data_type: number(38,0)
       - name: weight_units
         description: "The units of weight of the item."
-        data_type: varchar
+        data_type: text
       - name: purchase_unit
         description: "The purchase unit of the item."
         data_type: number(38,0)
@@ -963,10 +948,10 @@ models:
         data_type: number(38,0)
       - name: item_type
         description: "The type of the item."
-        data_type: varchar
+        data_type: text
       - name: sub_type
         description: "The subtype of the item."
-        data_type: varchar
+        data_type: text
       - name: units_type
         description: "The units type of the item."
         data_type: number(38,0)
@@ -1032,28 +1017,28 @@ models:
         data_type: boolean
       - name: atp_method
         description: "The available-to-promise method for the item."
-        data_type: varchar
+        data_type: text
       - name: supply_replenishment_method
         description: "The supply replenishment method for the item."
-        data_type: varchar
+        data_type: text
       - name: country_of_manufacture
         description: "The country of manufacture for the item."
-        data_type: varchar
+        data_type: text
       - name: full_name
         description: "The full name of the item."
-        data_type: varchar
+        data_type: text
       - name: purchase_description
         description: "The purchase description of the item."
-        data_type: varchar
+        data_type: text
       - name: subsidiary
         description: "The subsidiary associated with the item."
-        data_type: varchar
+        data_type: text
       - name: total_value
         description: "The total value of the item."
         data_type: float
       - name: vendor_name
         description: "The name of the vendor associated with the item."
-        data_type: varchar
+        data_type: text
 
   - name: stg_netsuite__subsidiaries
     description: "Stage table containing data related to subsidiaries from Netsuite. This table stores information about subsidiaries, including their identifiers, currencies, parent subsidiaries, representing customers and vendors, fiscal calendars, and other relevant attributes."
@@ -1087,16 +1072,16 @@ models:
         data_type: timestamp_tz
       - name: email
         description: "The email address associated with the subsidiary."
-        data_type: varchar
+        data_type: text
       - name: full_name
         description: "The full name of the subsidiary."
-        data_type: varchar
+        data_type: text
       - name: legal_name
         description: "The legal name of the subsidiary."
-        data_type: varchar
+        data_type: text
       - name: name
         description: "The name of the subsidiary."
-        data_type: varchar
+        data_type: text
       - name: main_address
         description: "The main address of the subsidiary."
         data_type: number(38,0)
@@ -1108,22 +1093,22 @@ models:
         data_type: number(38,0)
       - name: drop_down_state
         description: "The dropdown state of the subsidiary."
-        data_type: varchar
+        data_type: text
       - name: country
         description: "The country of the subsidiary."
-        data_type: varchar
+        data_type: text
       - name: edition
         description: "The edition of the subsidiary."
-        data_type: varchar
+        data_type: text
       - name: state
         description: "The state of the subsidiary."
-        data_type: varchar
+        data_type: text
       - name: custrecord_psg_lc_test_mode
         description: "The test mode of the subsidiary."
-        data_type: varchar
+        data_type: text
       - name: url
         description: "The URL associated with the subsidiary."
-        data_type: varchar
+        data_type: text
       - name: is_show_subsidiary_name
         description: "Specifies whether the subsidiary name is shown."
         data_type: boolean
@@ -1142,7 +1127,7 @@ models:
     columns:
       - name: unique_id
         description: "Surrogate key of transaction_id and transaction_line_id"
-        data_type: varchar
+        data_type: text
         tests:
           - unique
           - not_null
@@ -1179,9 +1164,6 @@ models:
       - name: amount_debit
         description: "The debit amount associated with the accounting line."
         data_type: float
-      - name: exchange_rate__de
-        description: "The exchange rate (decimal) associated with the accounting line."
-        data_type: number(38,0)
       - name: exchange_rate
         description: "The exchange rate associated with the accounting line."
         data_type: float
@@ -1257,7 +1239,7 @@ models:
         data_type: timestamp_tz
       - name: memo
         description: "The memo associated with the transaction line."
-        data_type: varchar
+        data_type: text
       - name: cleared_date
         description: "The cleared date associated with the transaction line."
         data_type: timestamp_tz
@@ -1284,7 +1266,7 @@ models:
         data_type: number(38,0)
       - name: accounting_line_type
         description: "The accounting line type associated with the transaction line."
-        data_type: varchar
+        data_type: text
       - name: price
         description: "The price associated with the transaction line."
         data_type: number(38,0)
@@ -1326,19 +1308,19 @@ models:
         data_type: number(38,0)
       - name: bill_variance_status
         description: "The variance status of the bill associated with the transaction line."
-        data_type: varchar        
+        data_type: text        
       - name: bill_of_materials_revision
         description: "The revision of the bill of materials associated with the transaction line."
         data_type: number(38,0)
       - name: item_type
         description: "The type of item associated with the transaction line."
-        data_type: varchar
+        data_type: text
       - name: bom_quantity
         description: "The bill of materials quantity associated with the transaction line."
         data_type: float
       - name: item_source
         description: "The source of the item associated with the transaction line."
-        data_type: varchar
+        data_type: text
       - name: is_billable
         description: "Specifies whether the transaction line is billable."
         data_type: boolean
@@ -1368,7 +1350,7 @@ models:
         data_type: float
       - name: cost_estimate_type
         description: "The type of cost estimate associated with the transaction line."
-        data_type: varchar
+        data_type: text
       - name: is_blanded_cost
         description: "Specifies whether the cost associated with the transaction line is blended."
         data_type: boolean
@@ -1386,7 +1368,7 @@ models:
         data_type: number(38,0)
       - name: assembly_units
         description: "The units associated with the assembly."
-        data_type: varchar
+        data_type: text
       - name: is_assembly_component
         description: "Specifies whether the transaction line is an assembly component."
         data_type: boolean
@@ -1479,13 +1461,13 @@ models:
         data_type: number(38,0)
       - name: allocation_alert
         description: "Specifies whether there is an allocation alert associated with the transaction line."
-        data_type: varchar
+        data_type: text
       - name: days_late
         description: "The number of days late associated with the transaction line."
         data_type: number(38,0)
       - name: document_number
         description: "The document number associated with the transaction line."
-        data_type: varchar
+        data_type: text
       - name: inventory_reporting_location_id
         description: "The identifier for the inventory reporting location associated with the transaction line."
         data_type: number(38,0)
@@ -1500,10 +1482,10 @@ models:
         data_type: number(38,0)
       - name: processed_by_rev_commit
         description: "Specifies whether the transaction line is processed by revenue commitment."
-        data_type: varchar
+        data_type: text
       - name: transaction_line_type
         description: "The type of the transaction line."
-        data_type: varchar
+        data_type: text
       - name: amortization_sched
         description: "The amortization schedule associated with the transaction line."
         data_type: number(38,0)
@@ -1521,7 +1503,7 @@ models:
         data_type: float
       - name: create_out_sourced_wo
         description: "Specifies whether to create an outsourced work order associated with the transaction line."
-        data_type: varchar
+        data_type: text
 
   - name: stg_netsuite__transactions
     config:
@@ -1536,13 +1518,13 @@ models:
           - not_null        
       - name: tran_id
         description: "The transaction ID."
-        data_type: varchar
+        data_type: text
       - name: external_id
         description: "The external identifier for the transaction."
-        data_type: varchar
+        data_type: text
       - name: transaction_number
         description: "The transaction number."
-        data_type: varchar
+        data_type: text
       - name: vendor_id
         description: "The identifier of the vendor associated with the transaction."
         data_type: number(38,0)
@@ -1599,22 +1581,22 @@ models:
         data_type: timestamp_tz
       - name: account_based_number
         description: "The account-based number of the transaction."
-        data_type: varchar
+        data_type: text
       - name: tran_display_name
         description: "The display name of the transaction."
-        data_type: varchar
+        data_type: text
       - name: type_based_document_number
         description: "The type-based document number of the transaction."
-        data_type: varchar
+        data_type: text
       - name: fax
         description: "The fax associated with the transaction."
-        data_type: varchar
+        data_type: text
       - name: email
         description: "The email associated with the transaction."
-        data_type: varchar
+        data_type: text
       - name: transaction_status
         description: "The status of the transaction."
-        data_type: varchar
+        data_type: text
       - name: balseg_status
         description: "The balance segment status of the transaction."
         data_type: number(38,0)
@@ -1623,10 +1605,10 @@ models:
         data_type: number(38,0)
       - name: payment_hold
         description: "Specifies whether the transaction is on payment hold."
-        data_type: varchar
+        data_type: text
       - name: is_ship_complete
         description: "Specifies whether the transaction is fully shipped."
-        data_type: varchar
+        data_type: text
       - name: payment_method
         description: "The payment method associated with the transaction."
         data_type: number(38,0)
@@ -1665,7 +1647,7 @@ models:
         data_type: number(38,0)
       - name: has_use_item_cost_as_transfer_cost
         description: "Specifies whether to use the item cost as the transfer cost."
-        data_type: varchar
+        data_type: text
       - name: cseg_channel
         description: "The channel associated with the transaction."
         data_type: number(38,0)
@@ -1677,13 +1659,13 @@ models:
         data_type: number(38,0)
       - name: memo
         description: "The memo associated with the transaction."
-        data_type: varchar
+        data_type: text
       - name: next_approver
         description: "The next approver associated with the transaction."
         data_type: number(38,0)
       - name: to_be_printed
         description: "Specifies whether the transaction is to be printed."
-        data_type: varchar
+        data_type: text
       - name: terms
         description: "The terms associated with the transaction."
         data_type: number(38,0)
@@ -1698,22 +1680,22 @@ models:
         data_type: float
       - name: type
         description: "The type of the transaction."
-        data_type: varchar
+        data_type: text
       - name: abbrev_type
         description: "The abbreviated type of the transaction."
-        data_type: varchar
+        data_type: text
       - name: custom_type
         description: "The custom type of the transaction."
         data_type: number(38,0)
       - name: journal_type
         description: "The journal type of the transaction."
-        data_type: varchar
+        data_type: text
       - name: record_type
         description: "The record type of the transaction."
-        data_type: varchar
+        data_type: text
       - name: transaction_type
         description: "The type of the transaction."
-        data_type: varchar
+        data_type: text
       - name: reversal
         description: "Specifies whether the transaction is a reversal."
         data_type: number(38,0)
@@ -1722,7 +1704,7 @@ models:
         data_type: timestamp_tz
       - name: reversal_defer
         description: "Specifies whether the reversal is deferred."
-        data_type: varchar
+        data_type: text
       - name: linked_inventory_transfer
         description: "Specifies whether the transaction is linked to an inventory transfer."
         data_type: number(38,0)
@@ -1734,7 +1716,7 @@ models:
         data_type: number(38,0)
       - name: other_refnum
         description: "The other reference number associated with the transaction."
-        data_type: varchar
+        data_type: text
       - name: committed
         description: "Specifies whether the transaction is committed."
         data_type: float
@@ -1770,16 +1752,16 @@ models:
         data_type: float
       - name: ship_carrier
         description: "The shipping carrier associated with the transaction."
-        data_type: varchar
+        data_type: text
       - name: to_subsidiary
         description: "The subsidiary associated with the transaction."
         data_type: number(38,0)
       - name: source
         description: "The source of the transaction."
-        data_type: varchar
+        data_type: text
       - name: is_firmed
         description: "Specifies whether the transaction is firmed."
-        data_type: varchar
+        data_type: text
       - name: is_posting
         description: "Specifies whether the transaction is posting."
         data_type: boolean
