@@ -57,9 +57,47 @@ models:
     description: "Dimension table containing information about items (products)"
     columns:
       - name: item_id
+        description: "The unique identifier for the item."
+        data_type: text
         tests:
           - unique
-          - not_null
+          - not_null        
+      - name: sku
+        description: "The stock-keeping unit (SKU) for the item."
+        data_type: text
+      - name: item_display_name
+        description: "The display name of the item."
+        data_type: text
+      - name: item_description
+        description: "The description of the item."
+        data_type: text
+      - name: item_type
+        description: "The type of the item."
+        data_type: text
+      - name: is_inactive
+        description: "Specifies whether the item is inactive."
+        data_type: boolean
+      - name: unit_cost
+        description: "The unit cost of the item."
+        data_type: numeric(38, 0)
+      - name: item_weight
+        description: "The weight of the item."
+        data_type: numeric(38, 0)
+      - name: org_sku
+        description: "The original SKU of the item."
+        data_type: text
+      - name: weight_unit
+        description: "The unit of weight for the item."
+        data_type: text
+      - name: class_id
+        description: "The unique identifier of the classification associated with the item."
+        data_type: text
+      - name: parent_class_id
+        description: "The unique identifier of the parent classification associated with the item."
+        data_type: text
+      - name: class_name
+        description: "The name of the classification associated with the item."
+        data_type: text
 
   - name: fct_erp__budget
     tests:
