@@ -424,7 +424,8 @@ models:
     description: "Stage table containing data related to customers from Netsuite. This table stores information about customers, including their identifiers, contact details, company information, transaction history, and other relevant attributes."
     config:
       contract:
-        enforced: true        
+        enforced: true
+      tags: ['pii']     
     columns:
       - name: customer_id
         description: "The unique identifier for the customer."
@@ -736,8 +737,9 @@ models:
   - name: stg_netsuite__entity_address
     description: "Stage table containing data related to entity addresses from Netsuite. This table stores information about addresses associated with entities, including address details, owner identifiers, and other relevant attributes."
     config:
-       contract:
-        enforced: true           
+      contract:
+        enforced: true
+      tags: ['pii']
     columns:
       - name: address_id
         description: "The unique identifier for the address."
@@ -1047,7 +1049,8 @@ models:
     description: "Stage table containing data related to subsidiaries from Netsuite. This table stores information about subsidiaries, including their identifiers, currencies, parent subsidiaries, representing customers and vendors, fiscal calendars, and other relevant attributes."
     config:
       contract:
-        enforced: true            
+        enforced: true
+      tags: ['pii']         
     columns:
       - name: subsidiary_id
         description: "The unique identifier for the subsidiary."
@@ -1126,7 +1129,8 @@ models:
     description: "Stage table containing data related to transaction accounting lines from Netsuite. This table stores information about accounting lines associated with transactions, including transaction identifiers, account details, amounts, exchange rates, and other relevant attributes."
     config:
       contract:
-        enforced: true            
+        enforced: true
+      tags: ['cfi','sfi']             
     columns:
       - name: unique_id
         description: "Surrogate key of transaction_id and transaction_line_id"
@@ -1187,7 +1191,8 @@ models:
     description: "Stage table containing data related to transaction lines from Netsuite. This table stores information about transaction lines, including unique identifiers, transaction details, item details, accounting information, quantities, amounts, and other relevant attributes."
     config:
       contract:
-        enforced: true            
+        enforced: true
+      tags: ['cfi','sfi']            
     columns:
       - name: unique_key
         description: "The unique key for the transaction line."
@@ -1514,7 +1519,8 @@ models:
       Each row represents a single transaction record within Netsuite's system, capturing essential details such as transaction ID, type, date, status, amounts, customer/vendor information, and transaction-related flags.
     config:
       contract:
-        enforced: true           
+        enforced: true
+      tags: ['cfi','sfi']            
     columns:   
       - name: transaction_id
         description: "The unique identifier for the transaction."
