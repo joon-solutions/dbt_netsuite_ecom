@@ -1,10 +1,9 @@
 name: "pr_to_docs"
 
 on:
-  schedule:
-      # run at 7AM every single day
-      # https://crontab.guru <-- for generating CRON expression
-      - cron: "30 22 * * *"
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 env:
