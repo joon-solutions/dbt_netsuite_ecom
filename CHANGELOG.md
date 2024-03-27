@@ -1,3 +1,13 @@
+# dbt_netsuite_ecom v1.0.1
+## Improvements 
+- Add additional document to models in staging and marts
+- Add CARs tag for restricted financial record
+- update readme.md
+- Add document site for macro
+
+Detail in release 1.0.1 [PR](https://github.com/joon-solutions/dbt_netsuite_ecom/pull/11)
+
+
 # dbt_netsuite_ecom v1.0.0
 First release
 - Configure DBT project to accomodate upcoming models
