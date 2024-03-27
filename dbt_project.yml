@@ -28,7 +28,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 vars:
   # replace by your source database and schema for Netsuite
   nestuite_source_database: 'raw'
-  nestuite_source_schema: 'netsuite'
+  nestuite_source_schema: 'netsuite_suite_analytics_prod'
 
 
 # Configuring models
@@ -37,6 +37,7 @@ vars:
 models:
   netsuite_joon:
     +tags: "netsuite"
+    +schema: netsuite
     marts:
       +materialized: table
       +tags: "marts"

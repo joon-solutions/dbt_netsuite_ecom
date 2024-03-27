@@ -4,7 +4,7 @@ sources:
 
 - name: netsuite
   description: accounting data
-  database: "{{ var('nestuite_source_database) }}"
+  database: "{{ var('nestuite_source_database') }}"
   schema: "{{ var('nestuite_source_schema') }}"
   loader: stitch
   loaded_at_field: _sdc_batched_at
