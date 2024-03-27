@@ -11,5 +11,5 @@ macros:
         type: integer
         description: The name of the column you want to convert 
       - name: unit_field
-        type: integer
+        type: string
         description: The name of the column with unit measurement              
