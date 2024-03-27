@@ -72,7 +72,7 @@ vars:
 ```
 
 ## Step 4: Define database and schema variables
-By default, this package runs using your `raw` database the `netsuite` schema. If this is not where your Netsuite data is (for example, if your netsuite schema is named `netsuite_abc`), add the following configuration to your root `dbt_project.yml` file:
+By default, this package runs using your `raw` database the `netsuite_suite_analytics_prod` schema. If this is not where your Netsuite data is (for example, if your Netsuite schema is named `netsuite_abc`), add the following configuration to your root `dbt_project.yml` file:
 
 ```yml
 vars:
