@@ -2,10 +2,11 @@ version: 2
 
 models:
   - name: dim_erp__customers
-    description: "Dimension table containing information about customers. THE TABLE CONTENT PII INFORMATION, USE IT CAREFULLY"
+    description: "Dimension table containing information about customers. THE DATA CONTAIN PII INFORMATION, USE WITH CARE."
     config:
       contract:
-        enforced: true       
+        enforced: true
+      tags: ['pii']       
     columns:
       - name: customer_id
         description: "The unique identifier for the customer."
@@ -210,10 +211,11 @@ models:
         data_type: float      
 
   - name: fct_erp__transaction_lines
-    description: "Fact table containing transaction line information."
+    description: "Fact table containing transaction line information. THE DATA CONTAIN CFI and SFI INFORMATION, USE WITH CARE."
     config:
       contract:
-        enforced: true  
+        enforced: true
+      tags: ['cfi','sfi']        
     tests:
       - dbt_utils.expression_is_true:
           expression: "amount_debit >= 0"          

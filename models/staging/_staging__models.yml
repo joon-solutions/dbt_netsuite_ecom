@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: stg_netsuite__account_types
-    description: "Stage table containing data related to account types from Netsuite"
+    description: "Stage model containing data related to account types from Netsuite"
     config:
       contract:
         enforced: true      
@@ -45,7 +45,7 @@ models:
         data_type: boolean
 
   - name: stg_netsuite__accounting_periods
-    description: "Stage table containing data related to accounting periods from Netsuite. This table stores information about accounting periods, including their unique identifiers, start and end dates, statuses, and other relevant attributes used for financial period closing and reporting."
+    description: "Stage model containing data related to accounting periods from Netsuite. This model stores information about accounting periods, including their unique identifiers, start and end dates, statuses, and other relevant attributes used for financial period closing and reporting."
     config:
       contract:
         enforced: true      
@@ -106,7 +106,7 @@ models:
         data_type: boolean
 
   - name: stg_netsuite__accounts
-    description: "Stage table containing data related to accounts from Netsuite."
+    description: "Stage model containing data related to accounts from Netsuite."
     config:
       contract:
         enforced: true       
@@ -185,7 +185,7 @@ models:
         data_type: text          
 
   - name: stg_netsuite__budget
-    description: "Stage table containing data related to budgets from Netsuite."
+    description: "Stage model containing data related to budgets from Netsuite."
     config:
       contract:
         enforced: true         
@@ -235,7 +235,7 @@ models:
 
   - name: stg_netsuite__budgets_machines
     description: > 
-      Stage table containing machine-generated budgets data
+      Stage model containing machine-generated budgets data
       A budget machine is a matrix machine containing amounts for budget categories and calendar months
       Detail at https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_161218135180.html#Budget-Machine
     config:
@@ -258,7 +258,7 @@ models:
         data_type: float
 
   - name: stg_netsuite__classifications
-    description: "Stage table containing data related to classifications from Netsuite. This table stores information about various classifications such as classes, departments, locations, etc., which are used for categorizing transactions and financial reporting."
+    description: "Stage model containing data related to classifications from Netsuite. This model stores information about various classifications such as classes, departments, locations, etc., which are used for categorizing transactions and financial reporting."
     config:
       contract:
         enforced: true           
@@ -298,7 +298,7 @@ models:
         data_type: boolean
 
   - name: stg_netsuite__consolidated_exchange_rates
-    description: "Stage table containing data related to consolidated exchange rates fetched from Netsuite. This table stores information about the exchange rates between different currencies for a specific period, which is used for financial consolidation and reporting."
+    description: "Stage model containing data related to consolidated exchange rates fetched from Netsuite. This model stores information about the exchange rates between different currencies for a specific period, which is used for financial consolidation and reporting."
     config:
       contract:
         enforced: true           
@@ -338,7 +338,7 @@ models:
         data_type: float
 
   - name: stg_netsuite__currencies
-    description: "Stage table containing data related to currencies from Netsuite. This table stores information about various currencies, including their names, symbols, precision, exchange rates, and other currency-related attributes."
+    description: "Stage model containing data related to currencies from Netsuite. This model stores information about various currencies, including their names, symbols, precision, exchange rates, and other currency-related attributes."
     config:
       contract:
         enforced: true            
@@ -384,7 +384,7 @@ models:
         data_type: boolean
 
   - name: stg_netsuite__customer_subsidiary_relationship
-    description: "Stage table containing data related to customer-subsidiary relationships from Netsuite. This table stores information about the relationships between customers and subsidiaries, including their identifiers, primary currency, balances, and other relevant attributes."
+    description: "Stage model containing data related to customer-subsidiary relationships from Netsuite. This model stores information about the relationships between customers and subsidiaries, including their identifiers, primary currency, balances, and other relevant attributes."
     config:
       contract:
         enforced: true            
@@ -421,7 +421,7 @@ models:
         data_type: boolean
 
   - name: stg_netsuite__customers
-    description: "Stage table containing data related to customers from Netsuite. This table stores information about customers, including their identifiers, contact details, company information, transaction history, and other relevant attributes."
+    description: "Stage model containing data related to customers from Netsuite. This model stores information about customers, including their identifiers, contact details, company information, transaction history, and other relevant attributes. . THE DATA CONTAIN PII INFORMATION, USE WITH CARE"
     config:
       contract:
         enforced: true
@@ -598,8 +598,8 @@ models:
 
   - name: stg_netsuite__deleted_records
     description: >
-      Stage table containing data related to deleted records from Netsuite. 
-      This table is append-only and thus does not have a unique key
+      Stage model containing data related to deleted records from Netsuite. 
+      This model is append-only and thus does not have a unique key
     config:
       contract:
         enforced: true        
@@ -643,7 +643,7 @@ models:
         data_type: boolean            
 
   - name: stg_netsuite__departments
-    description: "Stage table containing data related to departments from Netsuite. This table stores information about departments, including their identifiers, names, parent departments, subsidiary associations, and other relevant attributes."
+    description: "Stage model containing data related to departments from Netsuite. This model stores information about departments, including their identifiers, names, parent departments, subsidiary associations, and other relevant attributes."
     config:
       contract:
         enforced: true            
@@ -677,7 +677,7 @@ models:
         data_type: boolean
 
   - name: stg_netsuite__entities
-    description: "Stage table containing data related to entities from Netsuite. This table stores information about various entities, including their identifiers, contact details, entity types, and other relevant attributes."
+    description: "Stage model containing data related to entities from Netsuite. This model stores information about various entities, including their identifiers, contact details, entity types, and other relevant attributes."
     config:
       contract:
         enforced: true            
@@ -735,7 +735,7 @@ models:
         data_type: boolean
 
   - name: stg_netsuite__entity_address
-    description: "Stage table containing data related to entity addresses from Netsuite. This table stores information about addresses associated with entities, including address details, owner identifiers, and other relevant attributes."
+    description: "Stage model containing data related to entity addresses from Netsuite. This model stores information about addresses associated with entities, including address details, owner identifiers, and other relevant attributes. . THE DATA CONTAIN PII INFORMATION, USE WITH CARE."
     config:
       contract:
         enforced: true
@@ -791,7 +791,7 @@ models:
         data_type: boolean          
 
   - name: stg_netsuite__entity_status
-    description: "Stage table containing data related to entity statuses from Netsuite. This table stores information about statuses associated with entities, including status identifiers, names, types, and other relevant attributes."
+    description: "Stage model containing data related to entity statuses from Netsuite. This model stores information about statuses associated with entities, including status identifiers, names, types, and other relevant attributes."
     config:
       contract:
         enforced: true           
@@ -825,7 +825,7 @@ models:
         data_type: text
 
   - name: stg_netsuite__item_units
-    description: "Stage table containing data related to item units from Netsuite. This table stores information about units associated with items, including unit identifiers and names."
+    description: "Stage model containing data related to item units from Netsuite. This model stores information about units associated with items, including unit identifiers and names."
     config:
       contract:
         enforced: true            
@@ -841,7 +841,7 @@ models:
         data_type: text
 
   - name: stg_netsuite__items
-    description: "Stage table containing data related to items from Netsuite. This table stores information about various items, including their identifiers, descriptions, accounting details, and other relevant attributes."
+    description: "Stage model containing data related to items from Netsuite. This model stores information about various items, including their identifiers, descriptions, accounting details, and other relevant attributes."
     config:
       contract:
         enforced: true            
@@ -1046,7 +1046,7 @@ models:
         data_type: text
 
   - name: stg_netsuite__subsidiaries
-    description: "Stage table containing data related to subsidiaries from Netsuite. This table stores information about subsidiaries, including their identifiers, currencies, parent subsidiaries, representing customers and vendors, fiscal calendars, and other relevant attributes."
+    description: "Stage model containing data related to subsidiaries from Netsuite. This model stores information about subsidiaries, including their identifiers, currencies, parent subsidiaries, representing customers and vendors, fiscal calendars, and other relevant attributes. THE DATA CONTAIN PII INFORMATION, USE WITH CARE."
     config:
       contract:
         enforced: true
@@ -1126,7 +1126,10 @@ models:
         data_type: boolean
 
   - name: stg_netsuite__transaction_accounting_lines
-    description: "Stage table containing data related to transaction accounting lines from Netsuite. This table stores information about accounting lines associated with transactions, including transaction identifiers, account details, amounts, exchange rates, and other relevant attributes."
+    description: >
+      Stage model containing data related to transaction accounting lines from Netsuite. This model stores information about accounting lines 
+      associated with transactions, including transaction identifiers, account details, amounts, exchange rates, and other relevant attributes.
+      THE DATA CONTAIN CFI and SFI INFORMATION, USE WITH CARE.
     config:
       contract:
         enforced: true
@@ -1188,7 +1191,10 @@ models:
         data_type: boolean
 
   - name: stg_netsuite__transaction_lines
-    description: "Stage table containing data related to transaction lines from Netsuite. This table stores information about transaction lines, including unique identifiers, transaction details, item details, accounting information, quantities, amounts, and other relevant attributes."
+    description: >
+      Stage model containing data related to transaction lines from Netsuite. 
+      This model stores information about transaction lines, including unique identifiers, transaction details, item details, accounting information, quantities, amounts, and other relevant attributes. 
+      THE DATA CONTAIN CFI and SFI INFORMATION, USE WITH CARE.
     config:
       contract:
         enforced: true
@@ -1515,8 +1521,9 @@ models:
 
   - name: stg_netsuite__transactions
     description: >
-      This table contains transactional data from Netsuite, including various types of transactions such as sales orders, purchase orders, invoices, payments, and more. 
+      This model contains transactional data from Netsuite, including various types of transactions such as sales orders, purchase orders, invoices, payments, and more. 
       Each row represents a single transaction record within Netsuite's system, capturing essential details such as transaction ID, type, date, status, amounts, customer/vendor information, and transaction-related flags.
+      THE DATA CONTAIN CFI and SFI INFORMATION, USE WITH CARE.
     config:
       contract:
         enforced: true
