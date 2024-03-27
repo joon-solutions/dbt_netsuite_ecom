@@ -1,0 +1,57 @@
+name: pr_to_main
+
+on:
+  pull_request:
+
+env:
+  # specify value of the variables in repository's secret,
+  # detail is https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions
+  DBT_PROFILES_DIR: ./
+  DBT_ACCOUNT: ${{ secrets.DBT_ACCOUNT }}
+  DBT_USER: ${{ secrets.DBT_USER }}
+  DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
+  DBT_ROLE: ${{ secrets.DBT_ROLE }}
+  DBT_DB: ${{ secrets.DBT_DB }}
+  DBT_WH: ${{ secrets.DBT_WH }}
+  DBT_SCHEMA: ${{ secrets.DBT_SCHEMA }}      
+  NESTUITE_SOURCE_SCHEMA: ${{ secrets.NESTUITE_SOURCE_SCHEMA }}
+
+jobs:
+  pr_to_main:
+    name: pr_to_main
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python Environment
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11.x" # not specifying the patch version allows for faster setup
+          cache: 'pip'
+
+      - name: Install python & dbt dependencies
+        run: |
+          pip install -r requirements.txt
+          dbt deps
+
+      - name: Run all models
+        id: run_all_models
+        run: dbt run
+
+      - name: Test all models
+        id: test_all_models
+        run: dbt test
+          
+      - name: Lint dbt models
+        id: sqlfluff_json
+        run: |
+          git fetch origin ${{ github.event.pull_request.base.ref }}:${{ github.event.pull_request.base.ref }}
+          git diff ${{ github.event.pull_request.base.ref }} --name-only --diff-filter=d | egrep '^models/.*sql$$' | xargs -r sqlfluff lint --format github-annotation --annotation-level failure --nofail --write-output annotations.json     
+
+      - name: Annotate the Changes Files in PR
+        uses: yuzutech/annotations-action@v0.4.0
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          input: './annotations.json'          

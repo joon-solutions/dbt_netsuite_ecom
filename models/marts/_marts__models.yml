@@ -1,0 +1,330 @@
+version: 2
+
+models:
+  - name: dim_erp__customers
+    description: "Dimension table containing information about customers. THE TABLE CONTENT PII INFORMATION, USE IT CAREFULLY"
+    config:
+      contract:
+        enforced: true       
+    columns:
+      - name: customer_id
+        description: "The unique identifier for the customer."
+        tests:
+          - unique
+          - not_null
+        data_type: number(38,0)
+      - name: external_id
+        description: "The external identifier for the customer."
+        data_type: text
+      - name: company_name
+        description: "The name of the customer company."
+        data_type: text
+      - name: parent_id
+        description: "The unique identifier of the parent company of the customer."
+        data_type: number(38,0)
+      - name: parent_name
+        description: "The name of the parent company of the customer."
+        data_type: text
+      - name: department_full_name
+        description: "The full name of the department associated with the customer."
+        data_type: text
+      - name: phone
+        description: "The phone number of the customer."
+        data_type: text
+      - name: email
+        description: "The email address of the customer."
+        data_type: text
+      - name: default_address_id
+        description: "The default address identifier for the customer."
+        data_type: number(38,0)
+      - name: addr_text
+        description: "The text of the address associated with the customer."
+        data_type: text
+      - name: state
+        description: "The state of the customer."
+        data_type: text
+      - name: country
+        description: "The country of the customer."
+        data_type: text
+      - name: entity_status
+        description: "The status of the entity associated with the customer."
+        data_type: text
+      - name: entity_id
+        description: "The unique identifier of the entity associated with the customer."
+        data_type: number(38,0)
+      - name: primary_subsidiary_name
+        description: "The name of the primary subsidiary associated with the customer."
+        data_type: text
+
+  - name: dim_erp__items
+    config:
+      contract:
+        enforced: true  
+    description: "Dimension table containing information about items (products)"
+    columns:
+      - name: item_id
+        description: "The unique identifier for the item."
+        data_type: number(38,0)
+        tests:
+          - unique
+          - not_null        
+      - name: sku
+        description: "The stock-keeping unit (SKU) for the item."
+        data_type: text
+      - name: item_display_name
+        description: "The display name of the item."
+        data_type: text
+      - name: item_description
+        description: "The description of the item."
+        data_type: text
+      - name: item_type
+        description: "The type of the item."
+        data_type: text
+      - name: is_inactive
+        description: "Specifies whether the item is inactive."
+        data_type: boolean
+      - name: unit_cost
+        description: "The unit cost of the item."
+        data_type: float
+      - name: item_weight
+        description: "The weight of the item."
+        data_type: float
+      - name: item_weight_lb
+        description: "The weight of the item in pound (lbs)."
+        data_type: float        
+      - name: org_sku
+        description: "The original SKU of the item."
+        data_type: text
+      - name: weight_unit
+        description: "The unit of weight for the item."
+        data_type: text
+      - name: class_id
+        description: "The unique identifier of the classification associated with the item."
+        data_type: number(38,0)
+      - name: parent_class_id
+        description: "The unique identifier of the parent classification associated with the item."
+        data_type: number(38,0)
+      - name: class_name
+        description: "The name of the classification associated with the item."
+        data_type: text
+
+  - name: fct_erp__budget
+    description: "Fact table containing budget information."
+    config:
+      contract:
+        enforced: true       
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - budget_id
+            - accounting_period_id
+    columns:
+      - name: budget_id
+        description: "The unique identifier for the budget."
+        data_type: number(38,0)
+      - name: accounting_period_id
+        description: "The identifier for the accounting period."
+        data_type: number(38,0)
+        tests:
+          - not_null        
+      - name: subsidiary_id
+        description: "The unique identifier for the subsidiary."
+        data_type: number(38,0)
+        tests:
+          - not_null        
+      - name: account_id
+        description: "The unique identifier for the account."
+        data_type: number(38,0)
+        tests:
+          - not_null        
+      - name: currency_id
+        description: "The unique identifier for the currency."
+        data_type: number(38,0)
+      - name: customer_id
+        description: "The unique identifier for the customer."
+        data_type: number(38,0)
+      - name: class_id
+        description: "The unique identifier for the classification."
+        data_type: number(38,0)
+      - name: department_id
+        description: "The unique identifier for the department."
+        data_type: number(38,0)
+      - name: subsidiary_name
+        description: "The name of the subsidiary."
+        data_type: text
+      - name: account_name
+        description: "The name of the account."
+        data_type: text
+      - name: is_sales_account
+        description: "Specifies whether the budget belongs to a sales account."
+        data_type: boolean
+      - name: is_cogs_account
+        description: "Specifies whether the budget belongs to a cost of goods sold account."
+        data_type: boolean
+      - name: currency
+        description: "The currency of the budget."
+        data_type: text
+      - name: department_full_name
+        description: "The full name of the department."
+        data_type: text
+      - name: budget_month
+        description: "The month of the budget."
+        data_type: timestamp_tz
+      - name: amount_monthly
+        description: "The monthly amount of the budget."
+        data_type: float
+      - name: class_name
+        description: "The name of the classification."
+        data_type: text   
+
+  - name: fct_erp__consolidated_exchange_rate
+    description: This table holds the consolidated exchange rate (CER) for each account at each accounting(posting) period
+    config:
+      contract:
+        enforced: true     
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - account_id
+            - posting_period_id
+            - from_subsidiary_id
+            - to_subsidiary_id
+    columns:
+      - name: account_id
+        description: "The unique identifier for the account."
+        data_type: numeric(38,0)
+      - name: general_rate
+        description: "The general rate for the exchange."
+        data_type: text
+      - name: posting_period_id
+        description: "The identifier for the posting period."
+        data_type: numeric(38,0)
+      - name: from_subsidiary_id
+        description: "The unique identifier for the 'from' subsidiary."
+        data_type: numeric(38,0)
+      - name: to_subsidiary_id
+        description: "The unique identifier for the 'to' subsidiary."
+        data_type: numeric(38,0)
+      - name: consolidated_exchange_rate
+        description: "The CER computed from historical, average or current rate by field `general_rate`., by accounts"
+        data_type: float      
+
+  - name: fct_erp__transaction_lines
+    description: "Fact table containing transaction line information."
+    config:
+      contract:
+        enforced: true  
+    tests:
+      - dbt_utils.expression_is_true:
+          expression: "amount_debit >= 0"          
+      - dbt_utils.expression_is_true:
+          expression: "amount_credit >= 0"
+    columns:
+      - name: unique_key
+        description: "Unique key identifying the transaction line."
+        data_type: number(38,0)
+        tests:
+          - unique
+          - not_null        
+      - name: transaction_line_id
+        description: "Unique identifier for the transaction line."
+        data_type: numeric(38,0)
+      - name: transaction_id
+        description: "Unique identifier for the transaction."
+        data_type: numeric(38,0)
+      - name: item_id
+        description: "Unique identifier for the item."
+        data_type: numeric(38,0)
+      - name: account_id
+        description: "Unique identifier for the account."
+        data_type: numeric(38,0)
+      - name: subsidiary_id
+        description: "Unique identifier for the subsidiary."
+        data_type: numeric(38,0)
+      - name: department_id
+        description: "Unique identifier for the department."
+        data_type: numeric(38,0)
+      - name: location_id
+        description: "Unique identifier for the location."
+        data_type: numeric(38,0)
+      - name: customer_id
+        description: "Unique identifier for the customer. This is foreign key to dim_erp__customers"
+        data_type: numeric(38,0)
+      - name: created_from_transaction
+        description: "Transaction from which this transaction line was created."
+        data_type: text
+      - name: created_from_transaction__customer_id
+        description: "Customer associated with the transaction from which this transaction line was created. This is foreign key to dim_erp__customers"
+        data_type: numeric(38,0)
+      - name: created_from_transaction__transaction_date
+        description: "Transaction date of the transaction from which this transaction line was created."
+        data_type: timestamp_tz
+      - name: created_from_transaction__transaction_type
+        description: "Transaction type of the transaction from which this transaction line was created."
+        data_type: text
+      - name: department_full_name
+        description: "Full name of the department associated with the transaction line."
+        data_type: text
+      - name: transaction_date
+        description: "Created date of the transaction line."
+        data_type: timestamp_tz
+      - name: transaction_type
+        description: "Type of the transaction line."
+        data_type: text
+      - name: document_number
+        description: "Document number associated with the transaction line."
+        data_type: text
+      - name: account_type
+        description: "Type of the account associated with the transaction line."
+        data_type: text
+      - name: account_name
+        description: "Name of the account associated with the transaction line."
+        data_type: text
+      - name: is_sales_account
+        description: "Indicates if the account associated with the transaction line is a sales account."
+        data_type: boolean
+      - name: is_cogs_account
+        description: "Indicates if the account associated with the transaction line is a cost of goods sold account."
+        data_type: boolean
+      - name: is_displayed
+        description: "Indicates if the transaction line is displayed."
+        data_type: boolean
+      - name: is_posting
+        description: "Indicates if the transaction line is posted."
+        data_type: boolean
+      - name: transaction_line_quantity
+        description: "Quantity associated with the transaction line."
+        data_type: float
+      - name: posting_period_id
+        description: "Identifier for the posting period associated with the transaction line."
+        data_type: number(38,0)
+      - name: currency_name
+        description: "Name of the currency associated with the transaction line."
+        data_type: text
+      - name: amount_debit
+        description: "Amount debited associated with the transaction line."
+        data_type: float
+      - name: amount_credit
+        description: "Amount credited associated with the transaction line."
+        data_type: float
+      - name: exchange_rate
+        description: "Exchange rate associated with the transaction line."
+        data_type: float
+      - name: amount_debit_foreign
+        description: "Amount debited in foreign currency associated with the transaction line."
+        data_type: float
+      - name: amount_credit_foreign
+        description: "Amount credited in foreign currency associated with the transaction line."
+        data_type: float
+      - name: amount
+        description: >
+          Transaction amount, difference between amount debit and credit.
+          For some accounts, the side will be either on the left (Debit) or right (Credit). This depends on accounting equation Assets = Liabilities + Equity
+          For example, asset, expense account will be on the debit side since they decrease equity of business (drawings)
+          Liabilities and revenue will be on the credit side since they increase equity of the business (investments)
+          There're also cases of reverse entries. For example, when customer return an order => revenue will be reduced and on the debit side => net amount will be difference between debit and credit
+          The case when condition decides whether to put debit or credit first in the equation, which depends on the above principle
+        data_type: float
+      - name: amount_foreign
+        description: "Amount converted to foreign currency by the field `exchange_rate`"
+        data_type: float

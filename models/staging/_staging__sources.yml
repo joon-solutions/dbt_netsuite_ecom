@@ -1,0 +1,36 @@
+version: 2
+
+sources:
+
+- name: netsuite
+  description: accounting data
+  database: "{{ var('nestuite_source_database') }}"
+  schema: "{{ var('nestuite_source_schema') }}"
+  loader: stitch
+  loaded_at_field: _sdc_batched_at
+  freshness:
+    error_after: {count: 24, period: hour}
+
+  tables: 
+    - name: customer
+    - name: customersubsidiaryrelationship
+    - name: deletedrecord
+    - name: transaction
+    - name: item
+    - name: budgets
+    - name: transactionline
+    - name: account
+    - name: department
+    - name: classification
+    - name: consolidatedexchangerate
+    - name: customlist_weight_units
+    - name: subsidiary
+    - name: transactionaccountingline
+    - name: entity
+    - name: entitystatus
+    - name: entityaddress
+    - name: accountingperiod
+    - name: budgetsmachine
+    - name: itemunit
+    - name: accounttype
+    - name: currency
