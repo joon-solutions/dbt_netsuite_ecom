@@ -1,18 +1,19 @@
 # Overview
 - Provides transformation for raw tables extracted from Netsuite via Stitch, to reduce engineer hours arising from exploring and developing models for Netsuite data
 - Enable data team to be exposed to the specification of Netsuite data, and transformations need to be implemented to create final marts table for analysis and reporting purposes
-- Provide detailed logic for a specific use case, instead of general transformations like the Fivetran [package](https://github.com/fivetran/dbt_netsuite_source)](https://github.com/fivetran/dbt_netsuite_source)
-- Generates a comprehensive data dictionary of your source and modeled Netsuite data through the dbt docs site.
+- Provide detailed logic for a specific use case, instead of general transformations like the Fivetran [package](https://github.com/fivetran/dbt_netsuite_source)(https://github.com/fivetran/dbt_netsuite_source). BE CAUTIOUS when using the package in your projects, and remember to take into account the Loader (Stitch), use cases, and type of business (e-commerce or trading companies).
+- Generates data dictionary of your source and modeled Netsuite data through the dbt docs site. The list of fields in Netsuite tables is varied depending on how it is configured, therefore, not all of the fields in this package can be found in the same Netsuite modules implemented in other companies. Be sure to reach out to the Netsuite champion in the organization for more information.
 
 # Use case
-The package is originally designed for an e-commerce company. The company is a startup with high growth and is present in different countries. They have plenty of subsidiaries and customers from different states of the US and Canada.
-Apart from being the main accounting system, Netsuite is used for inventory management. Products or inventories are distributed to customers via nearby subsidiaries. At the end of each financial year (FY), the accounting and finance department needs to consolidate financial reports from different subsidiaries, reported in different currencies to generate the consolidated financial report, including parent and all subsidiaries' financial figures.
-One of the role of finance team, is to provide budgets for upcoming FY. Budget can be sliced down to various elements such as items, departments, account or accounting period.
+- The package is originally designed for an e-commerce company. The company is a startup growing rapidly and selling its products in different countries. They have plenty of subsidiaries and customers from different states of the US and Canada.
+- Apart from being the main accounting system, Netsuite is used for inventory management. Inventories are distributed to customers via nearby subsidiaries. At the end of each financial year (FY), the accounting and finance department needs to consolidate financial reports from different subsidiaries, reported in different currencies to generate the consolidated financial report, including parent and all subsidiaries' financial figures.
+- One of the tasks of the finance team is to prepare budgets for upcoming FYs. The budget can be allocated to different types of business units such as items, departments, accounts or accounting periods.
+- As stated in the "Overview" section, rather than providing a general transformation, the package focuses on specific use cases for an ecommerce or trading company, which is to control their accounting transactions, and dimensional analysis around the transactions and budgets. The final objective is to create a set of mart tables that can support self-serve analytics for accounting and finance teams.
 
 # User manual
 
 ## Step 1. Prerequisites
-To use this package, you must have At least either one Netsuite connector syncing the respective tables to your destination via Stitch:
+To use this package, you must have At least one Netsuite connector syncing the respective tables to your destination via Stitch:
 
 - customer
 - customersubsidiaryrelationship
@@ -53,7 +54,7 @@ packages:
 ```
 
 ## Step 3: Define Database credentials
-To use the package, you need to declare below variables as environment variables in your local machine or the servers where dbt is deployed:
+To use the package, you need to declare the below variables as environment variables in your local machine or the servers where dbt is deployed:
 - DBT_ACCOUNT: Snowflake account hosted on a cloud platform in a geographical region
 - DBT_USER: username to use for connecting to Snowflake
 - DBT_PASSWORD: password to use for connecting to Snowflake
