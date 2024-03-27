@@ -84,5 +84,11 @@ packages:
       version: [">=1.1.0", "<2.0.0"]
 
 ```
+
+# Glossary
+The section includes terms used in the package.
+- PII (Personal Identifiable Information): Any representation of information that permits the identity of an individual to whom the information applies to be reasonably inferred by either direct or indirect means.
+- CARs (Confidential Accounting Records): financial data that contain sensitive information about a company's financial transactions, accounts, budgets, and other related information. 
+
 # How is this package maintained?
 The Joon team maintaining this package _only_ maintains the latest version of the package. We highly recommend you stay consistent with the [latest version](https://github.com/joon-solutions/dbt_netsuite_ecom) of the package and refer to the [CHANGELOG](https://github.com/joon-solutions/dbt_netsuite_ecom/CHANGELOG.md) and release notes for more information on changes across versions.

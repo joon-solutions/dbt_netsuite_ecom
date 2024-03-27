@@ -1,4 +1,4 @@
-{%- macro lbs_conversion (data_base,field_to_convert,unit_field='size_units') -%}
+{%- macro lbs_conversion (data_base, field_to_convert, unit_field='size_units') -%}
         case 
             when {{ data_base }}{{ field_to_convert }} is not null and {{ data_base }}{{ field_to_convert }} > 0 then
                 case 
