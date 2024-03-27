@@ -1,0 +1,15 @@
+version: 2
+
+macros:
+  - name: lbs_conversion
+    description: "The macro provides a function to convert quantity in other unit measurement to lbs"
+    arguments:
+      - name: data_base
+        type: string
+        description: The name of table or cte with quantity columns to convert
+      - name: field_to_convert
+        type: integer
+        description: The name of the column you want to convert 
+      - name: unit_field
+        type: string
+        description: The name of the column with unit measurement              
