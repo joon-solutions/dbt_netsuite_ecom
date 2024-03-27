@@ -185,7 +185,7 @@ models:
         data_type: text          
 
   - name: stg_netsuite__budget
-    description: "Stage model containing data related to budgets from Netsuite."
+    description: "Stage model containing data related to budgets from Netsuite. THE DATA CONTAIN CARs INFORMATION, USE WITH CARE."
     config:
       contract:
         enforced: true         
@@ -235,12 +235,14 @@ models:
 
   - name: stg_netsuite__budgets_machines
     description: > 
-      Stage model containing machine-generated budgets data
+      Stage model containing machine-generated budgets data.
       A budget machine is a matrix machine containing amounts for budget categories and calendar months
-      Detail at https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_161218135180.html#Budget-Machine
+      Detail at https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_161218135180.html#Budget-Machine.
+      THE DATA CONTAIN CARs INFORMATION, USE WITH CARE.
     config:
       contract:
-        enforced: true            
+        enforced: true
+      tags: ['CARs']            
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
@@ -1129,11 +1131,11 @@ models:
     description: >
       Stage model containing data related to transaction accounting lines from Netsuite. This model stores information about accounting lines 
       associated with transactions, including transaction identifiers, account details, amounts, exchange rates, and other relevant attributes.
-      THE DATA CONTAIN CFI and SFI INFORMATION, USE WITH CARE.
+      THE DATA CONTAIN CARs INFORMATION, USE WITH CARE.
     config:
       contract:
         enforced: true
-      tags: ['cfi','sfi']             
+      tags: ['CARs']             
     columns:
       - name: unique_id
         description: "Surrogate key of transaction_id and transaction_line_id"
@@ -1194,11 +1196,11 @@ models:
     description: >
       Stage model containing data related to transaction lines from Netsuite. 
       This model stores information about transaction lines, including unique identifiers, transaction details, item details, accounting information, quantities, amounts, and other relevant attributes. 
-      THE DATA CONTAIN CFI and SFI INFORMATION, USE WITH CARE.
+      THE DATA CONTAIN CARs INFORMATION, USE WITH CARE.
     config:
       contract:
         enforced: true
-      tags: ['cfi','sfi']            
+      tags: ['CARs']            
     columns:
       - name: unique_key
         description: "The unique key for the transaction line."
@@ -1523,11 +1525,11 @@ models:
     description: >
       This model contains transactional data from Netsuite, including various types of transactions such as sales orders, purchase orders, invoices, payments, and more. 
       Each row represents a single transaction record within Netsuite's system, capturing essential details such as transaction ID, type, date, status, amounts, customer/vendor information, and transaction-related flags.
-      THE DATA CONTAIN CFI and SFI INFORMATION, USE WITH CARE.
+      THE DATA CONTAIN CARs INFORMATION, USE WITH CARE.
     config:
       contract:
         enforced: true
-      tags: ['cfi','sfi']            
+      tags: ['CARs']            
     columns:   
       - name: transaction_id
         description: "The unique identifier for the transaction."
